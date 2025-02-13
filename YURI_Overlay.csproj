@@ -15,6 +15,9 @@
     <EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
     <PlatformTarget>x64</PlatformTarget>
 	<EnableWindowsTargeting>true</EnableWindowsTargeting>
+	<OutputPath>bin\reframework\plugins\managed\</OutputPath>
+	<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+	<AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -40,9 +43,13 @@
   <ItemGroup>
     <Reference Include="ImGui.NET">
       <HintPath>REFramework\plugins\managed\dependencies\ImGui.NET.dll</HintPath>
+      <Private>True</Private>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
     </Reference>
     <Reference Include="REFramework.NET">
       <HintPath>REFramework\plugins\REFramework.NET.dll</HintPath>
+      <Private>True</Private>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
     </Reference>
   </ItemGroup>
 </Project>

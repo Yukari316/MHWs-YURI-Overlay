@@ -16,12 +16,12 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v4
-    
+
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: 8.0.x
-        
+
     - name: Restore dependencies
       run: dotnet restore
       
@@ -30,7 +30,7 @@ jobs:
       
     - name: Zip the Build
       run: |
-        cd /home/runner/work/MHWs-YURI-Overlay/MHWs-YURI-Overlay/URI-Overlay/bin/Release/net8.0-windows10.0.26100.0/YURI_Overlay.dll && zip -r YURI_Overlay.zip *
+        cd /home/runner/work/MHWs-YURI-Overlay/MHWs-YURI-Overlay/bin/reframework/plugins/managed/ && zip -r YURI_Overlay.zip *
 
     - name: Expose Commit Data
       uses: rlespinasse/git-commit-data-action@v1
@@ -42,10 +42,10 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         tag: 0${{ github.run_number }}-${{ env.GIT_COMMIT_SHORT_SHA }}
-        name: Build 000${{ github.run_number }} (${{ env.GIT_COMMIT_SHORT_SHA }})
+        name: Build 00${{ github.run_number }} (${{ env.GIT_COMMIT_SHORT_SHA }})
         draft: false
         prerelease: true
-        body: '## [Main Repo](https://github.com/GreenComfyTea/MHWs-YURI-Overlay) | [Commit Files](https://github.com/GreenComfyTea/MHW-Yet-Another-Overlay-Interface/tree/${{ env.GIT_COMMIT_SHA }})'
+        body: '## [Main Repo](https://github.com/GreenComfyTea/MHWs-YURI-Overlay) | [Commit Files](https://github.com/GreenComfyTea/MHWs-YURI-Overlay/tree/${{ env.GIT_COMMIT_SHA }})'
         token: ${{ secrets.NIGHTLY_TOKEN }}
         repo: MHWs-YURI-Overlay-Nightly
         
@@ -56,7 +56,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.NIGHTLY_TOKEN }}
       with:
         upload_url: ${{ steps.create-build-release.outputs.upload_url }}
-        asset_path: /home/runner/work/MHWs-YURI-Overlay/MHWs-YURI-Overlay/YURI-Overlay/bin/Release/net8.0-windows10.0.26100.0/YURI_Overlay.zip
+        asset_path: /home/runner/work/MHWs-YURI-Overlay/MHWs-YURI-Overlay/bin/reframework/plugins/managed/YURI_Overlay.zip
         asset_name: YURI_Overlay_000${{ github.run_number }}_${{ env.GIT_COMMIT_SHORT_SHA }}.zip
         asset_content_type: application/zip
         
@@ -67,7 +67,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         tag: latest
-        name: Nightly 0${{ github.run_number }} (${{ env.GIT_COMMIT_SHORT_SHA }})
+        name: Nightly 00${{ github.run_number }} (${{ env.GIT_COMMIT_SHORT_SHA }})
         draft: false
         allowUpdates: true
         removeArtifacts: true
@@ -82,6 +82,6 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.NIGHTLY_TOKEN }}
       with:
         upload_url: ${{ steps.update-latest-release.outputs.upload_url }}
-        asset_path: /home/runner/work/MHWs-YURI-Overlay/MHWs-YURI-Overlay/YURI-Overlay/bin/Release/net8.0-windows10.0.26100.0/YYURI_Overlay.zip
-        asset_name: YURI_Overlay_000${{ github.run_number }}_${{ env.GIT_COMMIT_SHORT_SHA }}.zip
+        asset_path: /home/runner/work/MHWs-YURI-Overlay/MHWs-YURI-Overlay/bin/reframework/plugins/managed/YURI_Overlay.zip
+        asset_name: YURI_Overlay_00${{ github.run_number }}_${{ env.GIT_COMMIT_SHORT_SHA }}.zip
         asset_content_type: application/zip
