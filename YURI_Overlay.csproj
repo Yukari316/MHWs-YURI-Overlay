@@ -9,10 +9,12 @@
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
     <SignAssembly>False</SignAssembly>
     <ErrorReport>prompt</ErrorReport>
-    <Title>YURI Overlay (Your Useless Rewilding Interface)</Title>
+    <Title>YURI Overlay</Title>
     <Authors>GreenComfyTea</Authors>
     <Company>GreenComfyTea</Company>
     <EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
+    <PlatformTarget>x64</PlatformTarget>
+	<EnableWindowsTargeting>true</EnableWindowsTargeting>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -43,9 +45,4 @@
       <HintPath>REFramework\plugins\REFramework.NET.dll</HintPath>
     </Reference>
   </ItemGroup>
-
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="xcopy &quot;$(OutDir)&quot; &quot;D:\Programs\Steam\steamapps\common\MonsterHunterWildsBetatest_\reframework\plugins\managed&quot; /s /i /y" />
-  </Target>
-
 </Project>
