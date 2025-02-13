@@ -41,15 +41,15 @@ internal class ConfigManager : IDisposable
 
 	public void ActivateConfig(JsonDatabase<Config> config)
 	{
-		LogManager.Info($"ConfigManager: Activating config \"{config.name}\"...");
+		LogManager.Info($"ConfigManager: Activating config \"{config.Name}\"...");
 		
 		activeConfig = config;
-		_currentConfigInstance.data.configName = config.name;
+		_currentConfigInstance.data.configName = config.Name;
 		_currentConfigInstance.Save();
 
 		EmitActiveConfigChanged();
 
-		LogManager.Info($"ConfigManager: Config \"{config.name}\" is activated!");
+		LogManager.Info($"ConfigManager: Config \"{config.Name}\" is activated!");
 	}
 
 	public void ActivateConfig(string name)
@@ -80,7 +80,6 @@ internal class ConfigManager : IDisposable
 
 				defaultConfig = new(Constants.CONFIGS_PATH, Constants.DEFAULT_CONFIG);
 				DefaultConfig.ResetTo(defaultConfig.data);
-				defaultConfig.data.name = Constants.DEFAULT_CONFIG;
 				defaultConfig.Save();
 				configs[Constants.DEFAULT_CONFIG] = defaultConfig;
 
@@ -107,17 +106,17 @@ internal class ConfigManager : IDisposable
 
 		JsonDatabase<Config> config = new(Constants.CONFIGS_PATH, name, configToClone);
 		//if(configToClone == null) DefaultConfig.ResetTo(config.data);
-		config.data.name = name;
 		config.Save();
 
 		config.changed += OnConfigFileChanged;
-		config.created += OnConfigFileCreated;
 		config.renamedFrom += OnConfigFileRenamedFrom;
 		config.renamedTo += OnConfigFileRenamedTo;
 		config.deleted += OnConfigFileDeleted;
 		config.error += OnConfigFileError;
 
 		configs[name] = config;
+
+		EmitAnyConfigChanged();
 
 		LogManager.Info($"ConfigManager: Config \"{name}\" is initialized!");
 
@@ -151,7 +150,7 @@ internal class ConfigManager : IDisposable
 		JsonDatabase<Config> newConfig = InitializeConfig(newConfigName, activeConfig.data);
 
 		ActivateConfig(newConfig);
-		configs.Remove(oldConfig.name);
+		configs.Remove(oldConfig.Name);
 		oldConfig.Delete();
 
 		configWatcherInstance.DelayedEnable();
@@ -187,7 +186,6 @@ internal class ConfigManager : IDisposable
 		_currentConfigInstance = new(Constants.PLUGIN_DATA_PATH, Constants.CURRENT_CONFIG);
 
 		_currentConfigInstance.changed += OnCurrentConfigChanged;
-		_currentConfigInstance.created += OnCurrentConfigCreated;
 		_currentConfigInstance.renamedFrom += OnCurrentConfigRenamedFrom;
 		_currentConfigInstance.renamedTo += OnCurrentConfigRenamedTo;
 		_currentConfigInstance.deleted += OnCurrentConfigDeleted;

@@ -92,7 +92,7 @@ internal class ImGuiManager
 
 			foreach(var config in ConfigManager.Instance.configs)
 			{
-				ImGui.Text($"{config.Key} - {config.Value.data.name}");
+				ImGui.Text($"{config.Key} - {config.Value.Name}");
 			}
 
 			if(changed)

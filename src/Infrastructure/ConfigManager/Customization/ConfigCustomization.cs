@@ -98,7 +98,7 @@ internal class ConfigCustomization: Customization
 
 		LogManager.Info($"ConfigCustomization: Config changed.{Utils.Stringify(configManager.configs.Keys.ToArray())}");
 
-		configNames = configManager.configs.Values.Select(config => config.data.name).ToArray();
-		_activeConfigIndex = Array.IndexOf(configNames, configManager.activeConfig.data.name);
+		configNames = configManager.configs.Values.Select(config => config.Name).ToArray();
+		_activeConfigIndex = Array.IndexOf(configNames, configManager.activeConfig.Name);
 	}
 }

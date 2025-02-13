@@ -9,9 +9,6 @@ namespace YURI_Overlay;
 
 internal class Config
 {
-	[JsonIgnore]
-	public string name = Constants.DEFAULT_CONFIG;
-
 	public string localization = Constants.DEFAULT_LOCALIZATION;
 
 	public GlobalSettingsCustomization globalSettings = new();

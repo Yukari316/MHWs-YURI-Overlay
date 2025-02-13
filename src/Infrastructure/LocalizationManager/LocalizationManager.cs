@@ -36,11 +36,11 @@ internal sealed class LocalizationManager : IDisposable
 
 	public void ActivateLocalization(JsonDatabase<Localization> localization)
 	{
-		LogManager.Info($"LocalizationManager: Activating localization \"{localization.name}\"...");
+		LogManager.Info($"LocalizationManager: Activating localization \"{localization.Name}\"...");
 
 		activeLocalization = localization;
 
-		LogManager.Info($"LocalizationManager: Localization \"{localization.name}\" is activated!");
+		LogManager.Info($"LocalizationManager: Localization \"{localization.Name}\" is activated!");
 	}
 
 	public void ActivateLocalization(string name)
