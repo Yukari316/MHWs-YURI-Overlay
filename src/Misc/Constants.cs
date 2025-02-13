@@ -41,10 +41,10 @@ internal static class Constants
 	public const string NIGHTLY_LINK = "https://github.com/GreenComfyTea/MHW-Yet-Another-Overlay-Interface-Nightly/releases";
 	public const string TWITCH_LINK = "https://twitch.tv/GreenComfyTea";
 	public const string TWITTER_LINK = "https://twitter.com/GreenComfyTea";
-	public const string ARTSTATION_LINK = "https://greencomfytea.artstation.com";
-	public const string STREAMELEMENTS_TIP_LINK = "https://streamelements.com/greencomfytea/tip";
-	public const string PAYPAL_LINK = "https://paypal.me/greencomfytea";
-	public const string KOFI_LINK = "https://ko-fi.com/greencomfytea";
+	public const string ARTSTATION_LINK = "https://GreenComfyTea.artstation.com";
+	public const string STREAMELEMENTS_TIP_LINK = "https://streamelements.com/GreenComfyTea/tip";
+	public const string PAYPAL_LINK = "https://paypal.me/GreenComfyTea";
+	public const string KOFI_LINK = "https://ko-fi.com/GreenComfyTea";
 
 	public const string EMPTY_JSON = "{}";
 
