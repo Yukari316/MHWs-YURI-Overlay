@@ -132,7 +132,7 @@
 
 # Links
 * **[Nexus Mods](https://GreenComfyTeanexusmods.com/monsterhunterrise/mods/50)**  
-* **[Nightly Builds](https://github.com/GreenComfyTea/MHWs-YURI-Overlay-Nightly)** 
+* **[Nightly Builds](https://github.com/GreenComfyTea/MHWs-YURI-Overlay-Nightly/releases)** 
 * **[Requirements and Installation](https://github.com/GreenComfyTea/MHWs-YURI-Overlay/wiki/Requirements-and-Installation)**  
 * **[Features](https://github.com/GreenComfyTea/MHWs-YURI-Overlay/wiki/Features)**  
 * **[Troubleshooting](https://github.com/GreenComfyTea/MHWs-YURI-Overlay/wiki/Troubleshooting)**  
