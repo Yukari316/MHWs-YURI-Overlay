@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace YURI_Overlay;
 
-internal class ConfigCustomization: Customization
+internal sealed class ConfigCustomization: Customization
 {
 	private int _activeConfigIndex = 0;
 	private string _configNameInput = string.Empty;
@@ -18,6 +18,7 @@ internal class ConfigCustomization: Customization
 	{
 
 		ConfigManager configManager = ConfigManager.Instance;
+
 		configManager.activeConfigChanged += OnAnyConfigChanged;
 		configManager.anyConfigChanged += OnAnyConfigChanged;
 
@@ -98,7 +99,7 @@ internal class ConfigCustomization: Customization
 
 		LogManager.Info($"ConfigCustomization: Config changed.{Utils.Stringify(configManager.configs.Keys.ToArray())}");
 
-		configNames = configManager.configs.Values.Select(config => config.Name).ToArray();
-		_activeConfigIndex = Array.IndexOf(configNames, configManager.activeConfig.Name);
+		configNames = configManager.configs.Values.Select(config => config.name).ToArray();
+		_activeConfigIndex = Array.IndexOf(configNames, configManager.activeConfig.name);
 	}
 }

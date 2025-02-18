@@ -10,8 +10,8 @@ namespace YURI_Overlay;
 
 internal class JsonDatabase<T> : IDisposable where T : class, new()
 {
-	public string Name { get; set; } = string.Empty;
-	public string FilePath { get; set; } = Constants.PLUGIN_DATA_PATH;
+	public string name = string.Empty;
+	public string filePath = Constants.PLUGIN_DATA_PATH;
 
 	public T data;
 	public FileSync fileSyncInstance;
@@ -27,8 +27,8 @@ internal class JsonDatabase<T> : IDisposable where T : class, new()
 	public JsonDatabase(string path, string name, T data = null)
 	{
 		try {
-			Name = name;
-			FilePath = path;
+			this.name = name;
+			filePath = path;
 
 			string filePathName = Path.Combine(path, $"{name}.json");
 			fileSyncInstance = new(filePathName);
@@ -47,7 +47,7 @@ internal class JsonDatabase<T> : IDisposable where T : class, new()
 		try
 		{
 			jsonWatcherInstance?.Disable();
-			LogManager.Info($"File \"{Name}.json\": Loading... ${data}");
+			LogManager.Info($"File \"{name}.json\": Loading... ${data}");
 
 
 			string json = data == null ? fileSyncInstance.Read() : JsonSerializer.Serialize(data, Constants.JSON_SERIALIZER_OPTIONS_INSTANCE);
@@ -56,7 +56,7 @@ internal class JsonDatabase<T> : IDisposable where T : class, new()
 			fileSyncInstance.Write(json);
 
 
-			LogManager.Info($"File \"{Name}.json\": Loaded!");
+			LogManager.Info($"File \"{name}.json\": Loaded!");
 			jsonWatcherInstance?.DelayedEnable();
 			return this.data;
 		}
@@ -73,19 +73,19 @@ internal class JsonDatabase<T> : IDisposable where T : class, new()
 	{
 		try
 		{
-			LogManager.Info($"File \"{Name}.json\": Saving...");
+			LogManager.Info($"File \"{name}.json\": Saving...");
 			jsonWatcherInstance?.Disable();
 
 			var json = JsonSerializer.Serialize(data, Constants.JSON_SERIALIZER_OPTIONS_INSTANCE);
 
-			LogManager.Info($"File \"{Name}.json\": {json}");
+			LogManager.Info($"File \"{name}.json\": {json}");
 
 
 			bool isSuccess = fileSyncInstance.Write(json);
 
 
-			if(isSuccess) LogManager.Info($"File \"{Name}.json\": Saved!");
-			else LogManager.Info($"File \"{Name}.json\": Saving failed!");
+			if(isSuccess) LogManager.Info($"File \"{name}.json\": Saved!");
+			else LogManager.Info($"File \"{name}.json\": Saving failed!");
 
 			jsonWatcherInstance?.DelayedEnable();
 			return isSuccess;
@@ -99,10 +99,10 @@ internal class JsonDatabase<T> : IDisposable where T : class, new()
 
 	public void Delete()
 	{
-		LogManager.Info($"File \"{Name}.json\": Deleting...");
+		LogManager.Info($"File \"{name}.json\": Deleting...");
 		Dispose();
 		fileSyncInstance.Delete();
-		LogManager.Info($"File \"{Name}.json\": Deleted!");
+		LogManager.Info($"File \"{name}.json\": Deleted!");
 	}
 
 	public void EmitChanged()
@@ -129,8 +129,8 @@ internal class JsonDatabase<T> : IDisposable where T : class, new()
 
 	public void Dispose()
 	{
-		LogManager.Info($"File \"{Name}.json\": Disposing...");
+		LogManager.Info($"File \"{name}.json\": Disposing...");
 		jsonWatcherInstance?.Dispose();
-		LogManager.Info($"File \"{Name}.json\": Disposed!");
+		LogManager.Info($"File \"{name}.json\": Disposed!");
 	}
 }

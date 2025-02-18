@@ -41,15 +41,15 @@ internal class ConfigManager : IDisposable
 
 	public void ActivateConfig(JsonDatabase<Config> config)
 	{
-		LogManager.Info($"ConfigManager: Activating config \"{config.Name}\"...");
-		
+		LogManager.Info($"ConfigManager: Activating config \"{config.name}\"...");
+
 		activeConfig = config;
-		_currentConfigInstance.data.configName = config.Name;
+		_currentConfigInstance.data.configName = config.name;
 		_currentConfigInstance.Save();
 
 		EmitActiveConfigChanged();
 
-		LogManager.Info($"ConfigManager: Config \"{config.Name}\" is activated!");
+		LogManager.Info($"ConfigManager: Config \"{config.name}\" is activated!");
 	}
 
 	public void ActivateConfig(string name)
@@ -150,7 +150,7 @@ internal class ConfigManager : IDisposable
 		JsonDatabase<Config> newConfig = InitializeConfig(newConfigName, activeConfig.data);
 
 		ActivateConfig(newConfig);
-		configs.Remove(oldConfig.Name);
+		configs.Remove(oldConfig.name);
 		oldConfig.Delete();
 
 		configWatcherInstance.DelayedEnable();

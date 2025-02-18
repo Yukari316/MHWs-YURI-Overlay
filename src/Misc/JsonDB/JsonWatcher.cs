@@ -19,10 +19,10 @@ internal class JsonWatcher<T> : IDisposable where T : class, new()
 	{
 		try
 		{
-			LogManager.Info($"ConfigWatcher \"{jsonDatabase.Name}\": Initializing...");
+			LogManager.Info($"ConfigWatcher \"{jsonDatabase.name}\": Initializing...");
 
 			jsonDatabaseInstance = jsonDatabase;
-			watcher = new(jsonDatabase.FilePath);
+			watcher = new(jsonDatabase.filePath);
 
 			watcher.NotifyFilter = NotifyFilters.Attributes
 								 | NotifyFilters.CreationTime
@@ -36,10 +36,10 @@ internal class JsonWatcher<T> : IDisposable where T : class, new()
 			watcher.Deleted += OnJsonFileDeleted;
 			watcher.Error += OnJsonFileError;
 
-			watcher.Filter = $"{jsonDatabase.Name}.json";
+			watcher.Filter = $"{jsonDatabase.name}.json";
 			watcher.EnableRaisingEvents = true;
 
-			LogManager.Info($"ConfigWatcher \"{jsonDatabase.Name}\": Initialized!");
+			LogManager.Info($"ConfigWatcher \"{jsonDatabase.name}\": Initialized!");
 		}
 		catch(Exception exception)
 		{
@@ -64,16 +64,16 @@ internal class JsonWatcher<T> : IDisposable where T : class, new()
 
 	public void Dispose()
 	{
-		LogManager.Info($"ConfigWatcher \"{jsonDatabaseInstance.Name}\": Disposing...");
+		LogManager.Info($"ConfigWatcher \"{jsonDatabaseInstance.name}\": Disposing...");
 		watcher.Dispose();
-		LogManager.Info($"ConfigWatcher \"{jsonDatabaseInstance.Name}\": Disposed!");
+		LogManager.Info($"ConfigWatcher \"{jsonDatabaseInstance.name}\": Disposed!");
 	}
 
 	private void OnJsonFileChanged(object sender, FileSystemEventArgs e)
 	{
 		try
 		{
-			LogManager.Info($"{jsonDatabaseInstance.Name} jhjhk {_disabled} {_lastEventTime.Ticks} {File.GetLastWriteTime(e.FullPath).Ticks} {File.GetLastWriteTime(e.FullPath).Ticks} - {_lastEventTime.Ticks} = {File.GetLastWriteTime(e.FullPath).Ticks - _lastEventTime.Ticks} < {Constants.DUPLICATE_EVENT_THRESHOLD_TICKS}");
+			LogManager.Info($"{jsonDatabaseInstance.name} jhjhk {_disabled} {_lastEventTime.Ticks} {File.GetLastWriteTime(e.FullPath).Ticks} {File.GetLastWriteTime(e.FullPath).Ticks} - {_lastEventTime.Ticks} = {File.GetLastWriteTime(e.FullPath).Ticks - _lastEventTime.Ticks} < {Constants.DUPLICATE_EVENT_THRESHOLD_TICKS}");
 
 			if(_disabled) return;
 
@@ -82,7 +82,7 @@ internal class JsonWatcher<T> : IDisposable where T : class, new()
 			if(eventTime.Ticks - _lastEventTime.Ticks < Constants.DUPLICATE_EVENT_THRESHOLD_TICKS) return;
 
 
-			LogManager.Info($"File \"{jsonDatabaseInstance.Name}\": Changed.");
+			LogManager.Info($"File \"{jsonDatabaseInstance.name}\": Changed.");
 
 			jsonDatabaseInstance.Load();
 			jsonDatabaseInstance.EmitChanged();
@@ -134,7 +134,7 @@ internal class JsonWatcher<T> : IDisposable where T : class, new()
 		try
 		{
 			if(_disabled) return;
-			LogManager.Info($"File \"{jsonDatabaseInstance.Name}\": Deleted.");
+			LogManager.Info($"File \"{jsonDatabaseInstance.name}\": Deleted.");
 
 			jsonDatabaseInstance.EmitDeleted();
 		}
@@ -149,7 +149,7 @@ internal class JsonWatcher<T> : IDisposable where T : class, new()
 		try
 		{
 			if(_disabled) return;
-			LogManager.Info($"File \"{jsonDatabaseInstance.Name}\": Unknown error.");
+			LogManager.Info($"File \"{jsonDatabaseInstance.name}\": Unknown error.");
 
 			jsonDatabaseInstance.Load();
 		}

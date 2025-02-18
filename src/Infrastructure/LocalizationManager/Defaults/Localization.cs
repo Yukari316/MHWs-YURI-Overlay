@@ -25,6 +25,8 @@ internal class ImGuiLocalization
 	public string payPal = "PayPal";
 	public string buyMeATea = "Buy Me a Tea";
 
+	// Config
+
 	public string config = "Config";
 
 	public string activeConfig = "Active Config";
@@ -34,6 +36,10 @@ internal class ImGuiLocalization
 	public string delete = "Delete";
 	public string reset = "Reset";
 	public string rename = "Rename";
+
+	// Localization
+
+	public string language = "Language";
 
 	// Bar
 

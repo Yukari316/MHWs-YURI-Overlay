@@ -37,7 +37,10 @@ internal class ImGuiManager
 		{
 			if(!IsOpened) return;
 
-			var activeLocalization = LocalizationManager.Instance.activeLocalization.data;
+			ConfigManager configManager = ConfigManager.Instance;
+			LocalizationManager localizationManager = LocalizationManager.Instance;
+
+			var activeLocalization = localizationManager.activeLocalization.data;
 
 			var changed = false;
 
@@ -86,19 +89,20 @@ internal class ImGuiManager
 			ImGui.NewLine();
 			ImGui.Separator();
 
-			changed |= ConfigManager.Instance.customization.RenderImGui("config-settings");
-			changed |= ConfigManager.Instance.activeConfig.data.globalSettings.RenderImGui("global-settings");
-			changed |= ConfigManager.Instance.activeConfig.data.largeMonsterUI.RenderImGui("large-monster-ui");
+			changed |= configManager.customization.RenderImGui("config-settings");
+			changed |= localizationManager.customization.RenderImGui("localization");
+			changed |= configManager.activeConfig.data.globalSettings.RenderImGui("global-settings");
+			changed |= configManager.activeConfig.data.largeMonsterUI.RenderImGui("large-monster-ui");
 
-			foreach(var config in ConfigManager.Instance.configs)
+			foreach(var localization in localizationManager.localizations)
 			{
-				ImGui.Text($"{config.Key} - {config.Value.Name}");
+				ImGui.Text($"{localization.Key} - {localization.Value.name}");
 			}
 
 			if(changed)
 			{
 				LogManager.Info("ImGuiManager: CONFIGURATION CHANGED");
-				ConfigManager.Instance.activeConfig.Save();
+				configManager.activeConfig.Save();
 			}
 		}
 		catch(Exception e)
