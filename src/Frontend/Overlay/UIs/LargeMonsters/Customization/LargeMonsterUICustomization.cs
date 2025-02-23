@@ -1,22 +1,17 @@
 ﻿using ImGuiNET;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace YURI_Overlay;
 
-internal class LargeMonsterUICustomization : Customization
+internal class LargeMonsterUiCustomization : Customization
 {
-	public LargeMonsterDynamicUICustomization dynamic = new();
-	public LargeMonsterStaticUICustomization @static = new();
+	public LargeMonsterDynamicUiCustomization dynamic = new();
+	public LargeMonsterStaticUiCustomization @static = new();
 
-	public LargeMonsterUICustomization() { }
+	public LargeMonsterUiCustomization() { }
 
 	public override bool RenderImGui(string parentName = "")
 	{
-		var localization = LocalizationManager.Instance.activeLocalization.data.imGui;
+		var localization = LocalizationManager.Instance.ActiveLocalization.Data.imGui;
 
 		var isChanged = false;
 		var customizationName = $"{parentName}-large-monster";

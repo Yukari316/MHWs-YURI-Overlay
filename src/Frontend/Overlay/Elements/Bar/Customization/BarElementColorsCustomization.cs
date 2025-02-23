@@ -1,11 +1,4 @@
 ﻿using ImGuiNET;
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace YURI_Overlay;
 
@@ -16,7 +9,7 @@ internal class BarElementColorsCustomization : Customization
 
 	public override bool RenderImGui(string parentName = "")
 	{
-		var localization = LocalizationManager.Instance.activeLocalization.data.imGui;
+		var localization = LocalizationManager.Instance.ActiveLocalization.Data.imGui;
 
 		var isChanged = false;
 		var customizationName = $"{parentName}-colors";

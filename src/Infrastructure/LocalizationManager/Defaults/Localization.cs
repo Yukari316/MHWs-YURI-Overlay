@@ -134,11 +134,8 @@ internal class ImGuiLocalization
 internal class Localization
 {
 	[JsonIgnore]
-	public string isoCode = Constants.DEFAULT_LOCALIZATION;
+	public string isoCode = Constants.DefaultLocalization;
 
 	public LocalizationInfo localizationInfo = new();
 	public ImGuiLocalization imGui = new();
-
-
-
 }

@@ -1,28 +1,22 @@
 ﻿using ImGuiNET;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace YURI_Overlay;
 
-internal sealed class LargeMonsterDynamicUI
+internal sealed class LargeMonsterDynamicUi
 {
-	//private readonly LargeMonster _largeMonster;
-	private readonly Func<LargeMonsterDynamicUICustomization> _customizationAccessor;
+	private readonly LargeMonster _largeMonster;
+	private readonly Func<LargeMonsterDynamicUiCustomization> _customizationAccessor;
 
 	private readonly LabelElement _nameLabelElement;
 	private readonly LargeMonsterHealthComponent _healthComponent;
 
-	public LargeMonsterDynamicUI(/*LargeMonster largeMonster*/)
+	public LargeMonsterDynamicUi(LargeMonster largeMonster)
 	{
-		//_largeMonster = largeMonster;
-		_customizationAccessor = () => ConfigManager.Instance.activeConfig.data.largeMonsterUI.dynamic;
+		_largeMonster = largeMonster;
+		_customizationAccessor = () => ConfigManager.Instance.ActiveConfig.Data.largeMonsterUI.dynamic;
 
 		_nameLabelElement = new LabelElement(() => _customizationAccessor().nameLabel);
-		_healthComponent = new LargeMonsterHealthComponent(/*largeMonster, */() => _customizationAccessor().health);
+		_healthComponent = new LargeMonsterHealthComponent(largeMonster, () => _customizationAccessor().health);
 	}
 
 	public void Draw(ImDrawListPtr backgroundDrawList)
@@ -30,7 +24,10 @@ internal sealed class LargeMonsterDynamicUI
 		var customization = _customizationAccessor();
 		var settings = customization.settings;
 
-		//if(settings.hideDeadOrCaptured/* && !_largeMonster.isAlive*/) return;
+		if(settings.hideDeadOrCaptured && !_largeMonster.IsAlive)
+		{
+			return;
+		}
 
 		//_largeMonster.UpdateDistance();
 

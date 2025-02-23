@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace YURI_Overlay;
 
-internal class LocalizationWatcher : IDisposable
+internal partial class LocalizationWatcher : IDisposable
 {
 	private readonly FileSystemWatcher _watcher;
-	private readonly Dictionary<string, DateTime> _lastEventTimes = new();
+	private readonly Dictionary<string, DateTime> _lastEventTimes = [];
 
 	private bool _disabled = false;
 
@@ -19,7 +13,7 @@ internal class LocalizationWatcher : IDisposable
 		{
 			LogManager.Info("LocalizationWatcher: Initializing...");
 
-			_watcher = new(Constants.LOCALIZATIONS_PATH);
+			_watcher = new FileSystemWatcher(Constants.LocalizationsPath);
 
 			_watcher.NotifyFilter = NotifyFilters.Attributes
 								 | NotifyFilters.CreationTime
@@ -45,6 +39,11 @@ internal class LocalizationWatcher : IDisposable
 		}
 	}
 
+	~LocalizationWatcher()
+	{
+		Dispose();
+	}
+
 	public void Enable()
 	{
 		_disabled = false;
@@ -52,7 +51,7 @@ internal class LocalizationWatcher : IDisposable
 
 	public void DelayedEnable()
 	{
-		Timers.SetTimeout(Enable, Constants.REENABLE_WATCHER_DELAY_MILLISECONDS);
+		Timers.SetTimeout(Enable, Constants.ReenableWatcherDelayMilliseconds);
 	}
 
 	public void Disable()
@@ -71,19 +70,34 @@ internal class LocalizationWatcher : IDisposable
 	{
 		try
 		{
-			if(_disabled) return;
+			if(_disabled)
+			{
+				return;
+			}
 
-			string name = Path.GetFileNameWithoutExtension(e.Name);
+			var name = Path.GetFileNameWithoutExtension(e.Name);
+			if(name == null)
+			{
+				return;
+			}
 
-			DateTime eventTime = File.GetLastWriteTime(e.FullPath);
-			if(!_lastEventTimes.ContainsKey(name)) _lastEventTimes[name] = DateTime.MinValue;
+			var eventTime = File.GetLastWriteTime(e.FullPath);
+			if(!_lastEventTimes.ContainsKey(name))
+			{
+				_lastEventTimes[name] = DateTime.MinValue;
+			}
 
-			if(_lastEventTimes[name].Ticks - eventTime.Ticks < Constants.DUPLICATE_EVENT_THRESHOLD_TICKS) return;
+			if(_lastEventTimes[name].Ticks - eventTime.Ticks < Constants.DuplicateEventThresholdTicks)
+			{
+				return;
+			}
 
 			LogManager.Info($"Localization \"{name}\": Changed.");
 
-			if(LocalizationManager.Instance.localizations.ContainsKey(name)) return;
-
+			if(LocalizationManager.Instance.Localizations.ContainsKey(name))
+			{
+				return;
+			}
 
 			_lastEventTimes[name] = eventTime;
 		}
@@ -97,9 +111,12 @@ internal class LocalizationWatcher : IDisposable
 	{
 		try
 		{
-			if(_disabled) return;
+			if(_disabled)
+			{
+				return;
+			}
 
-			string name = Path.GetFileNameWithoutExtension(e.Name);
+			var name = Path.GetFileNameWithoutExtension(e.Name);
 
 			LogManager.Info($"Localization \"{name}\": Created.");
 
@@ -115,9 +132,12 @@ internal class LocalizationWatcher : IDisposable
 	{
 		try
 		{
-			if(_disabled) return;
+			if(_disabled)
+			{
+				return;
+			}
 
-			string name = Path.GetFileNameWithoutExtension(e.Name);
+			var name = Path.GetFileNameWithoutExtension(e.Name);
 
 			LogManager.Info($"Localization \"{name}\": Deleted.");
 		}
@@ -125,17 +145,19 @@ internal class LocalizationWatcher : IDisposable
 		{
 			LogManager.Error(exception);
 		}
-
 	}
 
 	private void OnConfigFileRenamed(object sender, RenamedEventArgs e)
 	{
 		try
 		{
-			if(_disabled) return;
+			if(_disabled)
+			{
+				return;
+			}
 
-			string oldName = Path.GetFileNameWithoutExtension(e.OldName);
-			string name = Path.GetFileNameWithoutExtension(e.Name);
+			var oldName = Path.GetFileNameWithoutExtension(e.OldName);
+			var name = Path.GetFileNameWithoutExtension(e.Name);
 
 			LogManager.Info($"Localization \"{oldName}\": Renamed to \"{name}\".");
 		}
@@ -147,7 +169,11 @@ internal class LocalizationWatcher : IDisposable
 
 	private void OnConfigFileError(object sender, ErrorEventArgs e)
 	{
-		if(_disabled) return;
-		LogManager.Info($"LocalizationWatcher: Unknown error.");
+		if(_disabled)
+		{
+			return;
+		}
+
+		LogManager.Info("LocalizationWatcher: Unknown error.");
 	}
 }

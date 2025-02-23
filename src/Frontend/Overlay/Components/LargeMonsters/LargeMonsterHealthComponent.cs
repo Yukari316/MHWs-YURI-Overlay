@@ -1,44 +1,32 @@
-﻿using ImGuiNET;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Numerics;
+
+using ImGuiNET;
 
 namespace YURI_Overlay;
 
 internal class LargeMonsterHealthComponent
 {
-	//private readonly LargeMonster _largeMonster;
-	private readonly Func<LargeMonsterHealthComponentCustomization> _customizationAccessor;
+	private readonly LargeMonster _largeMonster;
 
 	private readonly LabelElement _healthValueLabelElement;
 	private readonly LabelElement _healthPercentageLabelElement;
 	private readonly BarElement _healthBarElement;
 
-	public LargeMonsterHealthComponent(Func<LargeMonsterHealthComponentCustomization> customizationAccessor)
+	public LargeMonsterHealthComponent(LargeMonster largeMonster, Func<LargeMonsterHealthComponentCustomization> customizationAccessor)
 	{
-		//_largeMonster = largeMonster;
-		_customizationAccessor = customizationAccessor;
+		_largeMonster = largeMonster;
+		var customizationAccessor1 = customizationAccessor;
 
-		_healthValueLabelElement = new LabelElement(() => _customizationAccessor().healthValueLabel);
-		_healthPercentageLabelElement = new LabelElement(() => _customizationAccessor().healthPercentageLabel);
-		_healthBarElement = new BarElement(() => _customizationAccessor().healthBar);
+		_healthValueLabelElement = new LabelElement(() => customizationAccessor1().healthValueLabel);
+		_healthPercentageLabelElement = new LabelElement(() => customizationAccessor1().healthPercentageLabel);
+		_healthBarElement = new BarElement(() => customizationAccessor1().healthBar);
 	}
 
 	public void Draw(ImDrawListPtr backgroundDrawList, Vector2 position, float opacityScale = 1f)
 	{
-		//var monsterRef = _largeMonster.monsterRef;
-
-		var health = -1; // monsterRef.Health;
-		var maxHealth = -2; // monsterRef.MaxHealth;
-		var healthPercentage = health / maxHealth;
-
-		_healthBarElement.Draw(backgroundDrawList, position, healthPercentage, opacityScale);
-		_healthPercentageLabelElement.Draw(backgroundDrawList, position, opacityScale, healthPercentage);
-		_healthValueLabelElement.Draw(backgroundDrawList, position, opacityScale, health, maxHealth);
-
-
+		_healthBarElement.Draw(backgroundDrawList, position, _largeMonster.HealthPercentage, opacityScale);
+		_healthPercentageLabelElement.Draw(backgroundDrawList, position, opacityScale, _largeMonster.HealthPercentage);
+		_healthValueLabelElement.Draw(backgroundDrawList, position, opacityScale, _largeMonster.Health,
+			_largeMonster.MaxHealth);
 	}
 }

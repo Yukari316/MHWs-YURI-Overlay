@@ -1,52 +1,46 @@
 ﻿using ImGuiNET;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace YURI_Overlay;
 
-internal sealed class ConfigCustomization: Customization
+internal sealed class ConfigCustomization : Customization
 {
 	private int _activeConfigIndex = 0;
 	private string _configNameInput = string.Empty;
 
-	private string[] configNames = [];
+	private string[] _configNames = [];
 
 	public ConfigCustomization()
 	{
+		var configManager = ConfigManager.Instance;
 
-		ConfigManager configManager = ConfigManager.Instance;
-
-		configManager.activeConfigChanged += OnAnyConfigChanged;
-		configManager.anyConfigChanged += OnAnyConfigChanged;
+		configManager.ActiveConfigChanged += OnAnyConfigChanged;
+		configManager.AnyConfigChanged += OnAnyConfigChanged;
 
 		OnAnyConfigChanged(configManager, EventArgs.Empty);
 	}
 
 	public override bool RenderImGui(string parentName = "")
 	{
-		ConfigManager configManager = ConfigManager.Instance;
-		ImGuiLocalization localization = LocalizationManager.Instance.activeLocalization.data.imGui;
+		var configManager = ConfigManager.Instance;
+		var localization = LocalizationManager.Instance.ActiveLocalization.Data.imGui;
 
-		bool isChanged = false;
+		var isChanged = false;
 
 		if(ImGui.TreeNode($"{localization.config}##{parentName}"))
 		{
-			bool isActiveConfigChanged = ImGui.Combo(localization.activeConfig, ref _activeConfigIndex, configNames, configNames.Length);
+			var isActiveConfigChanged = ImGui.Combo(localization.activeConfig, ref _activeConfigIndex, _configNames, _configNames.Length);
 			if(isActiveConfigChanged)
 			{
 				isChanged |= isActiveConfigChanged;
 
-				configManager.ActivateConfig(configNames[_activeConfigIndex]);
+				configManager.ActivateConfig(_configNames[_activeConfigIndex]);
 			}
-			
-			ImGui.InputText($"{localization.newConfigName}##{parentName}", ref _configNameInput, Constants.MAX_CONFIG_NAME_LENGTH);
+
+			ImGui.InputText($"{localization.newConfigName}##{parentName}", ref _configNameInput, Constants.MaxConfigNameLength);
 
 			if(ImGui.Button($"{localization.@new}##{parentName}"))
 			{
-				if(_configNameInput != string.Empty && !configNames.Contains(_configNameInput))
+				if(_configNameInput != string.Empty && !_configNames.Contains(_configNameInput))
 				{
 					isChanged = true;
 
@@ -58,7 +52,7 @@ internal sealed class ConfigCustomization: Customization
 
 			if(ImGui.Button($"{localization.duplicate}##{parentName}"))
 			{
-				if(_configNameInput != string.Empty && !configNames.Contains(_configNameInput))
+				if(_configNameInput != string.Empty && !_configNames.Contains(_configNameInput))
 				{
 					isChanged = true;
 
@@ -70,7 +64,7 @@ internal sealed class ConfigCustomization: Customization
 
 			if(ImGui.Button($"{localization.rename}##{parentName}"))
 			{
-				if(_configNameInput != string.Empty && !configNames.Contains(_configNameInput))
+				if(_configNameInput != string.Empty && !_configNames.Contains(_configNameInput))
 				{
 					isChanged = true;
 
@@ -95,11 +89,9 @@ internal sealed class ConfigCustomization: Customization
 
 	private void OnAnyConfigChanged(object sender, EventArgs eventArgs)
 	{
-		ConfigManager configManager = ConfigManager.Instance;
+		var configManager = ConfigManager.Instance;
 
-		LogManager.Info($"ConfigCustomization: Config changed.{Utils.Stringify(configManager.configs.Keys.ToArray())}");
-
-		configNames = configManager.configs.Values.Select(config => config.name).ToArray();
-		_activeConfigIndex = Array.IndexOf(configNames, configManager.activeConfig.name);
+		_configNames = configManager.Configs.Values.Select(config => config.Name).ToArray();
+		_activeConfigIndex = Array.IndexOf(_configNames, configManager.ActiveConfig.Name);
 	}
 }

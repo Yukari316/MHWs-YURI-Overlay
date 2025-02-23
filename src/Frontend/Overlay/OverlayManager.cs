@@ -1,12 +1,4 @@
 ﻿using ImGuiNET;
-using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Diagnostics;
-using System.Linq;
-using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace YURI_Overlay;
 
@@ -16,19 +8,19 @@ internal sealed class OverlayManager
 
 	public static OverlayManager Instance => _lazy.Value;
 
-	private LargeMonsterUIManager _largeMonsterUIManager;
+	private LargeMonsterUiManager _largeMonsterUIManager;
 
 
 	private OverlayManager() { }
 
 	public void Initialize()
 	{
-		_largeMonsterUIManager = new LargeMonsterUIManager();
+		_largeMonsterUIManager = new LargeMonsterUiManager();
 	}
 
 	public void Draw()
 	{
-		ImGui.Begin("YAOI Overlay",
+		ImGui.Begin("YURI Overlay",
 			ImGuiWindowFlags.NoMove
 			| ImGuiWindowFlags.NoBackground
 			| ImGuiWindowFlags.NoCollapse

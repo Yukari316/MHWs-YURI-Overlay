@@ -1,11 +1,6 @@
-﻿using ImGuiNET;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Numerics;
-using System.Text;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks;
+﻿using System.Text.Json.Serialization;
+
+using ImGuiNET;
 
 namespace YURI_Overlay;
 
@@ -32,7 +27,7 @@ internal class GradientColorCustomization : Customization
 
 	public bool RenderImGui(string parentName = "", string name = "")
 	{
-		var localization = LocalizationManager.Instance.activeLocalization.data.imGui;
+		var localization = LocalizationManager.Instance.ActiveLocalization.Data.imGui;
 
 		var isChanged = false;
 		var customizationName = $"{parentName}-gradient-color";
@@ -43,7 +38,10 @@ internal class GradientColorCustomization : Customization
 			{
 				var isStartChanged = ImGui.ColorPicker4($"##${customizationName}-start", ref StartInfo.vector);
 				isChanged |= isStartChanged;
-				if(isStartChanged) StartInfo.Vector = StartInfo.vector;
+				if(isStartChanged)
+				{
+					StartInfo.Vector = StartInfo.vector;
+				}
 
 				ImGui.TreePop();
 			}
@@ -53,7 +51,10 @@ internal class GradientColorCustomization : Customization
 			{
 				var isEndChanged = ImGui.ColorPicker4($"##${customizationName}-end", ref EndInfo.vector);
 				isChanged |= isEndChanged;
-				if(isEndChanged) EndInfo.Vector = EndInfo.vector;
+				if(isEndChanged)
+				{
+					EndInfo.Vector = EndInfo.vector;
+				}
 
 				ImGui.TreePop();
 			}
@@ -66,7 +67,7 @@ internal class GradientColorCustomization : Customization
 
 	public override bool RenderImGui(string parentName = "")
 	{
-		var localization = LocalizationManager.Instance.activeLocalization.data.imGui;
+		var localization = LocalizationManager.Instance.ActiveLocalization.Data.imGui;
 
 		return RenderImGui(parentName, localization.color);
 	}

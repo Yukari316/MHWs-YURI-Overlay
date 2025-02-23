@@ -1,18 +1,19 @@
 ﻿using ImGuiNET;
+
 using REFrameworkNET;
 using REFrameworkNET.Attributes;
 
 namespace YURI_Overlay;
 
-public class YURI_Overlay_Plugin
+[System.Diagnostics.CodeAnalysis.SuppressMessage("Roslynator", "RCS1102:Make class static", Justification = "<Pending>")]
+public class Plugin
 {
 	public static bool IsInitialized { get; private set; }
 
 	[PluginEntryPoint]
 	public static void Main()
 	{
-		// Your plugin code goes here
-		API.LogInfo("Entering the void...");
+		LogManager.Info("Entering the void...");
 
 		try
 		{
@@ -31,6 +32,9 @@ public class YURI_Overlay_Plugin
 
 		ConfigManager.Instance.Dispose();
 		LocalizationManager.Instance.Dispose();
+		MonsterManager.Instance.Dispose();
+
+		API.LocalFrameGC();
 
 		LogManager.Info("Managers: Disposed!");
 	}
@@ -41,17 +45,14 @@ public class YURI_Overlay_Plugin
 		{
 			LogManager.Info("Managers: Initializing...");
 
-			ConfigManager configManager = ConfigManager.Instance;
-			LocalizationManager localizationManager = LocalizationManager.Instance;
-			LocalizationHelper localizationHelper = LocalizationHelper.Instance;
+			var configManager = ConfigManager.Instance;
+			var localizationManager = LocalizationManager.Instance;
+			var localizationHelper = LocalizationHelper.Instance;
 
-			ImGuiManager imGuiManager = ImGuiManager.Instance;
-			OverlayManager overlayManager = OverlayManager.Instance;
+			var imGuiManager = ImGuiManager.Instance;
+			var overlayManager = OverlayManager.Instance;
 
-			//SmallMonsterManager smallMonsterManager = SmallMonsterManager.Instance;
-			//LargeMonsterManager largeMonsterManager = LargeMonsterManager.Instance;
-			//MonsterManager monsterManager = MonsterManager.Instance;
-
+			var monsterManager = MonsterManager.Instance;
 
 			configManager.Initialize();
 			localizationManager.Initialize();
@@ -60,12 +61,9 @@ public class YURI_Overlay_Plugin
 			imGuiManager.Initialize();
 			overlayManager.Initialize();
 
-			//smallMonsterManager.Initialize();
-			//largeMonsterManager.Initialize();
-			//monsterManager.Initialize();
+			monsterManager.Initialize();
 
 			IsInitialized = true;
-
 
 			LogManager.Info("Managers: Initialized!");
 			LogManager.Info("Callbacks: Initializing...");
@@ -84,11 +82,14 @@ public class YURI_Overlay_Plugin
 	{
 		try
 		{
-			if(!IsInitialized) return;
+			if(!IsInitialized)
+			{
+				return;
+			}
 
-			ImGuiManager imGuiManager = ImGuiManager.Instance;
+			var imGuiManager = ImGuiManager.Instance;
 
-			if(ImGui.Button($"{Constants.MOD_NAME} v{Constants.VERSION}"))
+			if(ImGui.Button($"{Constants.ModName} v{Constants.Version}"))
 			{
 				imGuiManager.IsOpened = !imGuiManager.IsOpened;
 			}
@@ -96,8 +97,9 @@ public class YURI_Overlay_Plugin
 			if(imGuiManager.IsOpened)
 			{
 				ImGuiManager.Instance.Draw();
-				OverlayManager.Instance.Draw();
 			}
+
+			OverlayManager.Instance.Draw();
 		}
 		catch(Exception exception)
 		{

@@ -1,30 +1,25 @@
 ﻿using ImGuiNET;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace YURI_Overlay;
 
-internal class LargeMonsterStaticUICustomization : Customization
+internal class LargeMonsterStaticUiCustomization : Customization
 {
 	public bool enabled = true;
-	public LargeMonsterStaticUISettingsCustomization settings = new();
+	public LargeMonsterStaticUiSettingsCustomization settings = new();
 	public AnchoredPositionCustomization position = new();
 	public SpacingCustomization spacing = new();
-	public LargeMonsterStaticUISortingCustomization sorting = new();
+	public LargeMonsterStaticUiSortingCustomization sorting = new();
 
 
 	public LabelElementCustomization nameLabel = new();
 	public LargeMonsterHealthComponentCustomization health = new();
 
 
-	public LargeMonsterStaticUICustomization() { }
+	public LargeMonsterStaticUiCustomization() { }
 
 	public override bool RenderImGui(string parentName = "")
 	{
-		var localization = LocalizationManager.Instance.activeLocalization.data.imGui;
+		var localization = LocalizationManager.Instance.ActiveLocalization.Data.imGui;
 
 		var isChanged = false;
 		var customizationName = $"{parentName}-static";

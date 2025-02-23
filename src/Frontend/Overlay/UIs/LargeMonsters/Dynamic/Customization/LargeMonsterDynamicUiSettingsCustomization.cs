@@ -1,13 +1,8 @@
 ﻿using ImGuiNET;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace YURI_Overlay;
 
-internal class LargeMonsterDynamicUISettingsCustomization : Customization
+internal class LargeMonsterDynamicUiSettingsCustomization : Customization
 {
 	public bool hideDeadOrCaptured = true;
 	public bool renderHighlightedMonster = true;
@@ -15,11 +10,11 @@ internal class LargeMonsterDynamicUISettingsCustomization : Customization
 	public bool opacityFalloff = true;
 	public float maxDistance = 3000f;
 
-	public LargeMonsterDynamicUISettingsCustomization() { }
+	public LargeMonsterDynamicUiSettingsCustomization() { }
 
 	public override bool RenderImGui(string parentName = "")
 	{
-		var localization = LocalizationManager.Instance.activeLocalization.data.imGui;
+		var localization = LocalizationManager.Instance.ActiveLocalization.Data.imGui;
 
 		var isChanged = false;
 		var customizationName = $"{parentName}-settings";

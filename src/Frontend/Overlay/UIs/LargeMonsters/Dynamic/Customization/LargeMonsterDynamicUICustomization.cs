@@ -1,16 +1,11 @@
 ﻿using ImGuiNET;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace YURI_Overlay;
 
-internal class LargeMonsterDynamicUICustomization : Customization
+internal class LargeMonsterDynamicUiCustomization : Customization
 {
 	public bool enabled = true;
-	public LargeMonsterDynamicUISettingsCustomization settings = new();
+	public LargeMonsterDynamicUiSettingsCustomization settings = new();
 	public WorldOffsetCustomization worldOffset = new();
 	public OffsetCustomization offset = new();
 
@@ -18,11 +13,11 @@ internal class LargeMonsterDynamicUICustomization : Customization
 	public LargeMonsterHealthComponentCustomization health = new();
 
 
-	public LargeMonsterDynamicUICustomization() { }
+	public LargeMonsterDynamicUiCustomization() { }
 
 	public override bool RenderImGui(string parentName = "")
 	{
-		var localization = LocalizationManager.Instance.activeLocalization.data.imGui;
+		var localization = LocalizationManager.Instance.ActiveLocalization.Data.imGui;
 
 		var isChanged = false;
 		var customizationName = $"{parentName}-dynamic";

@@ -1,27 +1,83 @@
 ﻿using ImGuiNET;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace YURI_Overlay;
 
-internal class LargeMonsterUIManager
+internal sealed class LargeMonsterUiManager : IDisposable
 {
-	public LargeMonsterUIManager() { }
+
+	private List<LargeMonster> _staticLargeMonsters = [];
+
+	private System.Timers.Timer _updateTimer;
+
+	public LargeMonsterUiManager()
+	{
+		Initialize();
+	}
+
+	~LargeMonsterUiManager()
+	{
+		Dispose();
+	}
+
+	public void Initialize()
+	{
+		LogManager.Info("LargeMonsterUIManager: Initializing...");
+
+		_updateTimer = Timers.SetInterval(Update, 100);
+
+		LogManager.Info("LargeMonsterUIManager: Initialized!");
+	}
+
+	public void Update()
+	{
+		//UpdateDynamic();
+		UpdateStatic();
+	}
 
 	public void Draw(ImDrawListPtr backgroundDrawList)
 	{
-		DrawDynamicUI(backgroundDrawList);
-		DrawStaticUI(backgroundDrawList);
+		DrawDynamicUi(backgroundDrawList);
+		DrawStaticUi(backgroundDrawList);
+	}
+	public void Dispose()
+	{
+		LogManager.Info($"LargeMonsterUIManager: Disposing...");
+		_updateTimer.Dispose();
+		LogManager.Info($"LargeMonsterUIManager: Disposed!");
 	}
 
-	private void DrawDynamicUI(ImDrawListPtr backgroundDrawList)
+	private void UpdateStatic()
 	{
-		var customization = ConfigManager.Instance.activeConfig.data.largeMonsterUI.dynamic;
+		var config = ConfigManager.Instance.ActiveConfig.Data.largeMonsterUI.@static;
 
-		if(!customization.enabled) return;
+		List<LargeMonster> newLargeMonsters = [];
+
+		foreach(var largeMonsterPair in MonsterManager.Instance.LargeMonsters)
+		{
+			var largeMonster = largeMonsterPair.Value;
+
+			if(config.settings.hideDeadOrCaptured && !largeMonster.IsAlive)
+			{
+				continue;
+			}
+
+			newLargeMonsters.Add(largeMonster);
+
+			largeMonster.UpdatePosition();
+			largeMonster.UpdateDistance();
+		}
+
+		_staticLargeMonsters = newLargeMonsters;
+	}
+
+	private void DrawDynamicUi(ImDrawListPtr backgroundDrawList)
+	{
+		var customization = ConfigManager.Instance.ActiveConfig.Data.largeMonsterUI.dynamic;
+
+		if(!customization.enabled)
+		{
+			return;
+		}
 
 		//foreach(var largeMonsterPair in LargeMonsterManager.Instance.LargeMonsters)
 		//{
@@ -29,15 +85,18 @@ internal class LargeMonsterUIManager
 		//}
 	}
 
-	private void DrawStaticUI(ImDrawListPtr backgroundDrawList)
+	private void DrawStaticUi(ImDrawListPtr backgroundDrawList)
 	{
-		var customization = ConfigManager.Instance.activeConfig.data.largeMonsterUI.@static;
+		var customization = ConfigManager.Instance.ActiveConfig.Data.largeMonsterUI.@static;
 
-		if(!customization.enabled) return;
+		if(!customization.enabled)
+		{
+			return;
+		}
 
-		//for(var locationIndex = 0; locationIndex < LargeMonsterManager.Instance.LargeMonsters.Count; locationIndex++)
-		//{
-		//	LargeMonsterManager.Instance.LargeMonsters.ElementAt(locationIndex).Value.DrawStatic(backgroundDrawList, locationIndex);
-		//}
+		for(var locationIndex = 0; locationIndex < _staticLargeMonsters.Count; locationIndex++)
+		{
+			_staticLargeMonsters[locationIndex].StaticUi.Draw(backgroundDrawList, locationIndex);
+		}
 	}
 }

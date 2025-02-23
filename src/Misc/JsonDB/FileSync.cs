@@ -1,25 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace YURI_Overlay;
 
 internal class FileSync
 {
-	public string pathFileName = string.Empty;
+	public string PathFileName;
 
 	public FileSync(string pathFileName)
 	{
-		this.pathFileName = pathFileName;
+		PathFileName = pathFileName;
 	}
 
 	public string Read()
 	{
-		if(File.Exists(pathFileName)) return ReadFromFile();
-			
-		return Constants.EMPTY_JSON;
+		if(File.Exists(PathFileName))
+		{
+			return ReadFromFile();
+		}
+
+		return Constants.EmptyJson;
 	}
 
 	public bool Write(string json)
@@ -31,7 +30,7 @@ internal class FileSync
 	{
 		try
 		{
-			File.Delete(pathFileName);
+			File.Delete(PathFileName);
 		}
 		catch(Exception exception)
 		{
@@ -43,30 +42,30 @@ internal class FileSync
 	{
 		try
 		{
-			var file = File.Open(pathFileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
-			var streamReader = new StreamReader(file);
+			var file = File.Open(PathFileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+			StreamReader streamReader = new(file);
 			var content = streamReader.ReadToEnd();
 
 			streamReader.Close();
+			streamReader.Dispose();
 
 			return content;
 		}
 		catch(Exception exception)
 		{
 			LogManager.Error(exception);
-			return Constants.EMPTY_JSON;
+			return Constants.EmptyJson;
 		}
-
 	}
 
 	private bool WriteToFile(string json)
 	{
 		try
 		{
-			Directory.CreateDirectory(Path.GetDirectoryName(pathFileName));
-			var file = File.Open(pathFileName, FileMode.OpenOrCreate, FileAccess.Write, FileShare.ReadWrite);
+			Directory.CreateDirectory(Path.GetDirectoryName(PathFileName)!);
+			var file = File.Open(PathFileName, FileMode.OpenOrCreate, FileAccess.Write, FileShare.ReadWrite);
 
-			var streamWriter = new StreamWriter(file, Encoding.UTF8);
+			StreamWriter streamWriter = new(file, Encoding.UTF8);
 			streamWriter.AutoFlush = true;
 
 			file.SetLength(0);

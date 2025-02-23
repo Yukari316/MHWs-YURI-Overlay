@@ -1,10 +1,4 @@
 ﻿using ImGuiNET;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace YURI_Overlay;
 
@@ -21,11 +15,11 @@ internal sealed class BarElementCustomization : Customization
 
 	public bool RenderImGui(string visibleName, string customizationName = "bar")
 	{
-		var localization = LocalizationManager.Instance.activeLocalization.data.imGui;
+		var localization = LocalizationManager.Instance.ActiveLocalization.Data.imGui;
 
 		var isChanged = false;
 
-		if (ImGui.TreeNode($"{visibleName}##{customizationName}"))
+		if(ImGui.TreeNode($"{visibleName}##{customizationName}"))
 		{
 			isChanged |= ImGui.Checkbox($"{localization.visible}##{customizationName}", ref visible);
 

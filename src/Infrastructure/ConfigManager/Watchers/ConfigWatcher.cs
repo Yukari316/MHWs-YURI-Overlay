@@ -1,16 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
-
 namespace YURI_Overlay;
 
-internal class ConfigWatcher : IDisposable
+internal partial class ConfigWatcher : IDisposable
 {
 	private readonly FileSystemWatcher _watcher;
-	private readonly Dictionary<string, DateTime> _lastEventTimes = new();
+	private readonly Dictionary<string, DateTime> _lastEventTimes = [];
 
 	private bool _disabled = false;
 
@@ -20,7 +13,7 @@ internal class ConfigWatcher : IDisposable
 		{
 			LogManager.Info("ConfigWatcher: Initializing...");
 
-			_watcher = new(Constants.CONFIGS_PATH);
+			_watcher = new FileSystemWatcher(Constants.ConfigsPath);
 
 			_watcher.NotifyFilter = NotifyFilters.Attributes
 								 | NotifyFilters.CreationTime
@@ -46,6 +39,11 @@ internal class ConfigWatcher : IDisposable
 		}
 	}
 
+	~ConfigWatcher()
+	{
+		Dispose();
+	}
+
 	public void Enable()
 	{
 		_disabled = false;
@@ -53,7 +51,7 @@ internal class ConfigWatcher : IDisposable
 
 	public void DelayedEnable()
 	{
-		Timers.SetTimeout(Enable, Constants.REENABLE_WATCHER_DELAY_MILLISECONDS);
+		Timers.SetTimeout(Enable, Constants.ReenableWatcherDelayMilliseconds);
 	}
 
 	public void Disable()
@@ -74,22 +72,32 @@ internal class ConfigWatcher : IDisposable
 
 		try
 		{
-			if(_disabled) return;
-
-			string name = Path.GetFileNameWithoutExtension(e.Name);
-
-			DateTime eventTime = File.GetLastWriteTime(e.FullPath);
-
-			if(!_lastEventTimes.ContainsKey(name))
+			if(_disabled)
 			{
-				_lastEventTimes[name] = eventTime;
+				return;
+			}
+
+			var name = Path.GetFileNameWithoutExtension(e.Name);
+
+			if(name == null)
+			{
+				return;
+			}
+
+			var eventTime = File.GetLastWriteTime(e.FullPath);
+
+			if(!_lastEventTimes.TryGetValue(name, out var lastEventTime))
+			{
+				lastEventTime = eventTime;
+				_lastEventTimes[name] = lastEventTime;
 				LogManager.Info($"Config \"{name}\": Changed.");
 				return;
 			}
 
-			DateTime lastEventTime = _lastEventTimes[name];
-
-			if(eventTime.Ticks - lastEventTime.Ticks < Constants.DUPLICATE_EVENT_THRESHOLD_TICKS) return;
+			if(eventTime.Ticks - lastEventTime.Ticks < Constants.DuplicateEventThresholdTicks)
+			{
+				return;
+			}
 
 			LogManager.Info($"Config \"{name}\": Changed.");
 
@@ -105,9 +113,12 @@ internal class ConfigWatcher : IDisposable
 	{
 		try
 		{
-			if(_disabled) return;
+			if(_disabled)
+			{
+				return;
+			}
 
-			string name = Path.GetFileNameWithoutExtension(e.Name);
+			var name = Path.GetFileNameWithoutExtension(e.Name);
 
 			LogManager.Info($"Config \"{name}\": Created.");
 
@@ -121,10 +132,14 @@ internal class ConfigWatcher : IDisposable
 
 	private void OnConfigFileDeleted(object sender, FileSystemEventArgs e)
 	{
-		try {
-			if(_disabled) return;
+		try
+		{
+			if(_disabled)
+			{
+				return;
+			}
 
-			string name = Path.GetFileNameWithoutExtension(e.Name);
+			var name = Path.GetFileNameWithoutExtension(e.Name);
 
 			LogManager.Info($"Config \"{name}\": Deleted.");
 		}
@@ -132,17 +147,19 @@ internal class ConfigWatcher : IDisposable
 		{
 			LogManager.Error(exception);
 		}
-		
 	}
 
 	private void OnConfigFileRenamed(object sender, RenamedEventArgs e)
 	{
 		try
 		{
-			if(_disabled) return;
+			if(_disabled)
+			{
+				return;
+			}
 
-			string oldName = Path.GetFileNameWithoutExtension(e.OldName);
-			string name = Path.GetFileNameWithoutExtension(e.Name);
+			var oldName = Path.GetFileNameWithoutExtension(e.OldName);
+			var name = Path.GetFileNameWithoutExtension(e.Name);
 
 			LogManager.Info($"Config \"{oldName}\": Renamed to \"{name}\".");
 		}
@@ -154,7 +171,11 @@ internal class ConfigWatcher : IDisposable
 
 	private void OnConfigFileError(object sender, ErrorEventArgs e)
 	{
-		if(_disabled) return;
-		LogManager.Info($"ConfigWatcher: Unknown error.");
+		if(_disabled)
+		{
+			return;
+		}
+
+		LogManager.Info("ConfigWatcher: Unknown error.");
 	}
 }

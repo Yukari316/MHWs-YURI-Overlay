@@ -1,14 +1,10 @@
-﻿using ImGuiNET;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks;
+﻿using System.Text.Json.Serialization;
+
+using ImGuiNET;
 
 namespace YURI_Overlay;
 
-internal class LargeMonsterStaticUISettingsCustomization : Customization
+internal class LargeMonsterStaticUiSettingsCustomization : Customization
 {
 	public bool hideDeadOrCaptured = true;
 	public bool renderHighlightedMonster = true;
@@ -19,19 +15,22 @@ internal class LargeMonsterStaticUISettingsCustomization : Customization
 	public OutlineStyles HighlightedMonsterLocationEnum { get => (OutlineStyles) _highlightedMonsterLocationIndex; set => _highlightedMonsterLocationIndex = (int) value; }
 	public string highlightedMonsterLocation
 	{
-		get => LocalizationHelper.Instance.defaultOutlineStyles[_highlightedMonsterLocationIndex];
+		get => LocalizationHelper.Instance.DefaultOutlineStyles[_highlightedMonsterLocationIndex];
 		set
 		{
-			var index = Array.IndexOf(LocalizationHelper.Instance.defaultOutlineStyles, value);
-			if(index != -1) _highlightedMonsterLocationIndex = index;
+			var index = Array.IndexOf(LocalizationHelper.Instance.DefaultOutlineStyles, value);
+			if(index != -1)
+			{
+				_highlightedMonsterLocationIndex = index;
+			}
 		}
 	}
 
-	public LargeMonsterStaticUISettingsCustomization() { }
+	public LargeMonsterStaticUiSettingsCustomization() { }
 
 	public override bool RenderImGui(string parentName = "")
 	{
-		var localization = LocalizationManager.Instance.activeLocalization.data.imGui;
+		var localization = LocalizationManager.Instance.ActiveLocalization.Data.imGui;
 		var localizationHelper = LocalizationHelper.Instance;
 
 		var isChanged = false;
@@ -43,7 +42,7 @@ internal class LargeMonsterStaticUISettingsCustomization : Customization
 			isChanged |= ImGui.Checkbox($"{localization.renderHighlightedMonster}##{customizationName}", ref renderHighlightedMonster);
 			isChanged |= ImGui.Checkbox($"{localization.renderNotHighlightedMonsters}##{customizationName}", ref renderNotHighlightedMonsters);
 
-			isChanged |= ImGui.Combo($"{localization.highlightedMonsterLocation}##{customizationName}", ref _highlightedMonsterLocationIndex, localizationHelper.sortingLocations, localizationHelper.sortingLocations.Length);
+			isChanged |= ImGui.Combo($"{localization.highlightedMonsterLocation}##{customizationName}", ref _highlightedMonsterLocationIndex, localizationHelper.SortingLocations, localizationHelper.SortingLocations.Length);
 
 			ImGui.TreePop();
 		}

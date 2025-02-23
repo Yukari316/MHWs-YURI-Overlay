@@ -1,12 +1,6 @@
-﻿using ImGuiNET;
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Numerics;
-using System.Text;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks;
+﻿using System.Text.Json.Serialization;
+
+using ImGuiNET;
 
 namespace YURI_Overlay;
 
@@ -21,10 +15,14 @@ internal sealed class BarElementOutlineCustomization : Customization
 	public OutlineStyles StyleEnum { get => (OutlineStyles) _styleIndex; set => _styleIndex = (int) value; }
 	public string style
 	{
-		get => LocalizationHelper.Instance.defaultOutlineStyles[_styleIndex];
-		set {
-			var index = Array.IndexOf(LocalizationHelper.Instance.defaultOutlineStyles, value);
-			if(index != -1) _styleIndex = index;
+		get => LocalizationHelper.Instance.DefaultOutlineStyles[_styleIndex];
+		set
+		{
+			var index = Array.IndexOf(LocalizationHelper.Instance.DefaultOutlineStyles, value);
+			if(index != -1)
+			{
+				_styleIndex = index;
+			}
 		}
 	}
 
@@ -32,7 +30,7 @@ internal sealed class BarElementOutlineCustomization : Customization
 
 	public override bool RenderImGui(string parentName = "")
 	{
-		var localization = LocalizationManager.Instance.activeLocalization.data.imGui;
+		var localization = LocalizationManager.Instance.ActiveLocalization.Data.imGui;
 		var localizationHelper = LocalizationHelper.Instance;
 
 		var isChanged = false;
@@ -44,7 +42,7 @@ internal sealed class BarElementOutlineCustomization : Customization
 			isChanged |= ImGui.DragFloat($"{localization.thickness}##{customizationName}", ref thickness, 0.1f, 0, 1024f, "%.1f");
 			isChanged |= ImGui.DragFloat($"{localization.offset}##{customizationName}", ref offset, 0.1f, -1024f, 1024f, "%.1f");
 
-			isChanged |= ImGui.Combo($"{localization.style}##{customizationName}", ref _styleIndex, localizationHelper.outlineStyles, localizationHelper.fillDirections.Length);
+			isChanged |= ImGui.Combo($"{localization.style}##{customizationName}", ref _styleIndex, localizationHelper.OutlineStyles, localizationHelper.FillDirections.Length);
 
 			isChanged |= Color.RenderImGui(customizationName);
 

@@ -1,23 +1,13 @@
-﻿using ImGuiNET;
-using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace YURI_Overlay;
 
-namespace YURI_Overlay;
-
-internal sealed class UICustomization : Customization
+internal sealed class UiCustomization : Customization
 {
-	public LargeMonsterUICustomization largeMonsterUI = new();
+	public LargeMonsterUiCustomization largeMonsterUI = new();
 
-	public UICustomization() { }
+	public UiCustomization() { }
 
 	public bool RenderImGui(string visibleName, string customizationName = "ui")
 	{
-		var localization = LocalizationManager.Instance.activeLocalization.data.imGui;
-
 		var isChanged = false;
 
 		isChanged |= largeMonsterUI.RenderImGui(customizationName);

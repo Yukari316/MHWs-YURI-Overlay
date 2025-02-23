@@ -1,12 +1,6 @@
-﻿using ImGuiNET;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Numerics;
-using System.Text;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks;
-using System.Xml.Linq;
+﻿using System.Text.Json.Serialization;
+
+using ImGuiNET;
 
 namespace YURI_Overlay;
 
@@ -24,7 +18,7 @@ internal class ColorCustomization : Customization
 
 	public override bool RenderImGui(string parentName = "")
 	{
-		var localization = LocalizationManager.Instance.activeLocalization.data.imGui;
+		var localization = LocalizationManager.Instance.ActiveLocalization.Data.imGui;
 
 		var isChanged = false;
 		var customizationName = $"{parentName}-color";
@@ -33,7 +27,10 @@ internal class ColorCustomization : Customization
 		{
 			var isColorChanged = ImGui.ColorPicker4($"##${customizationName}", ref colorInfo.vector);
 			isChanged |= isColorChanged;
-			if(isColorChanged) colorInfo.Vector = colorInfo.vector;
+			if(isColorChanged)
+			{
+				colorInfo.Vector = colorInfo.vector;
+			}
 
 			ImGui.TreePop();
 		}

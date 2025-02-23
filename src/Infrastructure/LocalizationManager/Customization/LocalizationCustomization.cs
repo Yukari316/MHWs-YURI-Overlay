@@ -1,9 +1,4 @@
 ﻿using ImGuiNET;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace YURI_Overlay;
 
@@ -11,40 +6,39 @@ internal sealed class LocalizationCustomization : Customization
 {
 	private int _activeLocalizationIndex = 0;
 
-	private string[] localizationNames = [];
-	private string[] localizationIsoCodes = [];
+	private string[] _localizationNames = [];
+	private string[] _localizationIsoCodes = [];
 
 	public LocalizationCustomization()
 	{
-		LocalizationManager localizationManager = LocalizationManager.Instance;
+		var localizationManager = LocalizationManager.Instance;
 
-		localizationNames = localizationManager.localizations.Values.Select(localization => localization.data.localizationInfo.name).ToArray();
-		localizationIsoCodes = localizationManager.localizations.Values.Select(localization => localization.name).ToArray();
+		_localizationNames = localizationManager.Localizations.Values.Select(localization => localization.Data.localizationInfo.name).ToArray();
+		_localizationIsoCodes = localizationManager.Localizations.Values.Select(localization => localization.Name).ToArray();
 
-		_activeLocalizationIndex = Array.IndexOf(localizationIsoCodes, localizationManager.activeLocalization.name);
+		_activeLocalizationIndex = Array.IndexOf(_localizationIsoCodes, localizationManager.ActiveLocalization.Name);
 
-		localizationManager.activeLocalizationChanged += OnActiveLocalizationChanged;
-		localizationManager.anyLocalizationChanged += OnAnyLocalizationChanged;
-
+		localizationManager.ActiveLocalizationChanged += OnActiveLocalizationChanged;
+		localizationManager.AnyLocalizationChanged += OnAnyLocalizationChanged;
 	}
 
 	public override bool RenderImGui(string parentName = "")
 	{
-		LocalizationManager localizationManager = LocalizationManager.Instance;
-		ConfigManager configManager = ConfigManager.Instance;
-		ImGuiLocalization localization = localizationManager.activeLocalization.data.imGui;
+		var localizationManager = LocalizationManager.Instance;
+		var configManager = ConfigManager.Instance;
+		var localization = localizationManager.ActiveLocalization.Data.imGui;
 
-		bool isChanged = false;
+		var isChanged = false;
 
 		if(ImGui.TreeNode($"{localization.language}##{parentName}"))
 		{
-			bool isActiveConfigChanged = ImGui.Combo(localization.activeConfig, ref _activeLocalizationIndex, localizationNames, localizationNames.Length);
+			var isActiveConfigChanged = ImGui.Combo(localization.activeConfig, ref _activeLocalizationIndex, _localizationNames, _localizationNames.Length);
 			if(isActiveConfigChanged)
 			{
 				isChanged |= isActiveConfigChanged;
 
-				configManager.activeConfig.data.localization = localizationIsoCodes[_activeLocalizationIndex];
-				localizationManager.ActivateLocalization(localizationIsoCodes[_activeLocalizationIndex]);
+				configManager.ActiveConfig.Data.localization = _localizationIsoCodes[_activeLocalizationIndex];
+				localizationManager.ActivateLocalization(_localizationIsoCodes[_activeLocalizationIndex]);
 			}
 
 			ImGui.TreePop();
@@ -55,18 +49,16 @@ internal sealed class LocalizationCustomization : Customization
 
 	private void OnAnyLocalizationChanged(object sender, EventArgs eventArgs)
 	{
-		LocalizationManager localizationManager = LocalizationManager.Instance;
+		var localizationManager = LocalizationManager.Instance;
 
-		LogManager.Info($"LocalizationCustomization: Localizations changed.{Utils.Stringify(localizationManager.localizations.Keys.ToArray())}");
-
-		localizationNames = localizationManager.localizations.Values.Select(localization => localization.data.localizationInfo.name).ToArray();
-		localizationIsoCodes = localizationManager.localizations.Values.Select(localization => localization.name).ToArray();
+		_localizationNames = localizationManager.Localizations.Values.Select(localization => localization.Data.localizationInfo.name).ToArray();
+		_localizationIsoCodes = localizationManager.Localizations.Values.Select(localization => localization.Name).ToArray();
 	}
 
 	private void OnActiveLocalizationChanged(object sender, EventArgs eventArgs)
 	{
-		LocalizationManager localizationManager = LocalizationManager.Instance;
+		var localizationManager = LocalizationManager.Instance;
 
-		_activeLocalizationIndex = Array.IndexOf(localizationIsoCodes, localizationManager.activeLocalization.name);
+		_activeLocalizationIndex = Array.IndexOf(_localizationIsoCodes, localizationManager.ActiveLocalization.Name);
 	}
 }

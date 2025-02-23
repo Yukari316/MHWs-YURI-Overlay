@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace YURI_Overlay;
+﻿namespace YURI_Overlay;
 
 internal sealed class LocalizationHelper
 {
@@ -12,20 +6,20 @@ internal sealed class LocalizationHelper
 
 	public static LocalizationHelper Instance => _lazy.Value;
 
-	public string[] defaultFillDirections = new string[4];
-	public string[] fillDirections = new string[4];
+	public string[] DefaultFillDirections = new string[4];
+	public string[] FillDirections = new string[4];
 
-	public string[] defaultOutlineStyles = new string[3];
-	public string[] outlineStyles = new string[3];
+	public string[] DefaultOutlineStyles = new string[3];
+	public string[] OutlineStyles = new string[3];
 
-	public string[] defaultSortingLocations = new string[3];
-	public string[] sortingLocations = new string[3];
+	public string[] DefaultSortingLocations = new string[3];
+	public string[] SortingLocations = new string[3];
 
-	public string[] defaultSortings = new string[6];
-	public string[] sortings = new string[6];
+	public string[] DefaultSortings = new string[6];
+	public string[] Sortings = new string[6];
 
-	public string[] defaultAnchors  = new string[9];
-	public string[] anchors = new string[9];
+	public string[] DefaultAnchors = new string[9];
+	public string[] Anchors = new string[9];
 
 	public LocalizationHelper() { }
 
@@ -33,12 +27,11 @@ internal sealed class LocalizationHelper
 	{
 		var localizationManager = LocalizationManager.Instance;
 
-		localizationManager.activeLocalizationChanged += OnActiveLocalizationChanged;
+		localizationManager.ActiveLocalizationChanged += OnActiveLocalizationChanged;
 
-		var defaultLocalization = localizationManager.defaultLocalization.data.imGui;
+		var defaultLocalization = localizationManager.DefaultLocalization.Data.imGui;
 
-
-		defaultFillDirections =
+		DefaultFillDirections =
 		[
 			defaultLocalization.leftToRight,
 			defaultLocalization.rightToLeft,
@@ -46,21 +39,21 @@ internal sealed class LocalizationHelper
 			defaultLocalization.bottomToTop
 		];
 
-		defaultOutlineStyles =
+		DefaultOutlineStyles =
 		[
 			defaultLocalization.inside,
 			defaultLocalization.center,
 			defaultLocalization.outside
 		];
 
-		defaultSortingLocations =
+		DefaultSortingLocations =
 		[
 			defaultLocalization.normal,
 			defaultLocalization.first,
 			defaultLocalization.last
 		];
 
-		defaultSortings =
+		DefaultSortings =
 		[
 			defaultLocalization.normal,
 			defaultLocalization.id,
@@ -70,7 +63,7 @@ internal sealed class LocalizationHelper
 			defaultLocalization.distance
 		];
 
-		defaultAnchors =
+		DefaultAnchors =
 		[
 			defaultLocalization.topLeft,
 			defaultLocalization.topCenter,
@@ -88,9 +81,9 @@ internal sealed class LocalizationHelper
 
 	public void Update()
 	{
-		var localization = LocalizationManager.Instance.activeLocalization.data.imGui;
+		var localization = LocalizationManager.Instance.ActiveLocalization.Data.imGui;
 
-		fillDirections =
+		FillDirections =
 		[
 			localization.leftToRight,
 			localization.rightToLeft,
@@ -98,21 +91,21 @@ internal sealed class LocalizationHelper
 			localization.bottomToTop
 		];
 
-		outlineStyles =
+		OutlineStyles =
 		[
 			localization.inside,
 			localization.center,
 			localization.outside
 		];
 
-		sortingLocations =
+		SortingLocations =
 		[
 			localization.normal,
 			localization.first,
 			localization.last
 		];
 
-		sortings =
+		Sortings =
 		[
 			localization.normal,
 			localization.id,
@@ -122,7 +115,7 @@ internal sealed class LocalizationHelper
 			localization.distance
 		];
 
-		anchors =
+		Anchors =
 		[
 			localization.topLeft,
 			localization.topCenter,

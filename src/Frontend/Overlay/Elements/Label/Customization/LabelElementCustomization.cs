@@ -1,9 +1,4 @@
 ﻿using ImGuiNET;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace YURI_Overlay;
 
@@ -20,15 +15,13 @@ internal sealed class LabelElementCustomization : Customization
 
 	public bool RenderImGui(string visibleName, string customizationName = "label")
 	{
-		var localization = LocalizationManager.Instance.activeLocalization.data.imGui;
+		var localization = LocalizationManager.Instance.ActiveLocalization.Data.imGui;
 
 		var isChanged = false;
 
 		if(ImGui.TreeNode($"{visibleName}##{customizationName}"))
 		{
 			isChanged |= ImGui.Checkbox($"{localization.visible}##{customizationName}", ref visible);
-
-			LogManager.Info($"[{format}]: {format?.Length}");
 
 			isChanged |= ImGui.InputText($"{localization.format}##{customizationName}", ref format, 256);
 
