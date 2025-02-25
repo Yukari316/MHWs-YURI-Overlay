@@ -4,18 +4,18 @@ namespace YURI_Overlay;
 
 internal sealed class OverlayManager
 {
-	private static readonly Lazy<OverlayManager> _lazy = new(() => new OverlayManager());
+	private static readonly Lazy<OverlayManager> Lazy = new(() => new OverlayManager());
 
-	public static OverlayManager Instance => _lazy.Value;
+	public static OverlayManager Instance => Lazy.Value;
 
-	private LargeMonsterUiManager _largeMonsterUIManager;
+	private LargeMonsterUiManager _largeMonsterUiManager;
 
 
 	private OverlayManager() { }
 
 	public void Initialize()
 	{
-		_largeMonsterUIManager = new LargeMonsterUiManager();
+		_largeMonsterUiManager = new LargeMonsterUiManager();
 	}
 
 	public void Draw()
@@ -32,7 +32,7 @@ internal sealed class OverlayManager
 
 		var backgroundDrawList = ImGui.GetBackgroundDrawList();
 
-		_largeMonsterUIManager.Draw(backgroundDrawList);
+		_largeMonsterUiManager.Draw(backgroundDrawList);
 
 		ImGui.End();
 	}
