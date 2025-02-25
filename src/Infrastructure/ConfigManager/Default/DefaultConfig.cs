@@ -79,8 +79,8 @@ internal static class DefaultConfig
 		config.largeMonsterUI.@static.settings.renderHighlightedMonster = true;
 		config.largeMonsterUI.@static.settings.renderNotHighlightedMonsters = true;
 
-		config.largeMonsterUI.@static.position.x = 100f;
-		config.largeMonsterUI.@static.position.y = 100f;
+		config.largeMonsterUI.@static.position.x = 89f;
+		config.largeMonsterUI.@static.position.y = -40f;
 		config.largeMonsterUI.@static.position.Anchor = "Bottom-Left";
 
 		config.largeMonsterUI.@static.spacing.x = 300f;
@@ -89,55 +89,60 @@ internal static class DefaultConfig
 		config.largeMonsterUI.@static.nameLabel.visible = true;
 		config.largeMonsterUI.@static.nameLabel.format = "{0}";
 		config.largeMonsterUI.@static.nameLabel.settings.rightAlignmentShift = 0;
-		config.largeMonsterUI.@static.nameLabel.offset.x = -96f + 3f;
+		config.largeMonsterUI.@static.nameLabel.offset.x = 7f;
 		config.largeMonsterUI.@static.nameLabel.offset.y = 0f;
-		config.largeMonsterUI.@static.nameLabel.color.colorInfo.Rgba = 0xFFFFFFFF;
+		config.largeMonsterUI.@static.nameLabel.color.colorInfo.Rgba = 0xFFFFFFCC;
 
 		config.largeMonsterUI.@static.nameLabel.shadow.visible = true;
 		config.largeMonsterUI.@static.nameLabel.shadow.offset.x = 2f;
 		config.largeMonsterUI.@static.nameLabel.shadow.offset.y = 2f;
-		config.largeMonsterUI.@static.nameLabel.shadow.color.colorInfo.Rgba = 0x000000FF;
+		config.largeMonsterUI.@static.nameLabel.shadow.color.colorInfo.Rgba = 0x000000CC;
+
+		config.largeMonsterUI.@static.health.visible = true;
+		config.largeMonsterUI.@static.health.offset.x = 0f;
+		config.largeMonsterUI.@static.health.offset.y = 0f;
 
 		config.largeMonsterUI.@static.health.healthValueLabel.visible = true;
-		config.largeMonsterUI.@static.health.healthValueLabel.format = "{0:F0}/{1:F0}";
-		config.largeMonsterUI.@static.health.healthValueLabel.settings.rightAlignmentShift = 13;
-		config.largeMonsterUI.@static.health.healthValueLabel.offset.x = 4f;
-		config.largeMonsterUI.@static.health.healthValueLabel.offset.y = 16f;
-		config.largeMonsterUI.@static.health.healthValueLabel.color.colorInfo.Rgba = 0xFFFFFFFF;
+		config.largeMonsterUI.@static.health.healthValueLabel.format = "{0:F1}/{1:F0}";
+		config.largeMonsterUI.@static.health.healthValueLabel.settings.rightAlignmentShift = 0;
+		config.largeMonsterUI.@static.health.healthValueLabel.offset.x = 7f;
+		config.largeMonsterUI.@static.health.healthValueLabel.offset.y = 24f;
+		config.largeMonsterUI.@static.health.healthValueLabel.color.colorInfo.Rgba = 0xFFFFFFCC;
 
 		config.largeMonsterUI.@static.health.healthValueLabel.shadow.visible = true;
 		config.largeMonsterUI.@static.health.healthValueLabel.shadow.offset.x = 2f;
 		config.largeMonsterUI.@static.health.healthValueLabel.shadow.offset.y = 2f;
-		config.largeMonsterUI.@static.health.healthValueLabel.shadow.color.colorInfo.Rgba = 0x000000FF;
+		config.largeMonsterUI.@static.health.healthValueLabel.shadow.color.colorInfo.Rgba = 0x000000CC;
 
-		config.largeMonsterUI.@static.health.healthPercentageLabel.visible = false;
+		config.largeMonsterUI.@static.health.healthPercentageLabel.visible = true;
 		config.largeMonsterUI.@static.health.healthPercentageLabel.format = "{0:P1}";
 		config.largeMonsterUI.@static.health.healthPercentageLabel.settings.rightAlignmentShift = 6;
-		config.largeMonsterUI.@static.health.healthPercentageLabel.offset.x = 49f;
-		config.largeMonsterUI.@static.health.healthPercentageLabel.offset.y = 28f;
-		config.largeMonsterUI.@static.health.healthPercentageLabel.color.colorInfo.Rgba = 0xFFFFFFFF;
+		config.largeMonsterUI.@static.health.healthPercentageLabel.offset.x = 245f;
+		config.largeMonsterUI.@static.health.healthPercentageLabel.offset.y = 24f;
+		config.largeMonsterUI.@static.health.healthPercentageLabel.color.colorInfo.Rgba = 0xFFFFFFCC;
 
 		config.largeMonsterUI.@static.health.healthPercentageLabel.shadow.visible = true;
 		config.largeMonsterUI.@static.health.healthPercentageLabel.shadow.offset.x = 2f;
 		config.largeMonsterUI.@static.health.healthPercentageLabel.shadow.offset.y = 2f;
-		config.largeMonsterUI.@static.health.healthPercentageLabel.shadow.color.colorInfo.Rgba = 0x000000FF;
+		config.largeMonsterUI.@static.health.healthPercentageLabel.shadow.color.colorInfo.Rgba = 0x000000CC;
 
 		config.largeMonsterUI.@static.health.healthBar.visible = true;
 		config.largeMonsterUI.@static.health.healthBar.settings.fillDirection = "LeftToRight";
-		config.largeMonsterUI.@static.health.healthBar.offset.x = -96f;
-		config.largeMonsterUI.@static.health.healthBar.offset.y = 16f;
-		config.largeMonsterUI.@static.health.healthBar.size.width = 192f;
-		config.largeMonsterUI.@static.health.healthBar.size.height = 7f;
+		config.largeMonsterUI.@static.health.healthBar.offset.x = 0f;
+		config.largeMonsterUI.@static.health.healthBar.offset.y = 15f;
+		config.largeMonsterUI.@static.health.healthBar.size.width = 297f;
+		config.largeMonsterUI.@static.health.healthBar.size.height = 12f;
 
-		config.largeMonsterUI.@static.health.healthBar.colors.background.StartInfo.Rgba = 0xFFFFFF59;
-		config.largeMonsterUI.@static.health.healthBar.colors.background.EndInfo.Rgba = 0xFFFFFF59;
-		config.largeMonsterUI.@static.health.healthBar.colors.foreground.StartInfo.Rgba = 0x164D35FF;
-		config.largeMonsterUI.@static.health.healthBar.colors.foreground.EndInfo.Rgba = 0x75A55EFF;
+		config.largeMonsterUI.@static.health.healthBar.colors.foreground.StartInfo.Rgba = 0x004016CC;
+		config.largeMonsterUI.@static.health.healthBar.colors.foreground.EndInfo.Rgba = 0x34FF4ECC;
+		config.largeMonsterUI.@static.health.healthBar.colors.background.StartInfo.Rgba = 0x0000004A;
+		config.largeMonsterUI.@static.health.healthBar.colors.background.EndInfo.Rgba = 0x0000004A;
+
 
 		config.largeMonsterUI.@static.health.healthBar.outline.visible = true;
-		config.largeMonsterUI.@static.health.healthBar.outline.thickness = 3f;
+		config.largeMonsterUI.@static.health.healthBar.outline.thickness = 2f;
 		config.largeMonsterUI.@static.health.healthBar.outline.offset = 0f;
-		config.largeMonsterUI.@static.health.healthBar.outline.style = "Outside";
-		config.largeMonsterUI.@static.health.healthBar.outline.Color.colorInfo.Rgba = 0x00000059;
+		config.largeMonsterUI.@static.health.healthBar.outline.style = "Inside";
+		config.largeMonsterUI.@static.health.healthBar.outline.Color.colorInfo.Rgba = 0x00000080;
 	}
 }
