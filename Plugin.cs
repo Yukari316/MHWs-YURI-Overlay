@@ -94,12 +94,12 @@ public class Plugin
 				imGuiManager.IsOpened = !imGuiManager.IsOpened;
 			}
 
+			OverlayManager.Instance.Draw();
+
 			if(imGuiManager.IsOpened)
 			{
 				ImGuiManager.Instance.Draw();
 			}
-
-			OverlayManager.Instance.Draw();
 		}
 		catch(Exception exception)
 		{
