@@ -63,7 +63,6 @@ internal sealed class LargeMonsterUiManager : IDisposable
 
 			newLargeMonsters.Add(largeMonster);
 
-			largeMonster.UpdatePosition();
 			largeMonster.UpdateDistance();
 		}
 

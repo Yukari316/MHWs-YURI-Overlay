@@ -245,14 +245,15 @@ internal sealed class LargeMonster
 				return;
 			}
 
-			var name = (string) NameString_Method.InvokeBoxed(String_Type, null, [EmID, RoleID, LegendaryID]);
-			if(name == null)
-			{
-				LogManager.Info("[LargeMonster.Initialize] No enemy name");
-				return;
-			}
+			//var name = (string) NameString_Method.InvokeBoxed(String_Type, null, [EmID, RoleID, LegendaryID]);
+			//if(name == null)
+			//{
+			//	LogManager.Info("[LargeMonster.Initialize] No enemy name");
+			//	return;
+			//}
 
-			Name = name;
+			//Name = name;
+			Name = "High Purrformance Barrel Puncher Silver #444";
 		}
 		catch(Exception exception)
 		{

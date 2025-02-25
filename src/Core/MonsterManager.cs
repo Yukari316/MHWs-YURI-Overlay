@@ -10,25 +10,15 @@ internal sealed class MonsterManager : IDisposable
 
 	public Dictionary<ManagedObject, LargeMonster> LargeMonsters = [];
 
-	private Type chealthManager_Type;
 	private Type Boolean_Type;
-	private Type String_Type;
 
 	private Method doUpdateEnd_Method;
-	private Method get_HealthMgr_Method;
 	private Method get_IsBoss_Method;
-	private Method NameString_Method;
 
 	private Field _Context_Field;
 	private Field _Em_Field;
-	private Field Basic_Field;
-	private Field EmID_Field;
-	private Field RoleID_Field;
-	private Field LegendaryID_Field;
 
 	private MethodHook preDoUpdateEndHook;
-
-
 
 	private MonsterManager() { }
 
@@ -70,31 +60,15 @@ internal sealed class MonsterManager : IDisposable
 			var EnemyCharacter_TypeDef = TDB.Get().GetType("app.EnemyCharacter");
 
 			doUpdateEnd_Method = EnemyCharacter_TypeDef.GetMethod("doUpdateEnd");
-			get_HealthMgr_Method = EnemyCharacter_TypeDef.GetMethod("get_HealthMgr");
 			_Context_Field = EnemyCharacter_TypeDef.GetField("_Context");
-
-			chealthManager_Type = get_HealthMgr_Method.ReturnType.GetType();
 
 			_Em_Field = _Context_Field.GetType().GetField("_Em");
 
 			var enemyContext_TypeDef = _Em_Field.GetType();
 
 			get_IsBoss_Method = enemyContext_TypeDef.GetMethod("get_IsBoss");
-			Basic_Field = enemyContext_TypeDef.GetField("Basic");
 
 			Boolean_Type = get_IsBoss_Method.ReturnType.GetType();
-
-			var cEmModuleBasic_TypeDef = Basic_Field.GetType();
-
-			EmID_Field = cEmModuleBasic_TypeDef.GetField("EmID");
-			RoleID_Field = cEmModuleBasic_TypeDef.GetField("RoleID");
-			LegendaryID_Field = cEmModuleBasic_TypeDef.GetField("LegendaryID");
-
-			var EnemyDef_TypeDef = TDB.Get().GetType("app.EnemyDef");
-
-			NameString_Method = EnemyDef_TypeDef.GetMethod("NameString");
-
-			String_Type = NameString_Method.ReturnType.GetType();
 		}
 		catch(Exception exception)
 		{
@@ -161,6 +135,7 @@ internal sealed class MonsterManager : IDisposable
 				{
 					var largeMonster = LargeMonsters[enemyCharacter];
 					largeMonster.UpdateHealth();
+					largeMonster.UpdatePosition();
 				}
 			}
 
