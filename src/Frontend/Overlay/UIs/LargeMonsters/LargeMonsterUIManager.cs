@@ -70,86 +70,55 @@ internal sealed class LargeMonsterUiManager : IDisposable
 
 		// Sort
 
-
-		switch(config.sorting.SortingEnum)
+		if(config.sorting.reversedOrder)
 		{
-			case Sortings.Id:
-				newLargeMonsters.Sort((a, b) =>
-				{
-					var idComparison = a.Id.CompareTo(b.Id);
-					if(idComparison != 0)
-					{
-						return idComparison;
-					}
-
-					var roleIdComparison = a.RoleId.CompareTo(b.RoleId);
-					if(roleIdComparison != 0)
-					{
-						return roleIdComparison;
-					}
-
-					var legendaryIdComparison = a.LegendaryId.CompareTo(b.LegendaryId);
-					if(legendaryIdComparison != 0)
-					{
-						return legendaryIdComparison;
-					}
-
-					return string.CompareOrdinal(a.Name, b.Name);
-				});
-				break;
-			case Sortings.Health:
-				newLargeMonsters.Sort((a, b) =>
-				{
-					var healthDifference = a.Health - b.Health;
-					if(!Utils.IsApproximatelyEqual(healthDifference, 0f))
-					{
-						return healthDifference < 0f ? -1 : 1;
-					}
-
-					return string.CompareOrdinal(a.Name, b.Name);
-				});
-				break;
-			case Sortings.MaxHealth:
-				newLargeMonsters.Sort((a, b) =>
-				{
-					var maxHealthDifference = a.MaxHealth - b.MaxHealth;
-					if(!Utils.IsApproximatelyEqual(maxHealthDifference, 0f))
-					{
-						return maxHealthDifference < 0f ? -1 : 1;
-					}
-
-					return string.CompareOrdinal(a.Name, b.Name);
-				});
-				break;
-			case Sortings.HealthPercentage:
-				newLargeMonsters.Sort((a, b) =>
-				{
-					var healthPercentageDifference = a.HealthPercentage - b.HealthPercentage;
-					if(!Utils.IsApproximatelyEqual(healthPercentageDifference, 0f))
-					{
-						return healthPercentageDifference < 0f ? -1 : 1;
-					}
-
-					return string.CompareOrdinal(a.Name, b.Name);
-				});
-				break;
-
-			case Sortings.Distance:
-				newLargeMonsters.Sort((a, b) =>
-				{
-					var distanceDifference = a.Distance - b.Distance;
-					if(!Utils.IsApproximatelyEqual(distanceDifference, 0f))
-					{
-						return distanceDifference < 0f ? -1 : 1;
-					}
-
-					return string.CompareOrdinal(a.Name, b.Name);
-				});
-				break;
-			case Sortings.Name:
-			default:
-				newLargeMonsters.Sort((a, b) => string.CompareOrdinal(a.Name, b.Name));
-				break;
+			switch(config.sorting.SortingEnum)
+			{
+				case Sortings.Id:
+					newLargeMonsters.Sort(LargeMonsterSorting.CompareByIdReversed);
+					break;
+				case Sortings.Health:
+					newLargeMonsters.Sort(LargeMonsterSorting.CompareByHealthReversed);
+					break;
+				case Sortings.MaxHealth:
+					newLargeMonsters.Sort(LargeMonsterSorting.CompareByMaxHealthReversed);
+					break;
+				case Sortings.HealthPercentage:
+					newLargeMonsters.Sort(LargeMonsterSorting.CompareByHealthPercentageReversed);
+					break;
+				case Sortings.Distance:
+					newLargeMonsters.Sort(LargeMonsterSorting.CompareByDistanceReversed);
+					break;
+				case Sortings.Name:
+				default:
+					newLargeMonsters.Sort(LargeMonsterSorting.CompareByNameReversed);
+					break;
+			}
+		}
+		else
+		{
+			switch(config.sorting.SortingEnum)
+			{
+				case Sortings.Id:
+					newLargeMonsters.Sort(LargeMonsterSorting.CompareById);
+					break;
+				case Sortings.Health:
+					newLargeMonsters.Sort(LargeMonsterSorting.CompareByHealth);
+					break;
+				case Sortings.MaxHealth:
+					newLargeMonsters.Sort(LargeMonsterSorting.CompareByMaxHealth);
+					break;
+				case Sortings.HealthPercentage:
+					newLargeMonsters.Sort(LargeMonsterSorting.CompareByHealthPercentage);
+					break;
+				case Sortings.Distance:
+					newLargeMonsters.Sort(LargeMonsterSorting.CompareByDistance);
+					break;
+				case Sortings.Name:
+				default:
+					newLargeMonsters.Sort(LargeMonsterSorting.CompareByName);
+					break;
+			}
 		}
 
 		_staticLargeMonsters = newLargeMonsters;
