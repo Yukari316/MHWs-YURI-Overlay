@@ -41,17 +41,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Windows.CsWinRT" Version="2.2.0" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Reference Include="ImGui.NET">
       <HintPath>REFramework\plugins\managed\dependencies\ImGui.NET.dll</HintPath>
       <Private>True</Private>
-    </Reference>
-    <Reference Include="REFCoreDeps">
-      <HintPath>..\MHWilds-YURI-Overlay\REFramework\plugins\managed\dependencies\REFCoreDeps.dll</HintPath>
-	  <Private>True</Private>
     </Reference>
     <Reference Include="REFramework.NET">
       <HintPath>REFramework\plugins\REFramework.NET.dll</HintPath>
