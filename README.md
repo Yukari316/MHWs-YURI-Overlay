@@ -150,7 +150,7 @@
 # Credits
 **[GreenComfyTea](https://github.com/GreenComfyTea)** - creator of the mod and it's main contributor.  
 **[cursey](https://github.com/cursey)** - creator of [REFramework.NET](https://GreenComfyTeanexusmods.com/monsterhunterrise/mods/26).  
-**[praydog](https://github.com/praydog)** - creator of [REFramework.NET](https://GreenComfyTeanexusmods.com/monsterhunterrise/mods/26).
+**[praydog](https://github.com/praydog)** - contributor of [REFramework](https://GreenComfyTeanexusmods.com/monsterhunterrise/mods/26).
 ***
 # Support
 
