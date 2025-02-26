@@ -32,10 +32,10 @@ internal enum SortingLocations
 
 internal enum Sortings
 {
-	Normal,
-	ID,
 	Name,
+	Id,
 	Health,
+	MaxHealth,
 	HealthPercentage,
 	Distance
 }

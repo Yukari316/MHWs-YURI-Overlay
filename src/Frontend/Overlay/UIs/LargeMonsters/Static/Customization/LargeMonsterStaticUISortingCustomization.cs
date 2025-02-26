@@ -6,7 +6,7 @@ namespace YURI_Overlay;
 
 internal class LargeMonsterStaticUiSortingCustomization : Customization
 {
-	private int _sortingIndex = (int) Sortings.Normal;
+	private int _sortingIndex = (int) Sortings.Name;
 	[JsonIgnore]
 	public Sortings SortingEnum { get => (Sortings) _sortingIndex; set => _sortingIndex = (int) value; }
 	public string sorting

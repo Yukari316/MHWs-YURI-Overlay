@@ -11,6 +11,10 @@ internal sealed class LargeMonster
 	public ManagedObject EnemyCharacter;
 
 	public string Name = "Large Monster";
+	public int Id = -1;
+	public int RoleId = -1;
+	public int LegendaryId = -1;
+
 	public Vector3 Position = Vector3.Zero;
 	public float Distance = 0f;
 	public float Health = -1;
@@ -227,33 +231,35 @@ internal sealed class LargeMonster
 			var EmID = (int?) EmID_Field.GetDataBoxed((ulong) Basic.Ptr(), false);
 			if(EmID == null)
 			{
-				LogManager.Info("[LargeMonster.Initialize] No enemy ID");
+				LogManager.Info("[LargeMonster.Initialize] No enemy Id");
 				return;
 			}
 
 			var RoleID = (int?) RoleID_Field.GetDataBoxed((ulong) Basic.Ptr(), false);
 			if(RoleID == null)
 			{
-				LogManager.Info("[LargeMonster.Initialize] No enemy role ID");
+				LogManager.Info("[LargeMonster.Initialize] No enemy role Id");
 				return;
 			}
 
 			var LegendaryID = (int?) LegendaryID_Field.GetDataBoxed((ulong) Basic.Ptr(), false);
 			if(LegendaryID == null)
 			{
-				LogManager.Info("[LargeMonster.Initialize] No enemy legendary ID");
+				LogManager.Info("[LargeMonster.Initialize] No enemy legendary Id");
 				return;
 			}
 
-			//var name = (string) NameString_Method.InvokeBoxed(String_Type, null, [EmID, RoleID, LegendaryID]);
-			//if(name == null)
-			//{
-			//	LogManager.Info("[LargeMonster.Initialize] No enemy name");
-			//	return;
-			//}
+			var name = (string) NameString_Method.InvokeBoxed(String_Type, null, [EmID, RoleID, LegendaryID]);
+			if(name == null)
+			{
+				LogManager.Info("[LargeMonster.Initialize] No enemy name");
+				return;
+			}
 
-			//Name = name;
-			Name = "High Purrformance Barrel Puncher Silver #444";
+			Name = name;
+			Id = (int) EmID;
+			RoleId = (int) RoleID;
+			LegendaryId = (int) LegendaryID;
 		}
 		catch(Exception exception)
 		{

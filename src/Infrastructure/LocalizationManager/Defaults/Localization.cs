@@ -107,7 +107,8 @@ internal class ImGuiLocalization
 
 	public string sorting = "Sorting";
 	public string type = "Type";
-	public string id = "ID";
+	public string id = "Id";
+	public string maxHealth = "Max Health";
 	public string healthPercentage = "Health Percentage";
 	public string distance = "Distance";
 

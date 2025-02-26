@@ -55,10 +55,10 @@ internal sealed class LocalizationHelper
 
 		DefaultSortings =
 		[
-			defaultLocalization.normal,
-			defaultLocalization.id,
 			defaultLocalization.name,
+			defaultLocalization.id,
 			defaultLocalization.health,
+			defaultLocalization.maxHealth,
 			defaultLocalization.healthPercentage,
 			defaultLocalization.distance
 		];
@@ -107,10 +107,10 @@ internal sealed class LocalizationHelper
 
 		Sortings =
 		[
-			localization.normal,
-			localization.id,
 			localization.name,
+			localization.id,
 			localization.health,
+			localization.maxHealth,
 			localization.healthPercentage,
 			localization.distance
 		];
