@@ -50,6 +50,9 @@
 	<a href="https://GreenComfyTeanexusmods.com/monsterhunterrise/mods/26">
 		<img alt="REFramework.NET Dependency" src="https://custom-icon-badges.demolab.com/badge/dependency-REFramework.NET-green?logo=package-dependencies" />
 	</a>
+	<a href="https://GreenComfyTeanexusmods.com/monsterhunterrise/mods/26">
+		<img alt=".NET Dependency" src="https://custom-icon-badges.demolab.com/badge/dependency-.NET%20Desktop%20Runtime%20v8.0.x-green?logo=package-dependencies" />
+	</a>
 	<br>
 	<br>
 	<a href="https://github.com/GreenComfyTea/MHWs-YURI-Overlay/commits/main">
@@ -97,8 +100,8 @@
 	</a>
 	<br>
 	<br>
-	<a href="https://GreenComfyTeanexusmods.com/monsterhunterrise/mods/50">
-		<img alt="Website" src="https://custom-icon-badges.demolab.com/website?down_color=red&down_message=down&up_color=brightgreen&up_message=up&logo=link&url=https://GreenComfyTeanexusmods.com/monsterhunterrise/mods/50" />
+	<a href="https://nexusmods.com/monsterhunterwilds/mods/62">
+		<img alt="Website" src="https://custom-icon-badges.demolab.com/website?down_color=red&down_message=down&up_color=brightgreen&up_message=up&logo=link&url=https://nexusmods.com/monsterhunterwilds/mods/62" />
 	</a>
 	<a href="https://github.com/GreenComfyTea?tab=followers">
 		<img alt="Followers" src="https://custom-icon-badges.demolab.com/github/followers/GreenComfyTea?logo=people" />
@@ -131,21 +134,20 @@
 </p>
 
 # Links
-* **[Nexus Mods](https://GreenComfyTeanexusmods.com/monsterhunterrise/mods/50)**  
+* **[Nexus Mods](https://nexusmods.com/monsterhunterwilds/mods/62)**  
 * **[Nightly Builds](https://github.com/GreenComfyTea/MHWs-YURI-Overlay-Nightly/releases)** 
-* **[Requirements and Installation](https://github.com/GreenComfyTea/MHWs-YURI-Overlay/wiki/Requirements-and-Installation)**  
-* **[Features](https://github.com/GreenComfyTea/MHWs-YURI-Overlay/wiki/Features)**  
-* **[Troubleshooting](https://github.com/GreenComfyTea/MHWs-YURI-Overlay/wiki/Troubleshooting)**  
 
 # Requirements
-1. **[REFramework.NET](https://GreenComfyTeanexusmods.com/monsterhunterrise/mods/26)**;
+1. **[REFramework.NET](https://github.com/GreenComfyTea/REFramework/releases/)**;
+2. **[.NET Desktop Runtime v8.0.x](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)**.
 
 # How to install:
-1. Install **[REFramework.NET](https://GreenComfyTeanexusmods.com/monsterhunterrise/mods/26)**;
-2. Download the mod:
-	* Official release can be downloaded from **[Nexus Mods](https://GreenComfyTeanexusmods.com/monsterhunterrise/mods/50)**;
-	* Nightly builds are available in **[this repo](https://github.com/GreenComfyTea/MHWs-YURI-Overlay-Nightly)** and can contain broken functionality, debugging info on screen, bugs and might require the latest **[nightly build](https://github.com/praydog/REFramework-nightly/releases)** of **[REFramework.NET](https://GreenComfyTeanexusmods.com/monsterhunterrise/mods/26)**. Use with caution!
-3. Extract the mod from the archive and place it in `/MonsterHunterWilds/`` folder. Refer to **[FAQ](https://github.com/GreenComfyTea/MHWs-YURI-Overlay/wiki/FAQ)** to verify how the file hierarchy should look like if everything is done correctly.
+1. Install **[REFramework.NET](https://github.com/GreenComfyTea/REFramework/releases/)**;
+2. Install **[.NET Desktop Runtime v8.0.x](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)**;
+3. Download the mod:
+	* Official release can be downloaded from here or **[Nexus Mods]([https://GreenComfyTeanexusmods.com/monsterhunterrise/mods/50](https://www.nexusmods.com/monsterhunterwilds/mods/62))**;
+	* Nightly builds are available in **[this repo](https://github.com/GreenComfyTea/MHWs-YURI-Overlay-Nightly)** and can contain broken functionality, debugging info on screen, bugs and might require the latest **[nightly build](https://github.com/praydog/REFramework-nightly/releases)** of **[REFramework.NET](https://github.com/GreenComfyTea/REFramework/releases/)**. Use with caution!
+4. Extract the mod from the archive and place it in `/MonsterHunterWilds/` folder.
 
 # Credits
 **[GreenComfyTea](https://github.com/GreenComfyTea)** - creator of the mod and it's main contributor.  
