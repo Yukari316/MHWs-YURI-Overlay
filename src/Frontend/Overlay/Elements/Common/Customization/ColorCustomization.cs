@@ -8,7 +8,7 @@ internal class ColorCustomization : Customization
 {
 	[JsonIgnore]
 	public ColorInfo colorInfo = new();
-	public string color
+	public string Color
 	{
 		get => colorInfo.RgbaHex;
 		set => colorInfo.RgbaHex = value;

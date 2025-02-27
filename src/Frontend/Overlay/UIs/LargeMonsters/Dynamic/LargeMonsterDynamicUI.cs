@@ -13,18 +13,18 @@ internal sealed class LargeMonsterDynamicUi
 	public LargeMonsterDynamicUi(LargeMonster largeMonster)
 	{
 		_largeMonster = largeMonster;
-		_customizationAccessor = () => ConfigManager.Instance.ActiveConfig.Data.largeMonsterUI.dynamic;
+		_customizationAccessor = () => ConfigManager.Instance.ActiveConfig.Data.LargeMonsterUI.Dynamic;
 
-		_nameLabelElement = new LabelElement(() => _customizationAccessor().nameLabel);
-		_healthComponent = new LargeMonsterHealthComponent(largeMonster, () => _customizationAccessor().health);
+		_nameLabelElement = new LabelElement(() => _customizationAccessor().NameLabel);
+		_healthComponent = new LargeMonsterHealthComponent(largeMonster, () => _customizationAccessor().Health);
 	}
 
 	public void Draw(ImDrawListPtr backgroundDrawList)
 	{
 		var customization = _customizationAccessor();
-		var settings = customization.settings;
+		var settings = customization.Settings;
 
-		if(settings.hideDeadOrCaptured && !_largeMonster.IsAlive)
+		if(settings.HideDeadOrCaptured && !_largeMonster.IsAlive)
 		{
 			return;
 		}

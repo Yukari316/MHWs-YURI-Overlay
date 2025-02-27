@@ -8,20 +8,8 @@ internal sealed class BarElementSettingsCustomization : Customization
 {
 	[JsonIgnore]
 	private int _fillDirectionIndex = (int) FillDirections.LeftToRight;
-	[JsonIgnore]
-	public FillDirections FillDirectionEnum { get => (FillDirections) _fillDirectionIndex; set => _fillDirectionIndex = (int) value; }
-	public string fillDirection
-	{
-		get => LocalizationHelper.Instance.DefaultOutlineStyles[_fillDirectionIndex];
-		set
-		{
-			var index = Array.IndexOf(LocalizationHelper.Instance.DefaultFillDirections, value);
-			if(index != -1)
-			{
-				_fillDirectionIndex = index;
-			}
-		}
-	}
+	[JsonConverter(typeof(JsonStringEnumConverter))]
+	public FillDirections FillDirection { get => (FillDirections) _fillDirectionIndex; set => _fillDirectionIndex = (int) value; }
 
 	public override bool RenderImGui(string parentName = "")
 	{

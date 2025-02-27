@@ -4,8 +4,8 @@ namespace YURI_Overlay;
 
 internal class BarElementColorsCustomization : Customization
 {
-	public GradientColorCustomization foreground = new();
-	public GradientColorCustomization background = new();
+	public GradientColorCustomization Foreground = new();
+	public GradientColorCustomization Background = new();
 
 	public override bool RenderImGui(string parentName = "")
 	{
@@ -16,8 +16,8 @@ internal class BarElementColorsCustomization : Customization
 
 		if(ImGui.TreeNode($"{localization.colors}##{customizationName}"))
 		{
-			isChanged |= foreground.RenderImGui(customizationName, localization.foreground);
-			isChanged |= background.RenderImGui(customizationName, localization.background);
+			isChanged |= Foreground.RenderImGui(customizationName, localization.foreground);
+			isChanged |= Background.RenderImGui(customizationName, localization.background);
 
 			ImGui.TreePop();
 		}

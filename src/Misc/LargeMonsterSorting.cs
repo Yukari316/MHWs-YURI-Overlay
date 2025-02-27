@@ -128,7 +128,6 @@ internal static class LargeMonsterSorting
 			return healthDifference < 0f ? -1 : 1;
 		}
 
-
 		var distanceDifference = a.Distance - b.Distance;
 		if(!Utils.IsApproximatelyEqual(distanceDifference, 0f))
 		{
@@ -416,7 +415,6 @@ internal static class LargeMonsterSorting
 		{
 			return healthDifference < 0f ? -1 : 1;
 		}
-
 
 		var distanceDifference = a.Distance - b.Distance;
 		if(!Utils.IsApproximatelyEqual(distanceDifference, 0f))

@@ -67,10 +67,8 @@ internal sealed partial class ConfigManager : IDisposable
 			{
 				LogManager.Info("ConfigManager: Default config is not found. Creating it...");
 
-				defaultConfig = new JsonDatabase<Config>(Constants.ConfigsPath, Constants.DefaultConfig);
-				DefaultConfig.ResetTo(defaultConfig.Data);
-				defaultConfig.Save();
-				Configs[Constants.DefaultConfig] = defaultConfig;
+				var newDefaultConfig = InitializeConfig(Constants.DefaultConfig);
+				DefaultConfig.ResetTo(newDefaultConfig);
 
 				LogManager.Info("ConfigManager: Default config is created!");
 
@@ -149,8 +147,7 @@ internal sealed partial class ConfigManager : IDisposable
 
 	public void ResetConfig()
 	{
-		DefaultConfig.ResetTo(ActiveConfig.Data);
-		ActiveConfig.Save();
+		DefaultConfig.ResetTo(ActiveConfig);
 	}
 
 	public void Dispose()
@@ -197,7 +194,8 @@ internal sealed partial class ConfigManager : IDisposable
 
 			if(allConfigFilePathNames.Length == 0)
 			{
-				InitializeConfig(Constants.DefaultConfig);
+				var defaultConfig = InitializeConfig(Constants.DefaultConfig);
+				DefaultConfig.ResetTo(defaultConfig);
 				return;
 			}
 

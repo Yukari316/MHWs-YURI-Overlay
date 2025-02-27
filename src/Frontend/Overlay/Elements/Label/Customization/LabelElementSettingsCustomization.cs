@@ -4,7 +4,7 @@ namespace YURI_Overlay;
 
 internal class LabelElementSettingsCustomization : Customization
 {
-	public int rightAlignmentShift = 0;
+	public int RightAlignmentShift = 0;
 
 	public LabelElementSettingsCustomization() { }
 
@@ -17,7 +17,7 @@ internal class LabelElementSettingsCustomization : Customization
 
 		if(ImGui.TreeNode($"{localization.settings}##{customizationName}"))
 		{
-			isChanged |= ImGui.InputInt($"{localization.rightAlignmentShift}##{customizationName}", ref rightAlignmentShift);
+			isChanged |= ImGui.InputInt($"{localization.rightAlignmentShift}##{customizationName}", ref RightAlignmentShift);
 
 			ImGui.TreePop();
 		}

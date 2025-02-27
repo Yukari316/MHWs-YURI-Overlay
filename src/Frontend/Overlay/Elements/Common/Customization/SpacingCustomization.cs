@@ -4,8 +4,8 @@ namespace YURI_Overlay;
 
 internal sealed class SpacingCustomization : Customization
 {
-	public float x = 0f;
-	public float y = 0f;
+	public float X = 0f;
+	public float Y = 0f;
 
 	public SpacingCustomization() { }
 
@@ -18,8 +18,8 @@ internal sealed class SpacingCustomization : Customization
 
 		if(ImGui.TreeNode($"{localization.spacing}##${customizationName}"))
 		{
-			isChanged |= ImGui.DragFloat($"{localization.x}##${customizationName}", ref x, 0.1f, -4096f, 4096f, "%.1f");
-			isChanged |= ImGui.DragFloat($"{localization.y}##${customizationName}", ref y, 0.1f, -4096f, 4096f, "%.1f");
+			isChanged |= ImGui.DragFloat($"{localization.x}##${customizationName}", ref X, 0.1f, -4096f, 4096f, "%.1f");
+			isChanged |= ImGui.DragFloat($"{localization.y}##${customizationName}", ref Y, 0.1f, -4096f, 4096f, "%.1f");
 
 			ImGui.TreePop();
 		}

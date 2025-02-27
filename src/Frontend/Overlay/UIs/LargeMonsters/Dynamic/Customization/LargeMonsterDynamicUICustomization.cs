@@ -4,13 +4,13 @@ namespace YURI_Overlay;
 
 internal class LargeMonsterDynamicUiCustomization : Customization
 {
-	public bool enabled = true;
-	public LargeMonsterDynamicUiSettingsCustomization settings = new();
-	public WorldOffsetCustomization worldOffset = new();
-	public OffsetCustomization offset = new();
+	public bool Enabled = true;
+	public LargeMonsterDynamicUiSettingsCustomization Settings = new();
+	public WorldOffsetCustomization WorldOffset = new();
+	public OffsetCustomization Offset = new();
 
-	public LabelElementCustomization nameLabel = new();
-	public LargeMonsterHealthComponentCustomization health = new();
+	public LabelElementCustomization NameLabel = new();
+	public LargeMonsterHealthComponentCustomization Health = new();
 
 
 	public LargeMonsterDynamicUiCustomization() { }
@@ -20,17 +20,17 @@ internal class LargeMonsterDynamicUiCustomization : Customization
 		var localization = LocalizationManager.Instance.ActiveLocalization.Data.imGui;
 
 		var isChanged = false;
-		var customizationName = $"{parentName}-dynamic";
+		var customizationName = $"{parentName}-Dynamic";
 
 		if(ImGui.TreeNode($"{localization.dynamic}##{customizationName}"))
 		{
-			isChanged |= ImGui.Checkbox($"{localization.enabled}##{customizationName}", ref enabled);
+			isChanged |= ImGui.Checkbox($"{localization.enabled}##{customizationName}", ref Enabled);
 
-			isChanged |= settings.RenderImGui(customizationName);
-			isChanged |= worldOffset.RenderImGui(customizationName);
-			isChanged |= offset.RenderImGui(customizationName);
-			isChanged |= nameLabel.RenderImGui(localization.nameLabel, $"{customizationName}-name-label");
-			isChanged |= health.RenderImGui(customizationName);
+			isChanged |= Settings.RenderImGui(customizationName);
+			isChanged |= WorldOffset.RenderImGui(customizationName);
+			isChanged |= Offset.RenderImGui(customizationName);
+			isChanged |= NameLabel.RenderImGui(localization.nameLabel, $"{customizationName}-name-label");
+			isChanged |= Health.RenderImGui(customizationName);
 
 			ImGui.TreePop();
 		}

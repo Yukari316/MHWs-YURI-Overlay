@@ -9,22 +9,14 @@ internal sealed class AnchoredPositionCustomization : Customization
 	public float x = 0f;
 	public float y = 0f;
 
-	[JsonIgnore]
 	private int _anchorIndex = (int) Anchors.TopLeft;
-	[JsonIgnore]
-	public Anchors AnchorEnum { get => (Anchors) _anchorIndex; set => _anchorIndex = (int) value; }
-	public string Anchor
+	[JsonConverter(typeof(JsonStringEnumConverter))]
+	public Anchors anchor
 	{
-		get => LocalizationHelper.Instance.DefaultAnchors[_anchorIndex];
-		set
-		{
-			var index = Array.IndexOf(LocalizationHelper.Instance.DefaultAnchors, value);
-			if(index != -1)
-			{
-				_anchorIndex = index;
-			}
-		}
+		get => (Anchors) _anchorIndex;
+		set => _anchorIndex = (int) value;
 	}
+
 
 	public AnchoredPositionCustomization() { }
 

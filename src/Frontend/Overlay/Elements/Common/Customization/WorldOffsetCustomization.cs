@@ -4,9 +4,9 @@ namespace YURI_Overlay;
 
 internal sealed class WorldOffsetCustomization : Customization
 {
-	public float x = 0f;
-	public float y = 0f;
-	public float z = 0f;
+	public float X = 0f;
+	public float Y = 0f;
+	public float Z = 0f;
 
 	public WorldOffsetCustomization() { }
 
@@ -19,9 +19,9 @@ internal sealed class WorldOffsetCustomization : Customization
 
 		if(ImGui.TreeNode($"{localization.worldOffset}##${customizationName}"))
 		{
-			isChanged |= ImGui.DragFloat($"{localization.x}##${customizationName}", ref x, 0.1f, -4096f, 4096f, "%.1f");
-			isChanged |= ImGui.DragFloat($"{localization.y}##${customizationName}", ref y, 0.1f, -4096f, 4096f, "%.1f");
-			isChanged |= ImGui.DragFloat($"{localization.z}##${customizationName}", ref z, 0.1f, -4096f, 4096f, "%.1f");
+			isChanged |= ImGui.DragFloat($"{localization.x}##${customizationName}", ref X, 0.1f, -4096f, 4096f, "%.1f");
+			isChanged |= ImGui.DragFloat($"{localization.y}##${customizationName}", ref Y, 0.1f, -4096f, 4096f, "%.1f");
+			isChanged |= ImGui.DragFloat($"{localization.z}##${customizationName}", ref Z, 0.1f, -4096f, 4096f, "%.1f");
 
 			ImGui.TreePop();
 		}

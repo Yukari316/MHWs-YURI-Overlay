@@ -5,7 +5,7 @@ using REFrameworkNET.Attributes;
 
 namespace YURI_Overlay;
 
-[System.Diagnostics.CodeAnalysis.SuppressMessage("Roslynator", "RCS1102:Make class static", Justification = "<Pending>")]
+[System.Diagnostics.CodeAnalysis.SuppressMessage("Roslynator", "RCS1102:Make class Static", Justification = "<Pending>")]
 public class Plugin
 {
 	public static bool IsInitialized { get; private set; }

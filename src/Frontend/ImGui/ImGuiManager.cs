@@ -119,8 +119,8 @@ internal sealed class ImGuiManager
 
 			changed |= configManager.Customization.RenderImGui("config-settings");
 			changed |= localizationManager.Customization.RenderImGui("localization");
-			changed |= configManager.ActiveConfig.Data.globalSettings.RenderImGui("global-settings");
-			changed |= configManager.ActiveConfig.Data.largeMonsterUI.RenderImGui("large-monster-ui");
+			changed |= configManager.ActiveConfig.Data.GlobalSettings.RenderImGui("global-settings");
+			changed |= configManager.ActiveConfig.Data.LargeMonsterUI.RenderImGui("large-monster-ui");
 
 			foreach(var localization in localizationManager.Localizations)
 			{

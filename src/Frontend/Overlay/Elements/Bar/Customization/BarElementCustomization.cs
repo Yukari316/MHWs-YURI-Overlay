@@ -4,12 +4,12 @@ namespace YURI_Overlay;
 
 internal sealed class BarElementCustomization : Customization
 {
-	public bool visible = true;
-	public BarElementSettingsCustomization settings = new();
-	public OffsetCustomization offset = new();
-	public SizeCustomization size = new();
-	public BarElementColorsCustomization colors = new();
-	public BarElementOutlineCustomization outline = new();
+	public bool Visible = true;
+	public BarElementSettingsCustomization Settings = new();
+	public OffsetCustomization Offset = new();
+	public SizeCustomization Size = new();
+	public BarElementColorsCustomization Colors = new();
+	public BarElementOutlineCustomization Outline = new();
 
 	public BarElementCustomization() { }
 
@@ -21,13 +21,15 @@ internal sealed class BarElementCustomization : Customization
 
 		if(ImGui.TreeNode($"{visibleName}##{customizationName}"))
 		{
-			isChanged |= ImGui.Checkbox($"{localization.visible}##{customizationName}", ref visible);
+			isChanged |= ImGui.Checkbox($"{localization.visible}##{customizationName}", ref Visible);
 
-			isChanged |= settings.RenderImGui(customizationName);
-			isChanged |= offset.RenderImGui(customizationName);
-			isChanged |= size.RenderImGui(customizationName);
-			isChanged |= colors.RenderImGui(customizationName);
-			isChanged |= outline.RenderImGui(customizationName);
+			isChanged |= Settings.RenderImGui(customizationName);
+			isChanged |= Offset.RenderImGui(customizationName);
+			isChanged |= Size.RenderImGui(customizationName);
+			isChanged |= Colors.RenderImGui(customizationName);
+			isChanged |= Outline.RenderImGui(customizationName);
+
+			ImGui.TreePop();
 		}
 
 		return isChanged;

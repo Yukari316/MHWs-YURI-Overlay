@@ -10,7 +10,7 @@ internal static class AnchorPositionCalculator
 	{
 		var displaySize = ImGui.GetIO().DisplaySize;
 
-		return anchoredPositionCustomization.AnchorEnum switch
+		return anchoredPositionCustomization.anchor switch
 		{
 			Anchors.TopCenter => new Vector2(
 								(displaySize.X / 2f) + anchoredPositionCustomization.x,

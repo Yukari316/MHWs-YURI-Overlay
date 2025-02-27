@@ -4,15 +4,15 @@ namespace YURI_Overlay;
 
 internal class LargeMonsterStaticUiCustomization : Customization
 {
-	public bool enabled = true;
-	public LargeMonsterStaticUiSettingsCustomization settings = new();
-	public AnchoredPositionCustomization position = new();
-	public SpacingCustomization spacing = new();
-	public LargeMonsterStaticUiSortingCustomization sorting = new();
+	public bool Enabled = true;
+	public LargeMonsterStaticUiSettingsCustomization Settings = new();
+	public AnchoredPositionCustomization Position = new();
+	public SpacingCustomization Spacing = new();
+	public LargeMonsterStaticUiSortingCustomization Sorting = new();
 
 
-	public LabelElementCustomization nameLabel = new();
-	public LargeMonsterHealthComponentCustomization health = new();
+	public LabelElementCustomization NameLabel = new();
+	public LargeMonsterHealthComponentCustomization Health = new();
 
 
 	public LargeMonsterStaticUiCustomization() { }
@@ -22,18 +22,18 @@ internal class LargeMonsterStaticUiCustomization : Customization
 		var localization = LocalizationManager.Instance.ActiveLocalization.Data.imGui;
 
 		var isChanged = false;
-		var customizationName = $"{parentName}-static";
+		var customizationName = $"{parentName}-Static";
 
 		if(ImGui.TreeNode($"{localization.@static}##{customizationName}"))
 		{
-			isChanged |= ImGui.Checkbox($"{localization.enabled}##{customizationName}", ref enabled);
+			isChanged |= ImGui.Checkbox($"{localization.enabled}##{customizationName}", ref Enabled);
 
-			isChanged |= settings.RenderImGui(customizationName);
-			isChanged |= position.RenderImGui(customizationName);
-			isChanged |= spacing.RenderImGui(customizationName);
-			isChanged |= sorting.RenderImGui(customizationName);
-			isChanged |= nameLabel.RenderImGui(localization.nameLabel, $"{customizationName}-name-label");
-			isChanged |= health.RenderImGui(customizationName);
+			isChanged |= Settings.RenderImGui(customizationName);
+			isChanged |= Position.RenderImGui(customizationName);
+			isChanged |= Spacing.RenderImGui(customizationName);
+			isChanged |= Sorting.RenderImGui(customizationName);
+			isChanged |= NameLabel.RenderImGui(localization.nameLabel, $"{customizationName}-name-label");
+			isChanged |= Health.RenderImGui(customizationName);
 
 			ImGui.TreePop();
 		}

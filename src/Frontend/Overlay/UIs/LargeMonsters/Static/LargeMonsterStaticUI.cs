@@ -13,29 +13,29 @@ internal sealed class LargeMonsterStaticUi
 	public LargeMonsterStaticUi(LargeMonster largeMonster)
 	{
 		_largeMonster = largeMonster;
-		_customizationAccessor = () => ConfigManager.Instance.ActiveConfig.Data.largeMonsterUI.@static;
+		_customizationAccessor = () => ConfigManager.Instance.ActiveConfig.Data.LargeMonsterUI.Static;
 
-		_nameLabelElement = new LabelElement(() => _customizationAccessor().nameLabel);
-		_healthComponent = new LargeMonsterHealthComponent(largeMonster, () => _customizationAccessor().health);
+		_nameLabelElement = new LabelElement(() => _customizationAccessor().NameLabel);
+		_healthComponent = new LargeMonsterHealthComponent(largeMonster, () => _customizationAccessor().Health);
 	}
 
 	public void Draw(ImDrawListPtr backgroundDrawList, int locationIndex)
 	{
 		var customization = _customizationAccessor();
-		var settings = customization.settings;
+		var settings = customization.Settings;
 
-		if(settings.hideDeadOrCaptured && !_largeMonster.IsAlive)
+		if(settings.HideDeadOrCaptured && !_largeMonster.IsAlive)
 		{
 			return;
 		}
 
-		var spacing = customization.spacing;
+		var spacing = customization.Spacing;
 
-		var anchoredPosition = customization.position;
+		var anchoredPosition = customization.Position;
 		var position = AnchorPositionCalculator.Convert(anchoredPosition);
 
-		position.X += spacing.x * locationIndex;
-		position.Y += spacing.y * locationIndex;
+		position.X += spacing.X * locationIndex;
+		position.Y += spacing.Y * locationIndex;
 
 		_healthComponent.Draw(backgroundDrawList, position);
 		_nameLabelElement.Draw(backgroundDrawList, position, 1f, _largeMonster.Name);

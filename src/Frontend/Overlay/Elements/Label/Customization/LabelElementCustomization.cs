@@ -4,12 +4,12 @@ namespace YURI_Overlay;
 
 internal sealed class LabelElementCustomization : Customization
 {
-	public bool visible = true;
-	public string format = "{0}";
-	public LabelElementSettingsCustomization settings = new();
-	public OffsetCustomization offset = new();
-	public ColorCustomization color = new();
-	public LabelElementShadowCustomization shadow = new();
+	public bool Visible = true;
+	public string Format = "{0}";
+	public LabelElementSettingsCustomization Settings = new();
+	public OffsetCustomization Offset = new();
+	public ColorCustomization Color = new();
+	public LabelElementShadowCustomization Shadow = new();
 
 	public LabelElementCustomization() { }
 
@@ -21,14 +21,16 @@ internal sealed class LabelElementCustomization : Customization
 
 		if(ImGui.TreeNode($"{visibleName}##{customizationName}"))
 		{
-			isChanged |= ImGui.Checkbox($"{localization.visible}##{customizationName}", ref visible);
+			isChanged |= ImGui.Checkbox($"{localization.visible}##{customizationName}", ref Visible);
 
-			isChanged |= ImGui.InputText($"{localization.format}##{customizationName}", ref format, 256);
+			isChanged |= ImGui.InputText($"{localization.format}##{customizationName}", ref Format, 256);
 
-			isChanged |= settings.RenderImGui(customizationName);
-			isChanged |= offset.RenderImGui(customizationName);
-			isChanged |= color.RenderImGui(customizationName);
-			isChanged |= shadow.RenderImGui(customizationName);
+			isChanged |= Settings.RenderImGui(customizationName);
+			isChanged |= Offset.RenderImGui(customizationName);
+			isChanged |= Color.RenderImGui(customizationName);
+			isChanged |= Shadow.RenderImGui(customizationName);
+
+			ImGui.TreePop();
 		}
 
 		return isChanged;

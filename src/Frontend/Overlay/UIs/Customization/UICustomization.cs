@@ -2,7 +2,7 @@
 
 internal sealed class UiCustomization : Customization
 {
-	public LargeMonsterUiCustomization largeMonsterUI = new();
+	public LargeMonsterUiCustomization LargeMonsterUI = new();
 
 	public UiCustomization() { }
 
@@ -10,7 +10,7 @@ internal sealed class UiCustomization : Customization
 	{
 		var isChanged = false;
 
-		isChanged |= largeMonsterUI.RenderImGui(customizationName);
+		isChanged |= LargeMonsterUI.RenderImGui(customizationName);
 
 		return isChanged;
 	}

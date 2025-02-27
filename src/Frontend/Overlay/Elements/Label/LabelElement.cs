@@ -17,7 +17,7 @@ internal sealed class LabelElement
 	{
 		var customization = _customizationAccessor();
 
-		if(!customization.visible)
+		if(!customization.Visible)
 		{
 			return;
 		}
@@ -27,35 +27,35 @@ internal sealed class LabelElement
 			return;
 		}
 
-		var text = string.Format(customization.format, args);
+		var text = string.Format(customization.Format, args);
 
 		if(string.IsNullOrEmpty(text))
 		{
 			return;
 		}
 
-		var rightAlignmentShift = customization.settings.rightAlignmentShift;
+		var rightAlignmentShift = customization.Settings.RightAlignmentShift;
 
 		if(rightAlignmentShift != 0)
 		{
 			text = text.PadLeft(rightAlignmentShift);
 		}
 
-		var offset = customization.offset;
-		var shadowOffset = customization.shadow.offset;
+		var offset = customization.Offset;
+		var shadowOffset = customization.Shadow.Offset;
 
-		var textPositionX = position.X + offset.x;
-		var textPositionY = position.Y + offset.y;
+		var textPositionX = position.X + offset.X;
+		var textPositionY = position.Y + offset.Y;
 
-		var shadowPositionX = textPositionX + shadowOffset.x;
-		var shadowPositionY = textPositionY + shadowOffset.y;
+		var shadowPositionX = textPositionX + shadowOffset.X;
+		var shadowPositionY = textPositionY + shadowOffset.Y;
 
 		Vector2 textPosition = new(textPositionX, textPositionY);
 		Vector2 shadowPosition = new(shadowPositionX, shadowPositionY);
 
-		if(customization.shadow.visible)
+		if(customization.Shadow.Visible)
 		{
-			var shadowColor = customization.shadow.color.colorInfo.Abgr;
+			var shadowColor = customization.Shadow.Color.colorInfo.Abgr;
 			if(opacityScale < 1)
 			{
 				shadowColor = Utils.ScaleColorOpacityAbgr(shadowColor, opacityScale);
@@ -64,7 +64,7 @@ internal sealed class LabelElement
 			backgroundDrawList.AddText(shadowPosition, shadowColor, text);
 		}
 
-		var color = customization.color.colorInfo.Abgr;
+		var color = customization.Color.colorInfo.Abgr;
 		if(opacityScale < 1)
 		{
 			color = Utils.ScaleColorOpacityAbgr(color, opacityScale);

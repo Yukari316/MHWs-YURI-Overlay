@@ -4,8 +4,8 @@ namespace YURI_Overlay;
 
 internal class LargeMonsterUiCustomization : Customization
 {
-	public LargeMonsterDynamicUiCustomization dynamic = new();
-	public LargeMonsterStaticUiCustomization @static = new();
+	public LargeMonsterDynamicUiCustomization Dynamic = new();
+	public LargeMonsterStaticUiCustomization Static = new();
 
 	public LargeMonsterUiCustomization() { }
 
@@ -18,8 +18,8 @@ internal class LargeMonsterUiCustomization : Customization
 
 		if(ImGui.TreeNode($"{localization.largeMonstersUI}##{customizationName}"))
 		{
-			isChanged |= dynamic.RenderImGui(customizationName);
-			isChanged |= @static.RenderImGui(customizationName);
+			//isChanged |= Dynamic.RenderImGui(customizationName);
+			isChanged |= Static.RenderImGui(customizationName);
 
 			ImGui.TreePop();
 		}

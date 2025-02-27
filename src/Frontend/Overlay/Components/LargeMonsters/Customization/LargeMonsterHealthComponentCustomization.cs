@@ -4,11 +4,11 @@ namespace YURI_Overlay;
 
 internal class LargeMonsterHealthComponentCustomization : Customization
 {
-	public bool visible = true;
-	public OffsetCustomization offset = new();
-	public LabelElementCustomization healthValueLabel = new();
-	public LabelElementCustomization healthPercentageLabel = new();
-	public BarElementCustomization healthBar = new();
+	public bool Visible = true;
+	public OffsetCustomization Offset = new();
+	public LabelElementCustomization ValueLabel = new();
+	public LabelElementCustomization PercentageLabel = new();
+	public BarElementCustomization Bar = new();
 
 	public LargeMonsterHealthComponentCustomization() { }
 
@@ -21,11 +21,11 @@ internal class LargeMonsterHealthComponentCustomization : Customization
 
 		if(ImGui.TreeNode($"{localization.health}##{customizationName}"))
 		{
-			isChanged |= ImGui.Checkbox($"{localization.visible}##{customizationName}", ref visible);
-			isChanged |= offset.RenderImGui(customizationName);
-			isChanged |= healthValueLabel.RenderImGui(localization.healthValueLabel, customizationName);
-			isChanged |= healthPercentageLabel.RenderImGui(localization.healthPercentageLabel, customizationName);
-			isChanged |= healthBar.RenderImGui(localization.healthBar, customizationName);
+			isChanged |= ImGui.Checkbox($"{localization.visible}##{customizationName}", ref Visible);
+			isChanged |= Offset.RenderImGui(customizationName);
+			isChanged |= ValueLabel.RenderImGui(localization.ValueLabel, customizationName);
+			isChanged |= PercentageLabel.RenderImGui(localization.PercentageLabel, customizationName);
+			isChanged |= Bar.RenderImGui(localization.Bar, customizationName);
 
 			ImGui.TreePop();
 		}

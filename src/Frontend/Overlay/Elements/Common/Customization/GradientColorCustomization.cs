@@ -8,7 +8,7 @@ internal class GradientColorCustomization : Customization
 {
 	[JsonIgnore]
 	public ColorInfo StartInfo { get; set; } = new();
-	public string start
+	public string Start
 	{
 		get => StartInfo.RgbaHex;
 		set => StartInfo.RgbaHex = value;
@@ -16,7 +16,7 @@ internal class GradientColorCustomization : Customization
 
 	[JsonIgnore]
 	public ColorInfo EndInfo { get; set; } = new();
-	public string end
+	public string End
 	{
 		get => EndInfo.RgbaHex;
 		set => EndInfo.RgbaHex = value;

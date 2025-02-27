@@ -15,11 +15,10 @@ internal class LargeMonsterHealthComponent
 	public LargeMonsterHealthComponent(LargeMonster largeMonster, Func<LargeMonsterHealthComponentCustomization> customizationAccessor)
 	{
 		_largeMonster = largeMonster;
-		var customizationAccessor1 = customizationAccessor;
 
-		_healthValueLabelElement = new LabelElement(() => customizationAccessor1().healthValueLabel);
-		_healthPercentageLabelElement = new LabelElement(() => customizationAccessor1().healthPercentageLabel);
-		_healthBarElement = new BarElement(() => customizationAccessor1().healthBar);
+		_healthValueLabelElement = new LabelElement(() => customizationAccessor().ValueLabel);
+		_healthPercentageLabelElement = new LabelElement(() => customizationAccessor().PercentageLabel);
+		_healthBarElement = new BarElement(() => customizationAccessor().Bar);
 	}
 
 	public void Draw(ImDrawListPtr backgroundDrawList, Vector2 position, float opacityScale = 1f)

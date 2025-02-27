@@ -6,25 +6,13 @@ namespace YURI_Overlay;
 
 internal sealed class BarElementOutlineCustomization : Customization
 {
-	public bool visible = true;
-	public float thickness = 1f;
-	public float offset = 0f;
+	public bool Visible = true;
+	public float Thickness = 1f;
+	public float Offset = 0f;
 
 	private int _styleIndex = (int) OutlineStyles.Outside;
-	[JsonIgnore]
-	public OutlineStyles StyleEnum { get => (OutlineStyles) _styleIndex; set => _styleIndex = (int) value; }
-	public string style
-	{
-		get => LocalizationHelper.Instance.DefaultOutlineStyles[_styleIndex];
-		set
-		{
-			var index = Array.IndexOf(LocalizationHelper.Instance.DefaultOutlineStyles, value);
-			if(index != -1)
-			{
-				_styleIndex = index;
-			}
-		}
-	}
+	[JsonConverter(typeof(JsonStringEnumConverter))]
+	public OutlineStyles Style { get => (OutlineStyles) _styleIndex; set => _styleIndex = (int) value; }
 
 	public ColorCustomization Color { get; set; } = new();
 
@@ -38,9 +26,9 @@ internal sealed class BarElementOutlineCustomization : Customization
 
 		if(ImGui.TreeNode($"{localization.outline}##{customizationName}"))
 		{
-			isChanged |= ImGui.Checkbox($"{localization.visible}##{customizationName}", ref visible);
-			isChanged |= ImGui.DragFloat($"{localization.thickness}##{customizationName}", ref thickness, 0.1f, 0, 1024f, "%.1f");
-			isChanged |= ImGui.DragFloat($"{localization.offset}##{customizationName}", ref offset, 0.1f, -1024f, 1024f, "%.1f");
+			isChanged |= ImGui.Checkbox($"{localization.visible}##{customizationName}", ref Visible);
+			isChanged |= ImGui.DragFloat($"{localization.thickness}##{customizationName}", ref Thickness, 0.1f, 0, 1024f, "%.1f");
+			isChanged |= ImGui.DragFloat($"{localization.offset}##{customizationName}", ref Offset, 0.1f, -1024f, 1024f, "%.1f");
 
 			isChanged |= ImGui.Combo($"{localization.style}##{customizationName}", ref _styleIndex, localizationHelper.OutlineStyles, localizationHelper.FillDirections.Length);
 

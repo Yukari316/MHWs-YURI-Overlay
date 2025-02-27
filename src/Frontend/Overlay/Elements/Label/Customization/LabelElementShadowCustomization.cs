@@ -4,9 +4,9 @@ namespace YURI_Overlay;
 
 internal class LabelElementShadowCustomization : Customization
 {
-	public bool visible = true;
-	public OffsetCustomization offset = new();
-	public ColorCustomization color = new();
+	public bool Visible = true;
+	public OffsetCustomization Offset = new();
+	public ColorCustomization Color = new();
 
 	public override bool RenderImGui(string parentName = "")
 	{
@@ -17,10 +17,10 @@ internal class LabelElementShadowCustomization : Customization
 
 		if(ImGui.TreeNode($"{localization.shadow}##{parentName}"))
 		{
-			isChanged |= ImGui.Checkbox($"{localization.visible}##{parentName}", ref visible);
+			isChanged |= ImGui.Checkbox($"{localization.visible}##{parentName}", ref Visible);
 
-			isChanged |= offset.RenderImGui(customizationName);
-			isChanged |= color.RenderImGui(customizationName);
+			isChanged |= Offset.RenderImGui(customizationName);
+			isChanged |= Color.RenderImGui(customizationName);
 
 			ImGui.TreePop();
 		}

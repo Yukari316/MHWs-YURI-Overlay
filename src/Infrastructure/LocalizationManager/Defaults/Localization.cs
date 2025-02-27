@@ -61,7 +61,7 @@ internal class ImGuiLocalization
 	public string outline = "Outline";
 	public string thickness = "Thickness";
 	public string style = "Style";
-	public string inside = "Inside";
+	public string inside = "inside";
 	public string center = "Center";
 	public string outside = "Outside";
 	public string colors = "Colors";
@@ -70,7 +70,7 @@ internal class ImGuiLocalization
 	public string color = "Color";
 	public string start = "Start";
 	public string end = "End";
-	public string healthBar = "Health Bar";
+	public string Bar = "Bar";
 
 	// Label
 
@@ -78,8 +78,8 @@ internal class ImGuiLocalization
 	public string format = "Format";
 	public string rightAlignmentShift = "Right Alignment Shift";
 	public string shadow = "Shadow";
-	public string healthValueLabel = "Health Value Label";
-	public string healthPercentageLabel = "Health Percentage Label";
+	public string ValueLabel = "Value Label";
+	public string PercentageLabel = "Percentage Label";
 
 	// Large Monsters
 	public string largeMonstersUI = "Large Monsters UI";

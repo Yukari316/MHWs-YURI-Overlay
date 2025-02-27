@@ -8,8 +8,8 @@ internal sealed class BarElement
 {
 	private readonly Func<BarElementCustomization> _customizationAccessor;
 
-	private (string, float, float, float, float, float, float, float, float) _cashingKeyByPosition1 = ("", 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f);
-	private (string, float, float, float) _cashingKeyByProgress2 = ("", 0f, 0f, 0f);
+	private (OutlineStyles, float, float, float, float, float, float, float, float) _cashingKeyByPosition1 = (OutlineStyles.Inside, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f);
+	private (FillDirections, float, float, float) _cashingKeyByProgress2 = (FillDirections.LeftToRight, 0f, 0f, 0f);
 
 	private float _outlinePositionX = 0f;
 	private float _outlinePositionY = 0f;
@@ -66,15 +66,15 @@ internal sealed class BarElement
 	{
 		var customization = _customizationAccessor();
 
-		if(!customization.visible)
+		if(!customization.Visible)
 		{
 			return;
 		}
 
 		progress = Utils.Clamp(progress, 0f, 1f);
 
-		var outline = customization.outline;
-		var outlineThickness = outline.thickness;
+		var outline = customization.Outline;
+		var outlineThickness = outline.Thickness;
 
 		UpdateByPosition1(position);
 		UpdateByProgress2(progress);
@@ -103,7 +103,7 @@ internal sealed class BarElement
 
 		// Outline
 
-		if(outline.visible && outlineThickness > 0f)
+		if(outline.Visible && outlineThickness > 0f)
 		{
 			backgroundDrawList.AddRect(
 				_outlineTopLeft,
@@ -119,15 +119,15 @@ internal sealed class BarElement
 	{
 		var customization = _customizationAccessor();
 
-		var offset = customization.offset;
-		var size = customization.size;
-		var outline = customization.outline;
+		var offset = customization.Offset;
+		var size = customization.Size;
+		var outline = customization.Outline;
 
-		var outlineThickness = outline.thickness;
-		var outlineOffset = outline.offset;
-		var outlineStyle = outline.style;
+		var outlineThickness = outline.Thickness;
+		var outlineOffset = outline.Offset;
+		var outlineStyle = outline.Style;
 
-		var cachingKey = (outlineStyle, position.X, position.Y, offset.x, offset.y, size.width, size.height, outlineThickness, outlineOffset);
+		var cachingKey = (outlineStyle, position.X, position.Y, offset.X, offset.Y, size.Width, size.Height, outlineThickness, outlineOffset);
 
 		if(!disableCaching && cachingKey == _cashingKeyByPosition1)
 		{
@@ -141,47 +141,48 @@ internal sealed class BarElement
 
 		switch(outlineStyle)
 		{
-			case "Inside":
-				_outlinePositionX = position.X + offset.x + halfOutlineThickness;
-				_outlinePositionY = position.Y + offset.y + halfOutlineThickness;
+			case OutlineStyles.Outside:
+				_positionX = position.X + offset.X;
+				_positionY = position.Y + offset.Y;
 
-				_outlineWidth = size.width - outlineThickness;
-				_outlineHeight = size.height - outlineThickness;
-
-				_positionX = _outlinePositionX + halfOutlineThickness + outlineOffset;
-				_positionY = _outlinePositionY + halfOutlineThickness + outlineOffset;
-
-				_width = _outlineWidth - outlineThickness - outlineOffset - outlineOffset;
-				_height = _outlineHeight - outlineThickness - outlineOffset - outlineOffset;
-
-				break;
-			case "Center":
-				_outlinePositionX = position.X + offset.x - halfOutlineOffset;
-				_outlinePositionY = position.Y + offset.y - halfOutlineOffset;
-
-				_outlineWidth = size.width + outlineOffset;
-				_outlineHeight = size.height + outlineOffset;
-
-				_positionX = _outlinePositionX + halfOutlineThickness + outlineOffset;
-				_positionY = _outlinePositionY + halfOutlineThickness + outlineOffset;
-
-				_width = _outlineWidth - outlineThickness - outlineOffset - outlineOffset;
-				_height = _outlineHeight - outlineThickness - outlineOffset - outlineOffset;
-
-				break;
-			case "Outside":
-			default:
-				_positionX = position.X + offset.x;
-				_positionY = position.Y + offset.y;
-
-				_width = size.width;
-				_height = size.height;
+				_width = size.Width;
+				_height = size.Height;
 
 				_outlinePositionX = _positionX - halfOutlineThickness - outlineOffset;
 				_outlinePositionY = _positionY - halfOutlineThickness - outlineOffset;
 
 				_outlineWidth = _width + outlineThickness + outlineOffset + outlineOffset;
 				_outlineHeight = _height + outlineThickness + outlineOffset + outlineOffset;
+
+				break;
+			case OutlineStyles.Center:
+				_outlinePositionX = position.X + offset.X - halfOutlineOffset;
+				_outlinePositionY = position.Y + offset.Y - halfOutlineOffset;
+
+				_outlineWidth = size.Width + outlineOffset;
+				_outlineHeight = size.Height + outlineOffset;
+
+				_positionX = _outlinePositionX + halfOutlineThickness + outlineOffset;
+				_positionY = _outlinePositionY + halfOutlineThickness + outlineOffset;
+
+				_width = _outlineWidth - outlineThickness - outlineOffset - outlineOffset;
+				_height = _outlineHeight - outlineThickness - outlineOffset - outlineOffset;
+
+				break;
+
+			case OutlineStyles.Inside:
+			default:
+				_outlinePositionX = position.X + offset.X + halfOutlineThickness;
+				_outlinePositionY = position.Y + offset.Y + halfOutlineThickness;
+
+				_outlineWidth = size.Width - outlineThickness;
+				_outlineHeight = size.Height - outlineThickness;
+
+				_positionX = _outlinePositionX + halfOutlineThickness + outlineOffset;
+				_positionY = _outlinePositionY + halfOutlineThickness + outlineOffset;
+
+				_width = _outlineWidth - outlineThickness - outlineOffset - outlineOffset;
+				_height = _outlineHeight - outlineThickness - outlineOffset - outlineOffset;
 
 				break;
 		}
@@ -191,7 +192,7 @@ internal sealed class BarElement
 	{
 		var customization = _customizationAccessor();
 
-		var fillDirection = customization.settings.fillDirection;
+		var fillDirection = customization.Settings.FillDirection;
 
 		var cachingKey = (fillDirection, _width, _height, progress);
 
@@ -204,7 +205,7 @@ internal sealed class BarElement
 
 		switch(fillDirection)
 		{
-			case "RightToLeft":
+			case FillDirections.RightToLeft:
 				_foregroundWidth = _width * progress;
 				_foregroundHeight = _height;
 
@@ -213,7 +214,7 @@ internal sealed class BarElement
 
 				_foregroundShiftX = _backgroundWidth;
 				break;
-			case "TopToBottom":
+			case FillDirections.TopToBottom:
 				_foregroundWidth = _width;
 				_foregroundHeight = _height * progress;
 
@@ -223,7 +224,7 @@ internal sealed class BarElement
 				_backgroundShiftY = _foregroundHeight;
 
 				break;
-			case "BottomToTop":
+			case FillDirections.BottomToTop:
 				_foregroundWidth = _width;
 				_foregroundHeight = _height * progress;
 
@@ -233,7 +234,7 @@ internal sealed class BarElement
 				_foregroundShiftY = _backgroundHeight;
 
 				break;
-			case "LeftToRight":
+			case FillDirections.LeftToRight:
 			default:
 				_foregroundWidth = _width * progress;
 				_foregroundHeight = _height;
@@ -251,9 +252,9 @@ internal sealed class BarElement
 	{
 		var customization = _customizationAccessor();
 
-		var colors = customization.colors;
-		var backgroundColor = colors.background;
-		var foregroundColor = colors.foreground;
+		var colors = customization.Colors;
+		var backgroundColor = colors.Background;
+		var foregroundColor = colors.Foreground;
 
 		_backgroundColorStart = backgroundColor.StartInfo.Abgr;
 		_backgroundColorEnd = backgroundColor.EndInfo.Abgr;
@@ -261,7 +262,7 @@ internal sealed class BarElement
 		_foregroundColorStart = foregroundColor.StartInfo.Abgr;
 		_foregroundColorEnd = foregroundColor.EndInfo.Abgr;
 
-		_outlineColor = customization.outline.Color.colorInfo.Abgr;
+		_outlineColor = customization.Outline.Color.colorInfo.Abgr;
 
 		if(Utils.IsApproximatelyEqual(opacityScale, 1f))
 		{
@@ -307,7 +308,7 @@ internal sealed class BarElement
 
 		// Outline
 
-		if(customization.outline.thickness > 0f)
+		if(customization.Outline.Thickness > 0f)
 		{
 			_outlineTopLeft = new Vector2(
 				_outlinePositionX,

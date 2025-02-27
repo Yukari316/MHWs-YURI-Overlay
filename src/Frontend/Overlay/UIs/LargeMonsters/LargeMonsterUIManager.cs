@@ -48,7 +48,7 @@ internal sealed class LargeMonsterUiManager : IDisposable
 
 	private void UpdateStatic()
 	{
-		var config = ConfigManager.Instance.ActiveConfig.Data.largeMonsterUI.@static;
+		var config = ConfigManager.Instance.ActiveConfig.Data.LargeMonsterUI.Static;
 
 		List<LargeMonster> newLargeMonsters = [];
 
@@ -58,7 +58,7 @@ internal sealed class LargeMonsterUiManager : IDisposable
 		{
 			var largeMonster = largeMonsterPair.Value;
 
-			if(config.settings.hideDeadOrCaptured && !largeMonster.IsAlive)
+			if(config.Settings.HideDeadOrCaptured && !largeMonster.IsAlive)
 			{
 				continue;
 			}
@@ -70,9 +70,9 @@ internal sealed class LargeMonsterUiManager : IDisposable
 
 		// Sort
 
-		if(config.sorting.reversedOrder)
+		if(config.Sorting.ReversedOrder)
 		{
-			switch(config.sorting.SortingEnum)
+			switch(config.Sorting.Type)
 			{
 				case Sortings.Id:
 					newLargeMonsters.Sort(LargeMonsterSorting.CompareByIdReversed);
@@ -97,7 +97,7 @@ internal sealed class LargeMonsterUiManager : IDisposable
 		}
 		else
 		{
-			switch(config.sorting.SortingEnum)
+			switch(config.Sorting.Type)
 			{
 				case Sortings.Id:
 					newLargeMonsters.Sort(LargeMonsterSorting.CompareById);
@@ -126,9 +126,9 @@ internal sealed class LargeMonsterUiManager : IDisposable
 
 	private void DrawDynamicUi(ImDrawListPtr backgroundDrawList)
 	{
-		var customization = ConfigManager.Instance.ActiveConfig.Data.largeMonsterUI.dynamic;
+		var customization = ConfigManager.Instance.ActiveConfig.Data.LargeMonsterUI.Dynamic;
 
-		if(!customization.enabled)
+		if(!customization.Enabled)
 		{
 			return;
 		}
@@ -141,9 +141,9 @@ internal sealed class LargeMonsterUiManager : IDisposable
 
 	private void DrawStaticUi(ImDrawListPtr backgroundDrawList)
 	{
-		var customization = ConfigManager.Instance.ActiveConfig.Data.largeMonsterUI.@static;
+		var customization = ConfigManager.Instance.ActiveConfig.Data.LargeMonsterUI.Static;
 
-		if(!customization.enabled)
+		if(!customization.Enabled)
 		{
 			return;
 		}

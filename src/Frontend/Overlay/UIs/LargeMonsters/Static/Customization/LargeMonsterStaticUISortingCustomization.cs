@@ -6,23 +6,11 @@ namespace YURI_Overlay;
 
 internal class LargeMonsterStaticUiSortingCustomization : Customization
 {
-	private int _sortingIndex = (int) Sortings.Name;
-	[JsonIgnore]
-	public Sortings SortingEnum { get => (Sortings) _sortingIndex; set => _sortingIndex = (int) value; }
-	public string sorting
-	{
-		get => LocalizationHelper.Instance.DefaultSortings[_sortingIndex];
-		set
-		{
-			var index = Array.IndexOf(LocalizationHelper.Instance.DefaultSortings, value);
-			if(index != -1)
-			{
-				_sortingIndex = index;
-			}
-		}
-	}
+	private int _typeIndex = (int) Sortings.Name;
+	[JsonConverter(typeof(JsonStringEnumConverter))]
+	public Sortings Type { get => (Sortings) _typeIndex; set => _typeIndex = (int) value; }
 
-	public bool reversedOrder = false;
+	public bool ReversedOrder = false;
 
 	public LargeMonsterStaticUiSortingCustomization() { }
 
@@ -36,9 +24,9 @@ internal class LargeMonsterStaticUiSortingCustomization : Customization
 
 		if(ImGui.TreeNode($"{localization.sorting}##{customizationName}"))
 		{
-			isChanged |= ImGui.Combo($"{localization.type}##{customizationName}", ref _sortingIndex, localizationHelper.Sortings, localizationHelper.Sortings.Length);
+			isChanged |= ImGui.Combo($"{localization.type}##{customizationName}", ref _typeIndex, localizationHelper.Sortings, localizationHelper.Sortings.Length);
 
-			isChanged |= ImGui.Checkbox($"{localization.reversedOrder}##{customizationName}", ref reversedOrder);
+			isChanged |= ImGui.Checkbox($"{localization.reversedOrder}##{customizationName}", ref ReversedOrder);
 
 			ImGui.TreePop();
 		}
