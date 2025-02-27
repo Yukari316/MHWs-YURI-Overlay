@@ -19,20 +19,20 @@ internal class LargeMonsterStaticUiCustomization : Customization
 
 	public override bool RenderImGui(string parentName = "")
 	{
-		var localization = LocalizationManager.Instance.ActiveLocalization.Data.imGui;
+		var localization = LocalizationManager.Instance.ActiveLocalization.Data.ImGui;
 
 		var isChanged = false;
 		var customizationName = $"{parentName}-Static";
 
-		if(ImGui.TreeNode($"{localization.@static}##{customizationName}"))
+		if(ImGui.TreeNode($"{localization.Static}##{customizationName}"))
 		{
-			isChanged |= ImGui.Checkbox($"{localization.enabled}##{customizationName}", ref Enabled);
+			isChanged |= ImGui.Checkbox($"{localization.Enabled}##{customizationName}", ref Enabled);
 
 			isChanged |= Settings.RenderImGui(customizationName);
 			isChanged |= Position.RenderImGui(customizationName);
 			isChanged |= Spacing.RenderImGui(customizationName);
 			isChanged |= Sorting.RenderImGui(customizationName);
-			isChanged |= NameLabel.RenderImGui(localization.nameLabel, $"{customizationName}-name-label");
+			isChanged |= NameLabel.RenderImGui(localization.NameLabel, $"{customizationName}-name-label");
 			isChanged |= Health.RenderImGui(customizationName);
 
 			ImGui.TreePop();

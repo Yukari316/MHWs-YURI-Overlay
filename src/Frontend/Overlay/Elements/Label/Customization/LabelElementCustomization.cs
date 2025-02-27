@@ -15,15 +15,15 @@ internal sealed class LabelElementCustomization : Customization
 
 	public bool RenderImGui(string visibleName, string customizationName = "label")
 	{
-		var localization = LocalizationManager.Instance.ActiveLocalization.Data.imGui;
+		var localization = LocalizationManager.Instance.ActiveLocalization.Data.ImGui;
 
 		var isChanged = false;
 
 		if(ImGui.TreeNode($"{visibleName}##{customizationName}"))
 		{
-			isChanged |= ImGui.Checkbox($"{localization.visible}##{customizationName}", ref Visible);
+			isChanged |= ImGui.Checkbox($"{localization.Visible}##{customizationName}", ref Visible);
 
-			isChanged |= ImGui.InputText($"{localization.format}##{customizationName}", ref Format, 256);
+			isChanged |= ImGui.InputText($"{localization.Format}##{customizationName}", ref Format, 256);
 
 			isChanged |= Settings.RenderImGui(customizationName);
 			isChanged |= Offset.RenderImGui(customizationName);

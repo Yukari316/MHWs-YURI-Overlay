@@ -13,15 +13,15 @@ internal class LargeMonsterStaticUiSettingsCustomization : Customization
 
 	public override bool RenderImGui(string parentName = "")
 	{
-		var localization = LocalizationManager.Instance.ActiveLocalization.Data.imGui;
+		var localization = LocalizationManager.Instance.ActiveLocalization.Data.ImGui;
 		var localizationHelper = LocalizationHelper.Instance;
 
 		var isChanged = false;
 		var customizationName = $"{parentName}-settings";
 
-		if(ImGui.TreeNode($"{localization.settings}##{customizationName}"))
+		if(ImGui.TreeNode($"{localization.Settings}##{customizationName}"))
 		{
-			isChanged |= ImGui.Checkbox($"{localization.hideDeadOrCaptured}##{customizationName}", ref HideDeadOrCaptured);
+			isChanged |= ImGui.Checkbox($"{localization.HideDeadOrCaptured}##{customizationName}", ref HideDeadOrCaptured);
 			//isChanged |= ImGui.Checkbox($"{localization.renderHighlightedMonster}##{customizationName}", ref renderHighlightedMonster);
 			//isChanged |= ImGui.Checkbox($"{localization.renderNotHighlightedMonsters}##{customizationName}", ref renderNotHighlightedMonsters);
 

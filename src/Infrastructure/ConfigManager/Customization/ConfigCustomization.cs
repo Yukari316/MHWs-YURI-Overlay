@@ -22,13 +22,13 @@ internal sealed class ConfigCustomization : Customization
 	public override bool RenderImGui(string parentName = "")
 	{
 		var configManager = ConfigManager.Instance;
-		var localization = LocalizationManager.Instance.ActiveLocalization.Data.imGui;
+		var localization = LocalizationManager.Instance.ActiveLocalization.Data.ImGui;
 
 		var isChanged = false;
 
-		if(ImGui.TreeNode($"{localization.config}##{parentName}"))
+		if(ImGui.TreeNode($"{localization.Config}##{parentName}"))
 		{
-			var isActiveConfigChanged = ImGui.Combo(localization.activeConfig, ref _activeConfigIndex, _configNames, _configNames.Length);
+			var isActiveConfigChanged = ImGui.Combo(localization.ActiveConfig, ref _activeConfigIndex, _configNames, _configNames.Length);
 			if(isActiveConfigChanged)
 			{
 				isChanged |= isActiveConfigChanged;
@@ -36,9 +36,9 @@ internal sealed class ConfigCustomization : Customization
 				configManager.ActivateConfig(_configNames[_activeConfigIndex]);
 			}
 
-			ImGui.InputText($"{localization.newConfigName}##{parentName}", ref _configNameInput, Constants.MaxConfigNameLength);
+			ImGui.InputText($"{localization.NewConfigName}##{parentName}", ref _configNameInput, Constants.MaxConfigNameLength);
 
-			if(ImGui.Button($"{localization.@new}##{parentName}"))
+			if(ImGui.Button($"{localization.New}##{parentName}"))
 			{
 				if(_configNameInput != string.Empty && !_configNames.Contains(_configNameInput))
 				{
@@ -50,7 +50,7 @@ internal sealed class ConfigCustomization : Customization
 
 			ImGui.SameLine();
 
-			if(ImGui.Button($"{localization.duplicate}##{parentName}"))
+			if(ImGui.Button($"{localization.Duplicate}##{parentName}"))
 			{
 				if(_configNameInput != string.Empty && !_configNames.Contains(_configNameInput))
 				{
@@ -62,7 +62,7 @@ internal sealed class ConfigCustomization : Customization
 
 			ImGui.SameLine();
 
-			if(ImGui.Button($"{localization.rename}##{parentName}"))
+			if(ImGui.Button($"{localization.Rename}##{parentName}"))
 			{
 				if(_configNameInput != string.Empty && !_configNames.Contains(_configNameInput))
 				{
@@ -74,7 +74,7 @@ internal sealed class ConfigCustomization : Customization
 
 			ImGui.SameLine();
 
-			if(ImGui.Button($"{localization.reset}##{parentName}"))
+			if(ImGui.Button($"{localization.Reset}##{parentName}"))
 			{
 				isChanged = true;
 

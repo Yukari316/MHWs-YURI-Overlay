@@ -101,12 +101,12 @@ internal static class DefaultConfig
 		config.LargeMonsterUI.Static.NameLabel.Settings.RightAlignmentShift = 0;
 		config.LargeMonsterUI.Static.NameLabel.Offset.X = 7f;
 		config.LargeMonsterUI.Static.NameLabel.Offset.Y = 0f;
-		config.LargeMonsterUI.Static.NameLabel.Color.colorInfo.Rgba = 0xFFFFFFCC;
+		config.LargeMonsterUI.Static.NameLabel.Color.colorInfo.Rgba = 0xFFFFFFFF;
 
 		config.LargeMonsterUI.Static.NameLabel.Shadow.Visible = true;
 		config.LargeMonsterUI.Static.NameLabel.Shadow.Offset.X = 2f;
 		config.LargeMonsterUI.Static.NameLabel.Shadow.Offset.Y = 2f;
-		config.LargeMonsterUI.Static.NameLabel.Shadow.Color.colorInfo.Rgba = 0x000000CC;
+		config.LargeMonsterUI.Static.NameLabel.Shadow.Color.colorInfo.Rgba = 0x000000FF;
 
 		config.LargeMonsterUI.Static.Health.Visible = true;
 
@@ -118,24 +118,24 @@ internal static class DefaultConfig
 		config.LargeMonsterUI.Static.Health.ValueLabel.Settings.RightAlignmentShift = 0;
 		config.LargeMonsterUI.Static.Health.ValueLabel.Offset.X = 7f;
 		config.LargeMonsterUI.Static.Health.ValueLabel.Offset.Y = 9f;
-		config.LargeMonsterUI.Static.Health.ValueLabel.Color.colorInfo.Rgba = 0xFFFFFFCC;
+		config.LargeMonsterUI.Static.Health.ValueLabel.Color.colorInfo.Rgba = 0xFFFFFFFF;
 
 		config.LargeMonsterUI.Static.Health.ValueLabel.Shadow.Visible = true;
 		config.LargeMonsterUI.Static.Health.ValueLabel.Shadow.Offset.X = 2f;
 		config.LargeMonsterUI.Static.Health.ValueLabel.Shadow.Offset.Y = 2f;
-		config.LargeMonsterUI.Static.Health.ValueLabel.Shadow.Color.colorInfo.Rgba = 0x000000CC;
+		config.LargeMonsterUI.Static.Health.ValueLabel.Shadow.Color.colorInfo.Rgba = 0x000000FF;
 
 		config.LargeMonsterUI.Static.Health.PercentageLabel.Visible = true;
 		config.LargeMonsterUI.Static.Health.PercentageLabel.Format = "{0:P1}";
 		config.LargeMonsterUI.Static.Health.PercentageLabel.Settings.RightAlignmentShift = 6;
 		config.LargeMonsterUI.Static.Health.PercentageLabel.Offset.X = 245f;
 		config.LargeMonsterUI.Static.Health.PercentageLabel.Offset.Y = 9f;
-		config.LargeMonsterUI.Static.Health.PercentageLabel.Color.colorInfo.Rgba = 0xFFFFFFCC;
+		config.LargeMonsterUI.Static.Health.PercentageLabel.Color.colorInfo.Rgba = 0xFFFFFFFF;
 
 		config.LargeMonsterUI.Static.Health.PercentageLabel.Shadow.Visible = true;
 		config.LargeMonsterUI.Static.Health.PercentageLabel.Shadow.Offset.X = 2f;
 		config.LargeMonsterUI.Static.Health.PercentageLabel.Shadow.Offset.Y = 2f;
-		config.LargeMonsterUI.Static.Health.PercentageLabel.Shadow.Color.colorInfo.Rgba = 0x000000CC;
+		config.LargeMonsterUI.Static.Health.PercentageLabel.Shadow.Color.colorInfo.Rgba = 0x000000FF;
 
 		config.LargeMonsterUI.Static.Health.Bar.Visible = true;
 		config.LargeMonsterUI.Static.Health.Bar.Settings.FillDirection = FillDirections.LeftToRight;

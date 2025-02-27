@@ -4,139 +4,138 @@ namespace YURI_Overlay;
 
 internal class LocalizationInfo
 {
-	public string name = "English";
-	public string translators = "GreenComfyTea";
+	public string Name = "English";
+	public string Translators = "GreenComfyTea";
 }
 
 internal class ImGuiLocalization
 {
 	// Mod Info
-	public string modInfo = "Mod Info";
+	public string ModInfo = "Mod Info";
 
-	public string madeBy = "Made by:";
-	public string nexusMods = "Nexus Mods";
-	public string gitHubRepo = "GitHub Repo";
-	public string twitch = "Twitch";
-	public string twitter = "Twitter";
-	public string artStation = "ArtStation";
-	public string donationMessage1 = "If you like the mod, please consider making a small donation!";
-	public string donationMessage2 = "It would help me maintain existing mods and create new ones in the future!";
-	public string donate = "Donate";
-	public string payPal = "PayPal";
-	public string buyMeATea = "Buy Me a Tea";
+	public string MadeBy = "Made by:";
+	public string NexusMods = "Nexus Mods";
+	public string GitHubRepo = "GitHub Repo";
+	public string Twitch = "Twitch";
+	public string Twitter = "Twitter";
+	public string ArtStation = "ArtStation";
+	public string DonationMessage1 = "If you like the mod, please consider making a small donation!";
+	public string DonationMessage2 = "It would help me maintain existing mods and create new ones in the future!";
+	public string Donate = "Donate";
+	public string PayPal = "PayPal";
+	public string BuyMeATea = "Buy Me a Tea";
 
 	// Config
 
-	public string config = "Config";
+	public string Config = "Config";
 
-	public string activeConfig = "Active Config";
-	public string newConfigName = "New Config Name";
-	public string @new = "New";
-	public string duplicate = "Duplicate";
-	public string delete = "Delete";
-	public string reset = "Reset";
-	public string rename = "Rename";
+	public string ActiveConfig = "Active Config";
+	public string NewConfigName = "New Config Name";
+	public string New = "New";
+	public string Duplicate = "Duplicate";
+	public string Delete = "Delete";
+	public string Reset = "Reset";
+	public string Rename = "Rename";
 
 	// Localization
 
-	public string language = "Language";
+	public string Language = "Language";
 
 	// Bar
 
-	public string bar = "Bar";
-	public string visible = "Visible";
-	public string settings = "Settings";
-	public string fillDirection = "Fill Direction";
-	public string leftToRight = "Left to Right";
-	public string rightToLeft = "Right to Left";
-	public string topToBottom = "Top to Bottom";
-	public string bottomToTop = "Bottom to Top";
-	public string offset = "Offset";
-	public string x = "X";
-	public string y = "Y";
-	public string z = "Z";
-	public string size = "Size";
-	public string width = "Width";
-	public string height = "Height";
-	public string outline = "Outline";
-	public string thickness = "Thickness";
-	public string style = "Style";
-	public string inside = "inside";
-	public string center = "Center";
-	public string outside = "Outside";
-	public string colors = "Colors";
-	public string background = "Background";
-	public string foreground = "Foreground";
-	public string color = "Color";
-	public string start = "Start";
-	public string end = "End";
 	public string Bar = "Bar";
+	public string Visible = "Visible";
+	public string Settings = "Settings";
+	public string FillDirection = "Fill Direction";
+	public string LeftToRight = "Left to Right";
+	public string RightToLeft = "Right to Left";
+	public string TopToBottom = "Top to Bottom";
+	public string BottomToTop = "Bottom to Top";
+	public string Offset = "Offset";
+	public string X = "X";
+	public string Y = "Y";
+	public string Z = "Z";
+	public string Size = "Size";
+	public string Width = "Width";
+	public string Height = "Height";
+	public string Outline = "Outline";
+	public string Thickness = "Thickness";
+	public string Style = "Style";
+	public string Inside = "inside";
+	public string Center = "Center";
+	public string Outside = "Outside";
+	public string Colors = "Colors";
+	public string Background = "Background";
+	public string Foreground = "Foreground";
+	public string Color = "Color";
+	public string Start = "Start";
+	public string End = "End";
 
 	// Label
 
-	public string label = "Label";
-	public string format = "Format";
-	public string rightAlignmentShift = "Right Alignment Shift";
-	public string shadow = "Shadow";
+	public string Label = "Label";
+	public string Format = "Format";
+	public string RightAlignmentShift = "Right Alignment Shift";
+	public string Shadow = "Shadow";
 	public string ValueLabel = "Value Label";
 	public string PercentageLabel = "Percentage Label";
 
 	// Large Monsters
-	public string largeMonstersUI = "Large Monsters UI";
-	public string @static = "Static";
-	public string dynamic = "Dynamic";
-	public string highlighted = "Highlighted";
-	public string spacing = "Spacing";
-	public string position = "Position";
+	public string LargeMonstersUi = "Large Monsters UI";
+	public string Static = "Static";
+	public string Dynamic = "Dynamic";
+	public string Highlighted = "Highlighted";
+	public string Spacing = "Spacing";
+	public string Position = "Position";
 
-	public string enabled = "Enabled";
-	public string hideDeadOrCaptured = "Hide Dead or Captured";
-	public string renderHighlightedMonster = "Render Highlighted Monster";
-	public string renderNotHighlightedMonsters = "Render Not Highlighted Monsters";
-	public string opacityFalloff = "Opacity Falloff";
-	public string maxDistance = "Max Distance";
-	public string worldOffset = "World Offset";
+	public string Enabled = "Enabled";
+	public string HideDeadOrCaptured = "Hide Dead or Captured";
+	public string RenderHighlightedMonster = "Render Highlighted Monster";
+	public string RenderNotHighlightedMonsters = "Render Not Highlighted Monsters";
+	public string OpacityFalloff = "Opacity Falloff";
+	public string MaxDistance = "Max Distance";
+	public string WorldOffset = "World Offset";
 
-	public string name = "Name";
-	public string health = "Health";
+	public string Name = "Name";
+	public string Health = "Health";
 
-	public string highlightedMonsterLocation = "Highlighted Monster Location";
-	public string normal = "Normal";
-	public string first = "First";
-	public string last = "Last";
+	public string HighlightedMonsterLocation = "Highlighted Monster Location";
+	public string Normal = "Normal";
+	public string First = "First";
+	public string Last = "Last";
 
-	public string sorting = "Sorting";
-	public string type = "Type";
-	public string id = "Id";
-	public string maxHealth = "Max Health";
-	public string healthPercentage = "Health Percentage";
-	public string distance = "Distance";
+	public string Sorting = "Sorting";
+	public string Type = "Type";
+	public string Id = "Id";
+	public string MaxHealth = "Max Health";
+	public string HealthPercentage = "Health Percentage";
+	public string Distance = "Distance";
 
-	public string reversedOrder = "Reversed Order";
+	public string ReversedOrder = "Reversed Order";
 
-	public string anchor = "Anchor";
-	public string topLeft = "Top-Left";
-	public string topCenter = "Top-Center";
-	public string topRight = "Top-Right";
-	public string centerLeft = "Center-Left";
-	public string centerRight = "Center-Right";
-	public string bottomLeft = "Bottom-Left";
-	public string bottomCenter = "Bottom-Center";
-	public string bottomRight = "Bottom-Right";
+	public string Anchor = "Anchor";
+	public string TopLeft = "Top-Left";
+	public string TopCenter = "Top-Center";
+	public string TopRight = "Top-Right";
+	public string CenterLeft = "Center-Left";
+	public string CenterRight = "Center-Right";
+	public string BottomLeft = "Bottom-Left";
+	public string BottomCenter = "Bottom-Center";
+	public string BottomRight = "Bottom-Right";
 
-	public string nameLabel = "Name Label";
+	public string NameLabel = "Name Label";
 
-	public string globalSettings = "Global Settings";
-	public string performance = "Performance";
-	public string updateDelaySeconds = "Update Delay (seconds)";
-	public string calculationCaching = "Calculation Caching";
+	public string GlobalSettings = "Global Settings";
+	public string Performance = "Performance";
+	public string UpdateDelaySeconds = "Update Delay (seconds)";
+	public string CalculationCaching = "Calculation Caching";
 }
 
 internal class Localization
 {
 	[JsonIgnore]
-	public string isoCode = Constants.DefaultLocalization;
+	public string IsoCode = Constants.DefaultLocalization;
 
-	public LocalizationInfo localizationInfo = new();
-	public ImGuiLocalization imGui = new();
+	public LocalizationInfo LocalizationInfo = new();
+	public ImGuiLocalization ImGui = new();
 }

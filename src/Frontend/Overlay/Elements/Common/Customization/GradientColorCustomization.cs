@@ -27,7 +27,7 @@ internal class GradientColorCustomization : Customization
 
 	public bool RenderImGui(string parentName = "", string name = "")
 	{
-		var localization = LocalizationManager.Instance.ActiveLocalization.Data.imGui;
+		var localization = LocalizationManager.Instance.ActiveLocalization.Data.ImGui;
 
 		var isChanged = false;
 		var customizationName = $"{parentName}-gradient-color";
@@ -69,8 +69,8 @@ internal class GradientColorCustomization : Customization
 
 	public override bool RenderImGui(string parentName = "")
 	{
-		var localization = LocalizationManager.Instance.ActiveLocalization.Data.imGui;
+		var localization = LocalizationManager.Instance.ActiveLocalization.Data.ImGui;
 
-		return RenderImGui(parentName, localization.color);
+		return RenderImGui(parentName, localization.Color);
 	}
 }

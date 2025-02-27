@@ -29,51 +29,51 @@ internal sealed class LocalizationHelper
 
 		localizationManager.ActiveLocalizationChanged += OnActiveLocalizationChanged;
 
-		var defaultLocalization = localizationManager.DefaultLocalization.Data.imGui;
+		var defaultLocalization = localizationManager.DefaultLocalization.Data.ImGui;
 
 		DefaultFillDirections =
 		[
-			defaultLocalization.leftToRight,
-			defaultLocalization.rightToLeft,
-			defaultLocalization.topToBottom,
-			defaultLocalization.bottomToTop
+			defaultLocalization.LeftToRight,
+			defaultLocalization.RightToLeft,
+			defaultLocalization.TopToBottom,
+			defaultLocalization.BottomToTop
 		];
 
 		DefaultOutlineStyles =
 		[
-			defaultLocalization.inside,
-			defaultLocalization.center,
-			defaultLocalization.outside
+			defaultLocalization.Inside,
+			defaultLocalization.Center,
+			defaultLocalization.Outside
 		];
 
 		DefaultSortingLocations =
 		[
-			defaultLocalization.normal,
-			defaultLocalization.first,
-			defaultLocalization.last
+			defaultLocalization.Normal,
+			defaultLocalization.First,
+			defaultLocalization.Last
 		];
 
 		DefaultSortings =
 		[
-			defaultLocalization.name,
-			defaultLocalization.id,
-			defaultLocalization.health,
-			defaultLocalization.maxHealth,
-			defaultLocalization.healthPercentage,
-			defaultLocalization.distance
+			defaultLocalization.Name,
+			defaultLocalization.Id,
+			defaultLocalization.Health,
+			defaultLocalization.MaxHealth,
+			defaultLocalization.HealthPercentage,
+			defaultLocalization.Distance
 		];
 
 		DefaultAnchors =
 		[
-			defaultLocalization.topLeft,
-			defaultLocalization.topCenter,
-			defaultLocalization.topRight,
-			defaultLocalization.centerLeft,
-			defaultLocalization.center,
-			defaultLocalization.centerRight,
-			defaultLocalization.bottomLeft,
-			defaultLocalization.bottomCenter,
-			defaultLocalization.bottomRight
+			defaultLocalization.TopLeft,
+			defaultLocalization.TopCenter,
+			defaultLocalization.TopRight,
+			defaultLocalization.CenterLeft,
+			defaultLocalization.Center,
+			defaultLocalization.CenterRight,
+			defaultLocalization.BottomLeft,
+			defaultLocalization.BottomCenter,
+			defaultLocalization.BottomRight
 		];
 
 		Update();
@@ -81,51 +81,51 @@ internal sealed class LocalizationHelper
 
 	public void Update()
 	{
-		var localization = LocalizationManager.Instance.ActiveLocalization.Data.imGui;
+		var localization = LocalizationManager.Instance.ActiveLocalization.Data.ImGui;
 
 		FillDirections =
 		[
-			localization.leftToRight,
-			localization.rightToLeft,
-			localization.topToBottom,
-			localization.bottomToTop
+			localization.LeftToRight,
+			localization.RightToLeft,
+			localization.TopToBottom,
+			localization.BottomToTop
 		];
 
 		OutlineStyles =
 		[
-			localization.inside,
-			localization.center,
-			localization.outside
+			localization.Inside,
+			localization.Center,
+			localization.Outside
 		];
 
 		SortingLocations =
 		[
-			localization.normal,
-			localization.first,
-			localization.last
+			localization.Normal,
+			localization.First,
+			localization.Last
 		];
 
 		Sortings =
 		[
-			localization.name,
-			localization.id,
-			localization.health,
-			localization.maxHealth,
-			localization.healthPercentage,
-			localization.distance
+			localization.Name,
+			localization.Id,
+			localization.Health,
+			localization.MaxHealth,
+			localization.HealthPercentage,
+			localization.Distance
 		];
 
 		Anchors =
 		[
-			localization.topLeft,
-			localization.topCenter,
-			localization.topRight,
-			localization.centerLeft,
-			localization.center,
-			localization.centerRight,
-			localization.bottomLeft,
-			localization.bottomCenter,
-			localization.bottomRight
+			localization.TopLeft,
+			localization.TopCenter,
+			localization.TopRight,
+			localization.CenterLeft,
+			localization.Center,
+			localization.CenterRight,
+			localization.BottomLeft,
+			localization.BottomCenter,
+			localization.BottomRight
 		];
 	}
 

@@ -10,14 +10,14 @@ internal class LabelElementSettingsCustomization : Customization
 
 	public override bool RenderImGui(string parentName = "")
 	{
-		var localization = LocalizationManager.Instance.ActiveLocalization.Data.imGui;
+		var localization = LocalizationManager.Instance.ActiveLocalization.Data.ImGui;
 
 		var isChanged = false;
 		var customizationName = $"{parentName}-settings";
 
-		if(ImGui.TreeNode($"{localization.settings}##{customizationName}"))
+		if(ImGui.TreeNode($"{localization.Settings}##{customizationName}"))
 		{
-			isChanged |= ImGui.InputInt($"{localization.rightAlignmentShift}##{customizationName}", ref RightAlignmentShift);
+			isChanged |= ImGui.InputInt($"{localization.RightAlignmentShift}##{customizationName}", ref RightAlignmentShift);
 
 			ImGui.TreePop();
 		}

@@ -76,7 +76,7 @@ internal sealed partial class LocalizationManager : IDisposable
 		LogManager.Info($"LocalizationManager: Initializing localization \"{name}\"...");
 
 		JsonDatabase<Localization> newLocalization = new(Constants.LocalizationsPath, name);
-		newLocalization.Data.isoCode = name;
+		newLocalization.Data.IsoCode = name;
 		newLocalization.Save();
 
 		newLocalization.Changed += OnLocalizationFileChanged;

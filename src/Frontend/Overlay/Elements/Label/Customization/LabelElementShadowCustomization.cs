@@ -10,14 +10,14 @@ internal class LabelElementShadowCustomization : Customization
 
 	public override bool RenderImGui(string parentName = "")
 	{
-		var localization = LocalizationManager.Instance.ActiveLocalization.Data.imGui;
+		var localization = LocalizationManager.Instance.ActiveLocalization.Data.ImGui;
 
 		var isChanged = false;
 		var customizationName = $"{parentName}-shadow";
 
-		if(ImGui.TreeNode($"{localization.shadow}##{parentName}"))
+		if(ImGui.TreeNode($"{localization.Shadow}##{parentName}"))
 		{
-			isChanged |= ImGui.Checkbox($"{localization.visible}##{parentName}", ref Visible);
+			isChanged |= ImGui.Checkbox($"{localization.Visible}##{parentName}", ref Visible);
 
 			isChanged |= Offset.RenderImGui(customizationName);
 			isChanged |= Color.RenderImGui(customizationName);

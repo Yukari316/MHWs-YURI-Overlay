@@ -14,18 +14,18 @@ internal class LargeMonsterDynamicUiSettingsCustomization : Customization
 
 	public override bool RenderImGui(string parentName = "")
 	{
-		var localization = LocalizationManager.Instance.ActiveLocalization.Data.imGui;
+		var localization = LocalizationManager.Instance.ActiveLocalization.Data.ImGui;
 
 		var isChanged = false;
 		var customizationName = $"{parentName}-settings";
 
-		if(ImGui.TreeNode($"{localization.settings}##{customizationName}"))
+		if(ImGui.TreeNode($"{localization.Settings}##{customizationName}"))
 		{
-			isChanged |= ImGui.Checkbox($"{localization.hideDeadOrCaptured}##{customizationName}", ref HideDeadOrCaptured);
-			isChanged |= ImGui.Checkbox($"{localization.renderHighlightedMonster}##{customizationName}", ref RenderHighlightedMonster);
-			isChanged |= ImGui.Checkbox($"{localization.renderNotHighlightedMonsters}##{customizationName}", ref RenderNotHighlightedMonsters);
-			isChanged |= ImGui.Checkbox($"{localization.opacityFalloff}##{customizationName}", ref OpacityFalloff);
-			isChanged |= ImGui.DragFloat($"{localization.maxDistance}##{customizationName}", ref MaxDistance, 0.1f, 0, 65536f, "%.1f");
+			isChanged |= ImGui.Checkbox($"{localization.HideDeadOrCaptured}##{customizationName}", ref HideDeadOrCaptured);
+			isChanged |= ImGui.Checkbox($"{localization.RenderHighlightedMonster}##{customizationName}", ref RenderHighlightedMonster);
+			isChanged |= ImGui.Checkbox($"{localization.RenderNotHighlightedMonsters}##{customizationName}", ref RenderNotHighlightedMonsters);
+			isChanged |= ImGui.Checkbox($"{localization.OpacityFalloff}##{customizationName}", ref OpacityFalloff);
+			isChanged |= ImGui.DragFloat($"{localization.MaxDistance}##{customizationName}", ref MaxDistance, 0.1f, 0, 65536f, "%.1f");
 
 			ImGui.TreePop();
 		}

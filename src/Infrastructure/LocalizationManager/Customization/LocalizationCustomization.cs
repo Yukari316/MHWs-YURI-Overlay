@@ -13,7 +13,7 @@ internal sealed class LocalizationCustomization : Customization
 	{
 		var localizationManager = LocalizationManager.Instance;
 
-		_localizationNames = localizationManager.Localizations.Values.Select(localization => localization.Data.localizationInfo.name).ToArray();
+		_localizationNames = localizationManager.Localizations.Values.Select(localization => localization.Data.LocalizationInfo.Name).ToArray();
 		_localizationIsoCodes = localizationManager.Localizations.Values.Select(localization => localization.Name).ToArray();
 
 		_activeLocalizationIndex = Array.IndexOf(_localizationIsoCodes, localizationManager.ActiveLocalization.Name);
@@ -26,13 +26,13 @@ internal sealed class LocalizationCustomization : Customization
 	{
 		var localizationManager = LocalizationManager.Instance;
 		var configManager = ConfigManager.Instance;
-		var localization = localizationManager.ActiveLocalization.Data.imGui;
+		var localization = localizationManager.ActiveLocalization.Data.ImGui;
 
 		var isChanged = false;
 
-		if(ImGui.TreeNode($"{localization.language}##{parentName}"))
+		if(ImGui.TreeNode($"{localization.Language}##{parentName}"))
 		{
-			var isActiveConfigChanged = ImGui.Combo(localization.activeConfig, ref _activeLocalizationIndex, _localizationNames, _localizationNames.Length);
+			var isActiveConfigChanged = ImGui.Combo(localization.Language, ref _activeLocalizationIndex, _localizationNames, _localizationNames.Length);
 			if(isActiveConfigChanged)
 			{
 				isChanged |= isActiveConfigChanged;
@@ -51,7 +51,7 @@ internal sealed class LocalizationCustomization : Customization
 	{
 		var localizationManager = LocalizationManager.Instance;
 
-		_localizationNames = localizationManager.Localizations.Values.Select(localization => localization.Data.localizationInfo.name).ToArray();
+		_localizationNames = localizationManager.Localizations.Values.Select(localization => localization.Data.LocalizationInfo.Name).ToArray();
 		_localizationIsoCodes = localizationManager.Localizations.Values.Select(localization => localization.Name).ToArray();
 	}
 

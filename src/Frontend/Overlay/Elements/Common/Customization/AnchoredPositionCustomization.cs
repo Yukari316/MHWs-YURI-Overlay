@@ -22,18 +22,18 @@ internal sealed class AnchoredPositionCustomization : Customization
 
 	public override bool RenderImGui(string parentName = "")
 	{
-		var localization = LocalizationManager.Instance.ActiveLocalization.Data.imGui;
+		var localization = LocalizationManager.Instance.ActiveLocalization.Data.ImGui;
 		var localizationHelper = LocalizationHelper.Instance;
 
 		var isChanged = false;
 		var customizationName = $"{parentName}-anchored-position";
 
-		if(ImGui.TreeNode($"{localization.position}##${customizationName}"))
+		if(ImGui.TreeNode($"{localization.Position}##${customizationName}"))
 		{
-			isChanged |= ImGui.DragFloat($"{localization.x}##${customizationName}", ref x, 0.1f, -8192f, 8192f, "%.1f");
-			isChanged |= ImGui.DragFloat($"{localization.y}##${customizationName}", ref y, 0.1f, -8192f, 8192f, "%.1f");
+			isChanged |= ImGui.DragFloat($"{localization.X}##${customizationName}", ref x, 0.1f, -8192f, 8192f, "%.1f");
+			isChanged |= ImGui.DragFloat($"{localization.Y}##${customizationName}", ref y, 0.1f, -8192f, 8192f, "%.1f");
 
-			isChanged |= ImGui.Combo($"{localization.anchor}##{customizationName}", ref _anchorIndex, localizationHelper.Anchors, localizationHelper.Anchors.Length);
+			isChanged |= ImGui.Combo($"{localization.Anchor}##{customizationName}", ref _anchorIndex, localizationHelper.Anchors, localizationHelper.Anchors.Length);
 
 			ImGui.TreePop();
 		}

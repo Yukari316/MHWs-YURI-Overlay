@@ -11,12 +11,12 @@ internal class LargeMonsterUiCustomization : Customization
 
 	public override bool RenderImGui(string parentName = "")
 	{
-		var localization = LocalizationManager.Instance.ActiveLocalization.Data.imGui;
+		var localization = LocalizationManager.Instance.ActiveLocalization.Data.ImGui;
 
 		var isChanged = false;
 		var customizationName = $"{parentName}-large-monster";
 
-		if(ImGui.TreeNode($"{localization.largeMonstersUI}##{customizationName}"))
+		if(ImGui.TreeNode($"{localization.LargeMonstersUi}##{customizationName}"))
 		{
 			//isChanged |= Dynamic.RenderImGui(customizationName);
 			isChanged |= Static.RenderImGui(customizationName);

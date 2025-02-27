@@ -14,14 +14,14 @@ internal class LargeMonsterHealthComponentCustomization : Customization
 
 	public override bool RenderImGui(string parentName = "")
 	{
-		var localization = LocalizationManager.Instance.ActiveLocalization.Data.imGui;
+		var localization = LocalizationManager.Instance.ActiveLocalization.Data.ImGui;
 
 		var isChanged = false;
 		var customizationName = $"{parentName}-health";
 
-		if(ImGui.TreeNode($"{localization.health}##{customizationName}"))
+		if(ImGui.TreeNode($"{localization.Health}##{customizationName}"))
 		{
-			isChanged |= ImGui.Checkbox($"{localization.visible}##{customizationName}", ref Visible);
+			isChanged |= ImGui.Checkbox($"{localization.Visible}##{customizationName}", ref Visible);
 			isChanged |= Offset.RenderImGui(customizationName);
 			isChanged |= ValueLabel.RenderImGui(localization.ValueLabel, customizationName);
 			isChanged |= PercentageLabel.RenderImGui(localization.PercentageLabel, customizationName);

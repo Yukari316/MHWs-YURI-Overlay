@@ -16,17 +16,17 @@ internal class LargeMonsterStaticUiSortingCustomization : Customization
 
 	public override bool RenderImGui(string parentName = "")
 	{
-		var localization = LocalizationManager.Instance.ActiveLocalization.Data.imGui;
+		var localization = LocalizationManager.Instance.ActiveLocalization.Data.ImGui;
 		var localizationHelper = LocalizationHelper.Instance;
 
 		var isChanged = false;
 		var customizationName = $"{parentName}-settings";
 
-		if(ImGui.TreeNode($"{localization.sorting}##{customizationName}"))
+		if(ImGui.TreeNode($"{localization.Sorting}##{customizationName}"))
 		{
-			isChanged |= ImGui.Combo($"{localization.type}##{customizationName}", ref _typeIndex, localizationHelper.Sortings, localizationHelper.Sortings.Length);
+			isChanged |= ImGui.Combo($"{localization.Type}##{customizationName}", ref _typeIndex, localizationHelper.Sortings, localizationHelper.Sortings.Length);
 
-			isChanged |= ImGui.Checkbox($"{localization.reversedOrder}##{customizationName}", ref ReversedOrder);
+			isChanged |= ImGui.Checkbox($"{localization.ReversedOrder}##{customizationName}", ref ReversedOrder);
 
 			ImGui.TreePop();
 		}

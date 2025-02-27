@@ -17,19 +17,19 @@ internal class LargeMonsterDynamicUiCustomization : Customization
 
 	public override bool RenderImGui(string parentName = "")
 	{
-		var localization = LocalizationManager.Instance.ActiveLocalization.Data.imGui;
+		var localization = LocalizationManager.Instance.ActiveLocalization.Data.ImGui;
 
 		var isChanged = false;
 		var customizationName = $"{parentName}-Dynamic";
 
-		if(ImGui.TreeNode($"{localization.dynamic}##{customizationName}"))
+		if(ImGui.TreeNode($"{localization.Dynamic}##{customizationName}"))
 		{
-			isChanged |= ImGui.Checkbox($"{localization.enabled}##{customizationName}", ref Enabled);
+			isChanged |= ImGui.Checkbox($"{localization.Enabled}##{customizationName}", ref Enabled);
 
 			isChanged |= Settings.RenderImGui(customizationName);
 			isChanged |= WorldOffset.RenderImGui(customizationName);
 			isChanged |= Offset.RenderImGui(customizationName);
-			isChanged |= NameLabel.RenderImGui(localization.nameLabel, $"{customizationName}-name-label");
+			isChanged |= NameLabel.RenderImGui(localization.NameLabel, $"{customizationName}-name-label");
 			isChanged |= Health.RenderImGui(customizationName);
 
 			ImGui.TreePop();

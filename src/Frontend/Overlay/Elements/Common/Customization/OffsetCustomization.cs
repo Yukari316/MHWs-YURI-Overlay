@@ -11,15 +11,15 @@ internal sealed class OffsetCustomization : Customization
 
 	public override bool RenderImGui(string parentName = "")
 	{
-		var localization = LocalizationManager.Instance.ActiveLocalization.Data.imGui;
+		var localization = LocalizationManager.Instance.ActiveLocalization.Data.ImGui;
 
 		var isChanged = false;
 		var customizationName = $"{parentName}-offset";
 
-		if(ImGui.TreeNode($"{localization.offset}##${customizationName}"))
+		if(ImGui.TreeNode($"{localization.Offset}##${customizationName}"))
 		{
-			isChanged |= ImGui.DragFloat($"{localization.x}##${customizationName}", ref X, 0.1f, -4096f, 4096f, "%.1f");
-			isChanged |= ImGui.DragFloat($"{localization.y}##${customizationName}", ref Y, 0.1f, -4096f, 4096f, "%.1f");
+			isChanged |= ImGui.DragFloat($"{localization.X}##${customizationName}", ref X, 0.1f, -4096f, 4096f, "%.1f");
+			isChanged |= ImGui.DragFloat($"{localization.Y}##${customizationName}", ref Y, 0.1f, -4096f, 4096f, "%.1f");
 
 			ImGui.TreePop();
 		}

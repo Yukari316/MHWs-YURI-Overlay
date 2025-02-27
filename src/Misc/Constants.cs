@@ -34,7 +34,7 @@ internal static class Constants
 	public const float DragFloatMin = -DragFloatMax;
 	public const string DragFloatFormat = "0.0";
 
-	public const string NexusModsLink = "https://nexusmods.com/monsterhunterworld/mods/...";
+	public const string NexusModsLink = "https://www.nexusmods.com/monsterhunterwilds/mods/62";
 	public const string GithubRepoLink = "https://github.com/GreenComfyTea/MHWs-YURI-Overlay";
 	public const string NightlyLink = "https://github.com/GreenComfyTea/MHWs-YURI-Overlay-Nightly/releases";
 	public const string TwitchLink = "https://twitch.tv/GreenComfyTea";

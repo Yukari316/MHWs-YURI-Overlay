@@ -13,15 +13,15 @@ internal sealed class BarElementSettingsCustomization : Customization
 
 	public override bool RenderImGui(string parentName = "")
 	{
-		var localization = LocalizationManager.Instance.ActiveLocalization.Data.imGui;
+		var localization = LocalizationManager.Instance.ActiveLocalization.Data.ImGui;
 		var localizationHelper = LocalizationHelper.Instance;
 
 		var isChanged = false;
 		var customizationName = $"{parentName}-settings";
 
-		if(ImGui.TreeNode($"{localization.settings}##{customizationName}"))
+		if(ImGui.TreeNode($"{localization.Settings}##{customizationName}"))
 		{
-			isChanged |= ImGui.Combo($"{localization.fillDirection}##{customizationName}", ref _fillDirectionIndex, localizationHelper.FillDirections, localizationHelper.FillDirections.Length);
+			isChanged |= ImGui.Combo($"{localization.FillDirection}##{customizationName}", ref _fillDirectionIndex, localizationHelper.FillDirections, localizationHelper.FillDirections.Length);
 
 			ImGui.TreePop();
 		}
