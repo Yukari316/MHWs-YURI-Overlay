@@ -23,17 +23,17 @@ internal class ColorCustomization : Customization
 		var isChanged = false;
 		var customizationName = $"{parentName}-color";
 
-		if(ImGui.TreeNode($"{localization.color}##${customizationName}"))
-		{
-			var isColorChanged = ImGui.ColorPicker4($"##${customizationName}", ref colorInfo.vector);
-			isChanged |= isColorChanged;
-			if(isColorChanged)
-			{
-				colorInfo.Vector = colorInfo.vector;
-			}
+		//if(ImGui.TreeNode($"{localization.color}##${customizationName}"))
+		//{
+		//	var isColorChanged = ImGui.ColorPicker4($"##${customizationName}", ref colorInfo.vector);
+		//	isChanged |= isColorChanged;
+		//	if(isColorChanged)
+		//	{
+		//		colorInfo.Vector = colorInfo.vector;
+		//	}
 
-			ImGui.TreePop();
-		}
+		//	ImGui.TreePop();
+		//}
 
 		return isChanged;
 	}

@@ -1,4 +1,6 @@
-﻿using REFrameworkNET;
+﻿using System.Xml.Linq;
+
+using REFrameworkNET;
 
 namespace YURI_Overlay;
 
@@ -13,12 +15,14 @@ internal sealed class MonsterManager : IDisposable
 	private Type Boolean_Type;
 
 	private Method doUpdateEnd_Method;
+	private Method doOnDestroy_Method;
 	private Method get_IsBoss_Method;
 
 	private Field _Context_Field;
 	private Field _Em_Field;
 
 	private MethodHook preDoUpdateEndHook;
+	private MethodHook preDoOnDestroyHook;
 
 	private MonsterManager() { }
 
@@ -60,6 +64,7 @@ internal sealed class MonsterManager : IDisposable
 			var EnemyCharacter_TypeDef = TDB.Get().GetType("app.EnemyCharacter");
 
 			doUpdateEnd_Method = EnemyCharacter_TypeDef.GetMethod("doUpdateEnd");
+			doOnDestroy_Method = EnemyCharacter_TypeDef.GetMethod("doOnDestroy");
 			_Context_Field = EnemyCharacter_TypeDef.GetField("_Context");
 
 			_Em_Field = _Context_Field.GetType().GetField("_Em");
@@ -85,6 +90,9 @@ internal sealed class MonsterManager : IDisposable
 
 			preDoUpdateEndHook = doUpdateEnd_Method.AddHook(false);
 			preDoUpdateEndHook.AddPre(OnPreDoUpdateEnd);
+
+			preDoOnDestroyHook = doOnDestroy_Method.AddHook(false);
+			preDoOnDestroyHook.AddPre(OnPreDoDestroy);
 
 			LogManager.Info("MonsterManager: Hooked!");
 		}
@@ -137,6 +145,29 @@ internal sealed class MonsterManager : IDisposable
 					largeMonster.UpdateHealth();
 					largeMonster.UpdatePosition();
 				}
+			}
+
+			return PreHookResult.Continue;
+		}
+		catch(Exception exception)
+		{
+			LogManager.Error(exception);
+			return PreHookResult.Continue;
+		}
+	}
+	private PreHookResult OnPreDoDestroy(Span<ulong> args)
+	{
+		try
+		{
+			var enemyCharacterPtr = args[1];
+			var enemyCharacter = ManagedObject.ToManagedObject(enemyCharacterPtr);
+
+
+			var isFound = LargeMonsters.TryGetValue(enemyCharacter, out var largeMonster);
+			if(isFound)
+			{
+				LogManager.Info($"[LargeMonster] Destroyed {largeMonster?.Name}");
+				LargeMonsters.Remove(enemyCharacter);
 			}
 
 			return PreHookResult.Continue;

@@ -122,11 +122,6 @@ internal sealed class ImGuiManager
 			changed |= configManager.ActiveConfig.Data.GlobalSettings.RenderImGui("global-settings");
 			changed |= configManager.ActiveConfig.Data.LargeMonsterUI.RenderImGui("large-monster-ui");
 
-			foreach(var localization in localizationManager.Localizations)
-			{
-				ImGui.Text($"{localization.Key} - {localization.Value.Name}");
-			}
-
 			if(changed)
 			{
 				configManager.ActiveConfig.Save();

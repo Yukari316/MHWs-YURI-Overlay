@@ -89,7 +89,7 @@ public class Plugin
 
 			var imGuiManager = ImGuiManager.Instance;
 
-			if(ImGui.Button($"{Constants.ModName} v{Constants.Version}"))
+			if(ImGui.IsKeyPressed(ImGuiKey.Home))
 			{
 				imGuiManager.IsOpened = !imGuiManager.IsOpened;
 			}
