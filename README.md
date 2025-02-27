@@ -129,7 +129,7 @@
 
 <p align="center">
 	<a>
-		<img align="center" src="https://user-images.githubusercontent.com/30152047/183250401-9f2898dd-feb4-4903-802c-c9d398261f11.png" />
+		<img align="center" src="https://github.com/user-attachments/assets/59da30a1-8e9b-492d-a85c-ae40a42280e8" />
 	</a>
 </p>
 
@@ -138,15 +138,15 @@
 * **[Nightly Builds](https://github.com/GreenComfyTea/MHWs-YURI-Overlay-Nightly/releases)** 
 
 # Requirements
-1. **[REFramework.NET](https://github.com/GreenComfyTea/REFramework/releases/)**;
-2. **[.NET Desktop Runtime v8.0.x](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)**.
+1. **[REFramework.NET](https://github.com/GreenComfyTea/REFramework/releases/)**
+2. **[.NET Desktop Runtime v8.0.x](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)**
 
 # How to install:
 1. Install **[REFramework.NET](https://github.com/GreenComfyTea/REFramework/releases/)**;
 2. Install **[.NET Desktop Runtime v8.0.x](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)**;
 3. Download the mod:
 	* Official release can be downloaded from here or **[Nexus Mods]([https://GreenComfyTeanexusmods.com/monsterhunterrise/mods/50](https://www.nexusmods.com/monsterhunterwilds/mods/62))**;
-	* Nightly builds are available in **[this repo](https://github.com/GreenComfyTea/MHWs-YURI-Overlay-Nightly)** and can contain broken functionality, debugging info on screen, bugs and might require the latest **[nightly build](https://github.com/praydog/REFramework-nightly/releases)** of **[REFramework.NET](https://github.com/GreenComfyTea/REFramework/releases/)**. Use with caution!
+	* Nightly builds are available in **[this repo](https://github.com/GreenComfyTea/MHWs-YURI-Overlay-Nightly)** and can contain broken functionality, debugging info on screen, bugs and might require the latest **[nightly build](https://github.com/GreenComfyTea/REFramework/releases/)** of **REFramework.NET**. Use with caution!
 4. Extract the mod from the archive and place it in `/MonsterHunterWilds/` folder.
 
 # Credits
