@@ -51,7 +51,7 @@
 		<img alt="REFramework.NET Dependency" src="https://custom-icon-badges.demolab.com/badge/dependency-REFramework.NET-green?logo=package-dependencies" />
 	</a>
 	<a href="https://GreenComfyTeanexusmods.com/monsterhunterrise/mods/26">
-		<img alt=".NET Dependency" src="https://custom-icon-badges.demolab.com/badge/dependency-.NET%20Desktop%20Runtime%20v8.0.x-green?logo=package-dependencies" />
+		<img alt=".NET Dependency" src="https://custom-icon-badges.demolab.com/badge/dependency-.NET%20Desktop%20Runtime%208.0.x-green?logo=package-dependencies" />
 	</a>
 	<br>
 	<br>
@@ -139,11 +139,11 @@
 
 # Requirements
 1. **[REFramework.NET](https://github.com/GreenComfyTea/REFramework/releases/)**
-2. **[.NET Desktop Runtime v8.0.x](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)**
+2. **[.NET Desktop Runtime 8.0.x](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)**
 
 # How to install:
 1. Install **[REFramework.NET](https://github.com/GreenComfyTea/REFramework/releases/)**;
-2. Install **[.NET Desktop Runtime v8.0.x](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)**;
+2. Install **[.NET Desktop Runtime 8.0.x](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)**;
 3. Download the mod:
 	* Official release can be downloaded from here or **[Nexus Mods]([https://GreenComfyTeanexusmods.com/monsterhunterrise/mods/50](https://www.nexusmods.com/monsterhunterwilds/mods/62))**;
 	* Nightly builds are available in **[this repo](https://github.com/GreenComfyTea/MHWs-YURI-Overlay-Nightly)** and can contain broken functionality, debugging info on screen, bugs and might require the latest **[nightly build](https://github.com/GreenComfyTea/REFramework/releases/)** of **REFramework.NET**. Use with caution!
