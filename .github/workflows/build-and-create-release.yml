@@ -20,9 +20,7 @@ jobs:
         contents: write
         deployments : write
         discussions: read
-        id-token: read
         issues: read
-        metadata: write
         packages: write
         pages: write
         pull-requests: write
