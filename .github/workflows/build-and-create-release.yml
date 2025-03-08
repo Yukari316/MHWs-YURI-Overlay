@@ -30,7 +30,7 @@ jobs:
       
     - name: Zip the Build
       run: |
-        cd /home/runner/work/MHWs-YURI-Overlay/MHWs-YURI-Overlay/bin/reframework/plugins/managed/ && zip -r YURI_Overlay.zip *
+        cd /home/runner/work/MHWs-YURI-Overlay/MHWs-YURI-Overlay/bin/reframework/plugins/managed/ && zip -r YURI_Overlay.zip -- *
 
     - name: Expose Commit Data
       uses: rlespinasse/git-commit-data-action@v1
