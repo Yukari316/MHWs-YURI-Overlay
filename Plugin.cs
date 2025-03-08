@@ -67,13 +67,13 @@ public class Plugin
 			cameraManager.Initialize();
 			monsterManager.Initialize();
 
-			IsInitialized = true;
-
 			LogManager.Info("Managers: Initialized!");
 			LogManager.Info("Callbacks: Initializing...");
 
 			REFrameworkNET.Callbacks.ImGuiRender.Post += OnImGuiRender;
 			REFrameworkNET.Callbacks.Initialize.Post += () => LogManager.Info("INIT POST");
+
+			IsInitialized = true;
 
 			LogManager.Info("Callbacks: Initialized!");
 		}
@@ -86,28 +86,41 @@ public class Plugin
 
 	private static void OnImGuiRender()
 	{
+		if(!IsInitialized) return;
+
 		try
 		{
-			if(!IsInitialized)
-			{
-				return;
-			}
+			ScreenManager.Instance.FrameUpdate();
+		}
+		catch(Exception exception)
+		{
+			LogManager.Error(exception);
+		}
 
+		try
+		{
+			ScreenManager.Instance.FrameUpdate();
+		}
+		catch(Exception exception)
+		{
+			LogManager.Error(exception);
+		}
+
+		try
+		{
 			var imGuiManager = ImGuiManager.Instance;
 
-			if(ImGui.IsKeyPressed(ImGuiKey.Home))
-			{
-				imGuiManager.IsOpened = !imGuiManager.IsOpened;
-			}
+			if(ImGui.IsKeyPressed(ImGuiKey.Home)) imGuiManager.IsOpened = !imGuiManager.IsOpened;
+			if(imGuiManager.IsOpened) ImGuiManager.Instance.Draw();
+		}
+		catch(Exception exception)
+		{
+			LogManager.Error(exception);
+		}
 
-			ScreenManager.Instance.FrameUpdate();
-
+		try
+		{
 			OverlayManager.Instance.Draw();
-
-			if(imGuiManager.IsOpened)
-			{
-				ImGuiManager.Instance.Draw();
-			}
 		}
 		catch(Exception exception)
 		{
