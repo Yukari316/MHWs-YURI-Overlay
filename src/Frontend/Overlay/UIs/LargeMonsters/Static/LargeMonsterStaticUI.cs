@@ -22,16 +22,11 @@ internal sealed class LargeMonsterStaticUi
 	public void Draw(ImDrawListPtr backgroundDrawList, int locationIndex)
 	{
 		var customization = _customizationAccessor();
-		var settings = customization.Settings;
-
-		if(settings.HideDeadOrCaptured && !_largeMonster.IsAlive)
-		{
-			return;
-		}
 
 		var spacing = customization.Spacing;
 
 		var anchoredPosition = customization.Position;
+		// TODO: Can be cached
 		var position = AnchorPositionCalculator.Convert(anchoredPosition);
 
 		position.X += spacing.X * locationIndex;

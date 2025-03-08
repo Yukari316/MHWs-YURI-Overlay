@@ -1,12 +1,11 @@
-﻿using System.Numerics;
-
-using ImGuiNET;
+﻿using ImGuiNET;
 
 namespace YURI_Overlay;
 
 internal sealed class LargeMonsterUiManager : IDisposable
 {
 
+	private List<LargeMonster> _dynamicLargeMonsters = [];
 	private List<LargeMonster> _staticLargeMonsters = [];
 
 	private System.Timers.Timer _updateTimer;
@@ -23,29 +22,67 @@ internal sealed class LargeMonsterUiManager : IDisposable
 
 	public void Initialize()
 	{
-		LogManager.Info("LargeMonsterUIManager: Initializing...");
+		LogManager.Info("[LargeMonsterUIManager] Initializing...");
 
 		_updateTimer = Timers.SetInterval(Update, 100);
 
-		LogManager.Info("LargeMonsterUIManager: Initialized!");
+		LogManager.Info("[LargeMonsterUIManager] Initialized!");
 	}
 
 	public void Update()
 	{
-		//UpdateDynamic();
+		UpdateDynamic();
 		UpdateStatic();
 	}
 
 	public void Draw(ImDrawListPtr backgroundDrawList)
 	{
+		UpdateAllDistances();
 		DrawDynamicUi(backgroundDrawList);
 		DrawStaticUi(backgroundDrawList);
 	}
+
 	public void Dispose()
 	{
-		LogManager.Info($"LargeMonsterUIManager: Disposing...");
+		LogManager.Info($"[LargeMonsterUIManager] Disposing...");
 		_updateTimer.Dispose();
-		LogManager.Info($"LargeMonsterUIManager: Disposed!");
+		LogManager.Info($"[LargeMonsterUIManager] Disposed!");
+	}
+
+	private void UpdateAllDistances()
+	{
+		foreach(var largeMonsterPair in MonsterManager.Instance.LargeMonsters)
+		{
+			var largeMonster = largeMonsterPair.Value;
+
+			largeMonster.UpdateDistance();
+		}
+	}
+
+	private void UpdateDynamic()
+	{
+		var config = ConfigManager.Instance.ActiveConfig.Data.LargeMonsterUI.Dynamic;
+		var settings = config.Settings;
+
+		List<LargeMonster> newLargeMonsters = [];
+
+		// Filter out dead and captured
+
+		foreach(var largeMonsterPair in MonsterManager.Instance.LargeMonsters)
+		{
+			var largeMonster = largeMonsterPair.Value;
+
+			if(!settings.RenderDeadOrCaptured && !largeMonster.IsAlive) continue;
+			if(settings.MaxDistance > 0f && largeMonster.Distance > settings.MaxDistance) continue;
+
+			newLargeMonsters.Add(largeMonster);
+		}
+
+		// Sort by distance
+		// Closest are drawn last
+		newLargeMonsters.Sort(LargeMonsterSorting.CompareByDistanceReversed);
+
+		_dynamicLargeMonsters = newLargeMonsters;
 	}
 
 	private void UpdateStatic()
@@ -60,14 +97,9 @@ internal sealed class LargeMonsterUiManager : IDisposable
 		{
 			var largeMonster = largeMonsterPair.Value;
 
-			if(config.Settings.HideDeadOrCaptured && !largeMonster.IsAlive)
-			{
-				continue;
-			}
+			if(!config.Settings.RenderDeadOrCaptured && !largeMonster.IsAlive) continue;
 
 			newLargeMonsters.Add(largeMonster);
-
-			largeMonster.UpdateDistance();
 		}
 
 		// Sort
@@ -132,17 +164,11 @@ internal sealed class LargeMonsterUiManager : IDisposable
 
 		if(!customization.Enabled) return;
 
-		var bar = new BarElement();
-
-		for(var locationIndex = 0; locationIndex < _staticLargeMonsters.Count; locationIndex++)
+		for(var locationIndex = 0; locationIndex < _dynamicLargeMonsters.Count; locationIndex++)
 		{
 			var largeMonster = _staticLargeMonsters[locationIndex];
 
-			largeMonster.UpdateScreenPosition();
-
-			if(largeMonster.ScreenPosition == null) continue;
-
-			bar.Draw(backgroundDrawList, (Vector2) largeMonster.ScreenPosition, largeMonster.HealthPercentage);
+			largeMonster.DynamicUi.Draw(backgroundDrawList);
 		}
 	}
 
@@ -154,7 +180,9 @@ internal sealed class LargeMonsterUiManager : IDisposable
 
 		for(var locationIndex = 0; locationIndex < _staticLargeMonsters.Count; locationIndex++)
 		{
-			_staticLargeMonsters[locationIndex].StaticUi.Draw(backgroundDrawList, locationIndex);
+			var largeMonster = _staticLargeMonsters[locationIndex];
+
+			largeMonster.StaticUi.Draw(backgroundDrawList, locationIndex);
 		}
 	}
 }

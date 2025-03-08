@@ -31,7 +31,7 @@ public class Plugin
 	[PluginExitPoint]
 	public static void Unload()
 	{
-		LogManager.Info("Managers: Disposing...");
+		LogManager.Info("[Managers]  Disposing...");
 
 		ConfigManager.Instance.Dispose();
 		LocalizationManager.Instance.Dispose();
@@ -39,14 +39,14 @@ public class Plugin
 
 		API.LocalFrameGC();
 
-		LogManager.Info("Managers: Disposed!");
+		LogManager.Info("[Managers]  Disposed!");
 	}
 
 	private static void Init()
 	{
 		try
 		{
-			LogManager.Info("Managers: Initializing...");
+			LogManager.Info("[Managers]  Initializing...");
 
 			var configManager = ConfigManager.Instance;
 			var localizationManager = LocalizationManager.Instance;
@@ -68,7 +68,7 @@ public class Plugin
 			cameraManager.Initialize();
 			monsterManager.Initialize();
 
-			LogManager.Info("Managers: Initialized!");
+			LogManager.Info("[Managers]  Initialized!");
 			LogManager.Info("Callbacks: Initializing...");
 
 			REFrameworkNET.Callbacks.ImGuiRender.Post += OnImGuiRender;

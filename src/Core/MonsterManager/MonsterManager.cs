@@ -33,12 +33,12 @@ internal sealed class MonsterManager : IDisposable
 	{
 		try
 		{
-			LogManager.Info("MonsterManager: Initializing...");
+			LogManager.Info("[MonsterManager] Initializing...");
 
 			InitializeTdb();
 			Hook();
 
-			LogManager.Info("MonsterManager: Initialized!");
+			LogManager.Info("[MonsterManager] Initialized!");
 		}
 		catch(Exception exception)
 		{
@@ -48,11 +48,11 @@ internal sealed class MonsterManager : IDisposable
 
 	public void Dispose()
 	{
-		LogManager.Info($"MonsterManager: Disposing...");
+		LogManager.Info($"[MonsterManager] Disposing...");
 
 		preDoUpdateEndHook.Dispose();
 
-		LogManager.Info($"MonsterManager: Disposed!");
+		LogManager.Info($"[MonsterManager] Disposed!");
 	}
 
 	private void InitializeTdb()
@@ -83,7 +83,7 @@ internal sealed class MonsterManager : IDisposable
 	{
 		try
 		{
-			LogManager.Info("MonsterManager: Hooking...");
+			LogManager.Info("[MonsterManager] Hooking...");
 
 
 			preDoUpdateEndHook = doUpdateEnd_Method.AddHook(false);
@@ -92,7 +92,7 @@ internal sealed class MonsterManager : IDisposable
 			preDoOnDestroyHook = doOnDestroy_Method.AddHook(false);
 			preDoOnDestroyHook.AddPre(OnPreDoDestroy);
 
-			LogManager.Info("MonsterManager: Hooked!");
+			LogManager.Info("[MonsterManager] Hooked!");
 		}
 		catch(Exception exception)
 		{

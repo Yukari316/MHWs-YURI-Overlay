@@ -19,7 +19,7 @@ internal class LargeMonsterUiCustomization : Customization
 
 		if(ImGui.TreeNode($"{localization.LargeMonstersUi}##{customizationName}"))
 		{
-			//isChanged |= Dynamic.RenderImGui(customizationName);
+			isChanged |= Dynamic.RenderImGui(customizationName);
 			isChanged |= Static.RenderImGui(customizationName);
 
 			ImGui.TreePop();

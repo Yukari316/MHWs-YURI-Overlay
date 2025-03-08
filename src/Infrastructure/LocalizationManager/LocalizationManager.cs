@@ -25,7 +25,7 @@ internal sealed partial class LocalizationManager : IDisposable
 
 	public void Initialize()
 	{
-		LogManager.Info("LocalizationManager: Initializing...");
+		LogManager.Info("[LocalizationManager] Initializing...");
 
 		var configManager = ConfigManager.Instance;
 
@@ -37,43 +37,43 @@ internal sealed partial class LocalizationManager : IDisposable
 		_localizationWatcherInstance = new LocalizationWatcher();
 		Customization = new LocalizationCustomization();
 
-		LogManager.Info("LocalizationManager: Initialized!");
+		LogManager.Info("[LocalizationManager] Initialized!");
 	}
 
 	public void ActivateLocalization(JsonDatabase<Localization> localization)
 	{
-		LogManager.Info($"LocalizationManager: Activating localization \"{localization.Name}\"...");
+		LogManager.Info($"[LocalizationManager] Activating localization \"{localization.Name}\"...");
 
 		ActiveLocalization = localization;
 
 		EmitActiveLocalizationChanged();
 
-		LogManager.Info($"LocalizationManager: Localization \"{localization.Name}\" is activated!");
+		LogManager.Info($"[LocalizationManager] Localization \"{localization.Name}\" is activated!");
 	}
 
 	public void ActivateLocalization(string name)
 	{
-		LogManager.Info($"LocalizationManager: Searching for localization \"{name}\" to activate it...");
+		LogManager.Info($"[LocalizationManager] Searching for localization \"{name}\" to activate it...");
 
 		var isGetConfigSuccess = Localizations.TryGetValue(name, out var localization);
 
 		if(!isGetConfigSuccess)
 		{
-			LogManager.Info($"LocalizationManager: localization \"{name}\" is not found.");
-			LogManager.Info("LocalizationManager: Activating default localization...");
+			LogManager.Info($"[LocalizationManager] localization \"{name}\" is not found.");
+			LogManager.Info("[LocalizationManager] Activating default localization...");
 
 			ActivateLocalization(DefaultLocalization);
 			return;
 		}
 
-		LogManager.Info($"LocalizationManager: Localization \"{name}\" is found!");
+		LogManager.Info($"[LocalizationManager] Localization \"{name}\" is found!");
 
 		ActivateLocalization(localization);
 	}
 
 	public void InitializeLocalization(string name)
 	{
-		LogManager.Info($"LocalizationManager: Initializing localization \"{name}\"...");
+		LogManager.Info($"[LocalizationManager] Initializing localization \"{name}\"...");
 
 		JsonDatabase<Localization> newLocalization = new(Constants.LocalizationsPath, name);
 		newLocalization.Data.IsoCode = name;
@@ -87,12 +87,12 @@ internal sealed partial class LocalizationManager : IDisposable
 
 		Localizations[name] = newLocalization;
 
-		LogManager.Info($"LocalizationManager: Localization \"{name}\" is initialized!");
+		LogManager.Info($"[LocalizationManager] Localization \"{name}\" is initialized!");
 	}
 
 	public void Dispose()
 	{
-		LogManager.Info("LocalizationManager: Disposing...");
+		LogManager.Info("[LocalizationManager] Disposing...");
 
 		_localizationWatcherInstance?.Dispose();
 
@@ -101,12 +101,12 @@ internal sealed partial class LocalizationManager : IDisposable
 			localization.Value?.Dispose();
 		}
 
-		LogManager.Info("LocalizationManager: Disposed!");
+		LogManager.Info("[LocalizationManager] Disposed!");
 	}
 
 	private void InitializeDefaultLocalization()
 	{
-		LogManager.Info("LocalizationManager: Initializing default localization...");
+		LogManager.Info("[LocalizationManager] Initializing default localization...");
 
 		JsonDatabase<Localization> defaultLocalization = new(Constants.LocalizationsPath, Constants.DefaultLocalization);
 		defaultLocalization.Data = new Localization();
@@ -114,14 +114,14 @@ internal sealed partial class LocalizationManager : IDisposable
 		Localizations[Constants.DefaultLocalization] = defaultLocalization;
 		this.DefaultLocalization = defaultLocalization;
 
-		LogManager.Info("LocalizationManager: Default localization is initialized!");
+		LogManager.Info("[LocalizationManager] Default localization is initialized!");
 	}
 
 	private void LoadAllLocalizations()
 	{
 		try
 		{
-			LogManager.Info("LocalizationManager: Loading all localizations...");
+			LogManager.Info("[LocalizationManager] Loading all localizations...");
 
 			Directory.CreateDirectory(Path.GetDirectoryName(Constants.LocalizationsPath)!);
 
@@ -141,7 +141,7 @@ internal sealed partial class LocalizationManager : IDisposable
 
 			InitializeDefaultLocalization();
 
-			LogManager.Info("LocalizationManager: Loading all localizations is done!");
+			LogManager.Info("[LocalizationManager] Loading all localizations is done!");
 		}
 		catch(Exception exception)
 		{
@@ -163,37 +163,37 @@ internal sealed partial class LocalizationManager : IDisposable
 
 	private void OnLocalizationFileChanged(object sender, EventArgs eventArgs)
 	{
-		LogManager.Info("LocalizationManager: Localization file changed.");
+		LogManager.Info("[LocalizationManager] Localization file changed.");
 		EmitAnyLocalizationChanged();
 	}
 
 	private void OnLocalizationFileCreated(object sender, EventArgs eventArgs)
 	{
-		LogManager.Info("LocalizationManager: Localization file created.");
+		LogManager.Info("[LocalizationManager] Localization file created.");
 		EmitAnyLocalizationChanged();
 	}
 
 	private void OnLocalizationFileRenamedFrom(object sender, EventArgs eventArgs)
 	{
-		LogManager.Info("LocalizationManager: Localization file renamed from.");
+		LogManager.Info("[LocalizationManager] Localization file renamed from.");
 		EmitAnyLocalizationChanged();
 	}
 
 	private void OnLocalizationFileRenamedTo(object sender, EventArgs eventArgs)
 	{
-		LogManager.Info("LocalizationManager: Localization file renamed to.");
+		LogManager.Info("[LocalizationManager] Localization file renamed to.");
 		EmitAnyLocalizationChanged();
 	}
 
 	private void OnLocalizationFileDeleted(object sender, EventArgs eventArgs)
 	{
-		LogManager.Info("LocalizationManager: Localization file deleted.");
+		LogManager.Info("[LocalizationManager] Localization file deleted.");
 		EmitAnyLocalizationChanged();
 	}
 
 	private void OnLocalizationFileError(object sender, EventArgs eventArgs)
 	{
-		LogManager.Info("LocalizationManager: Localization file throw an error.");
+		LogManager.Info("[LocalizationManager] Localization file throw an error.");
 	}
 
 	private void EmitActiveLocalizationChanged()

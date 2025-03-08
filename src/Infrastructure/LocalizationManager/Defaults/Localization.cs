@@ -89,9 +89,11 @@ internal class ImGuiLocalization
 	public string Position = "Position";
 
 	public string Enabled = "Enabled";
-	public string HideDeadOrCaptured = "Hide Dead or Captured";
+	public string RenderDeadOrCaptured = "Render Dead or Captured";
 	public string RenderHighlightedMonster = "Render Highlighted Monster";
-	public string RenderNotHighlightedMonsters = "Render Not Highlighted Monsters";
+	public string RenderNotHighlightedMonsters = "Render Non-highlighted Monsters";
+	public string AddMissionBeaconOffsetToWorldOffset = "Add Mission Beacon Offset to World Offset";
+	public string AddModelRadiusToWorldOffsetY = "Add Model Radius to World Offset Y";
 	public string OpacityFalloff = "Opacity Falloff";
 	public string MaxDistance = "Max Distance";
 	public string WorldOffset = "World Offset";
@@ -129,6 +131,8 @@ internal class ImGuiLocalization
 	public string Performance = "Performance";
 	public string UpdateDelaySeconds = "Update Delay (seconds)";
 	public string CalculationCaching = "Calculation Caching";
+
+
 }
 
 internal class Localization

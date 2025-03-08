@@ -19,9 +19,9 @@ internal sealed class WorldOffsetCustomization : Customization
 
 		if(ImGui.TreeNode($"{localization.WorldOffset}##${customizationName}"))
 		{
-			isChanged |= ImGui.DragFloat($"{localization.X}##${customizationName}", ref X, 0.1f, -4096f, 4096f, "%.1f");
-			isChanged |= ImGui.DragFloat($"{localization.Y}##${customizationName}", ref Y, 0.1f, -4096f, 4096f, "%.1f");
-			isChanged |= ImGui.DragFloat($"{localization.Z}##${customizationName}", ref Z, 0.1f, -4096f, 4096f, "%.1f");
+			isChanged |= ImGui.DragFloat($"{localization.X}##${customizationName}", ref X, 0.001f, -4096f, 4096f, "%.3f");
+			isChanged |= ImGui.DragFloat($"{localization.Y}##${customizationName}", ref Y, 0.001f, -4096f, 4096f, "%.3f");
+			isChanged |= ImGui.DragFloat($"{localization.Z}##${customizationName}", ref Z, 0.001f, -4096f, 4096f, "%.3f");
 
 			ImGui.TreePop();
 		}

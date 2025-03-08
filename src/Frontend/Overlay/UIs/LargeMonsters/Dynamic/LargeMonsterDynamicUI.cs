@@ -1,4 +1,6 @@
-﻿using ImGuiNET;
+﻿using System.Numerics;
+
+using ImGuiNET;
 
 namespace YURI_Overlay;
 
@@ -24,33 +26,31 @@ internal sealed class LargeMonsterDynamicUi
 		var customization = _customizationAccessor();
 		var settings = customization.Settings;
 
-		if(settings.HideDeadOrCaptured && !_largeMonster.IsAlive)
-		{
-			return;
-		}
+		var monsterPosition = _largeMonster.Position;
+		var worldOffset = customization.WorldOffset;
 
-		//_largeMonster.UpdateDistance();
+		var targetWorldPosition = new Vector3(
+			monsterPosition.X + worldOffset.X + _largeMonster.MissionBeaconOffset.X,
+			monsterPosition.Y + worldOffset.Y + _largeMonster.MissionBeaconOffset.Y,
+			monsterPosition.Z + worldOffset.Z + _largeMonster.MissionBeaconOffset.Z
+		);
 
-		//if(settings.maxDistance > 0f && _largeMonster.distance > settings.maxDistance) return;
+		var (maybeScreenPosition, _) = ScreenManager.Instance.ConvertWorldPositionToScreenPosition(targetWorldPosition);
 
-		//var monsterPosition = _largeMonster.monsterRef.Position;
-		//var worldOffset = customization.worldOffset;
+		// Not on screen
+		if(maybeScreenPosition == null) return;
 
-		//var targetWorldPosition = new Vector3(
-		//	monsterPosition.X + worldOffset.x,
-		//	monsterPosition.Y + worldOffset.y,
-		//	monsterPosition.Z + worldOffset.z
-		//);
+		var opacityScale =
+			settings.OpacityFalloff && settings.MaxDistance > 0f
+			? (settings.MaxDistance - _largeMonster.Distance) / settings.MaxDistance
+			: 1f;
 
-		//var isOnScreen = CameraSystem.MainViewport.WorldToScreen(targetWorldPosition, out var screenPosition);
+		var screenPosition = (Vector2) maybeScreenPosition;
 
-		//if(!isOnScreen) return;
+		screenPosition.X += customization.Offset.X;
+		screenPosition.Y += customization.Offset.Y;
 
-		//LogManager.Info($"{_largeMonster.monsterRef.Name}:{_largeMonster.distance}");
-
-		//var opacityScale = settings.maxDistance > 0f ? (settings.maxDistance - _largeMonster.distance) / settings.maxDistance : 1f;
-
-		//_healthComponent.Draw(backgroundDrawList, screenPosition, opacityScale);
-		//_nameLabelElement.Draw(backgroundDrawList, screenPosition, opacityScale, _largeMonster.monsterRef.Name);
+		_healthComponent.Draw(backgroundDrawList, screenPosition, opacityScale);
+		_nameLabelElement.Draw(backgroundDrawList, screenPosition, opacityScale, _largeMonster.Name);
 	}
 }
