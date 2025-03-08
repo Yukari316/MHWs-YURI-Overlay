@@ -134,41 +134,41 @@
 	</a>
 </p>
 
-# Links
+## Links
 * **[Nexus Mods](https://nexusmods.com/monsterhunterwilds/mods/62)**  
 * **[Nightly Builds](https://github.com/GreenComfyTea/MHWs-YURI-Overlay-Nightly/releases)** 
 
-# Requirements
+## Requirements
 1. **[REFramework.NET](https://github.com/GreenComfyTea/REFramework/releases/)**
 2. **[.NET Desktop Runtime 8.0.x](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)**
 
-# How to install:
+## How to install:
 1. Install **[REFramework.NET](https://github.com/GreenComfyTea/REFramework/releases/)**;
 2. Install **[.NET Desktop Runtime 8.0.x](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)**;
 3. Download the mod:
-	* Official release can be downloaded from here or **[Nexus Mods]([https://GreenComfyTeanexusmods.com/monsterhunterrise/mods/50](https://www.nexusmods.com/monsterhunterwilds/mods/62))**;
-	* Nightly builds are available **[here](https://github.com/GreenComfyTea/MHWs-YURI-Overlay-Nightly)** and can contain broken functionality, debugging info on screen, bugs and might require the latest **[nightly build](https://github.com/GreenComfyTea/REFramework/releases/)** of **REFramework.NET**. Use with caution!
+	>**:pushpin: NOTE:** Official release can be downloaded from here or **[Nexus Mods]([https://GreenComfyTeanexusmods.com/monsterhunterrise/mods/50](https://www.nexusmods.com/monsterhunterwilds/mods/62))**;
+	>**:pushpin: NOTE:** Nightly builds are available **[here](https://github.com/GreenComfyTea/MHWs-YURI-Overlay-Nightly)** and can contain broken functionality, debugging info on screen, bugs and might require the latest **[nightly build](https://github.com/GreenComfyTea/REFramework/releases/)** of **REFramework.NET**. Use with caution!
 4. Extract the mod from the archive and place it in `/MonsterHunterWilds/` folder.
 
-# Credits
+## Credits
 **[GreenComfyTea](https://github.com/GreenComfyTea)** - creator of the mod and it's main contributor.  
 **[cursey](https://github.com/cursey)** - creator of [REFramework.NET](https://GreenComfyTeanexusmods.com/monsterhunterrise/mods/26).  
 **[praydog](https://github.com/praydog)** - contributor of [REFramework](https://GreenComfyTeanexusmods.com/monsterhunterrise/mods/26).
 
-# Roadmap
-1. vx.0.x - Large Monster Static UI
-2. vx.1.x - Large Monster Dynamic UI, Large Monster Stamina, Large Monster Rage, Small Monster UI (Dynamic)
-3. vx.2.x - Large Monster Highlighted UI, Font Management + Unicode Support
-4. vx.3.x - Damage Meter UI
-1. vx.4.x - Image Support, Monster Icons, Weapon Icons, Crown Icons
-1. vx.5.x - Endemic Life UI
-1. vx.6.x - Large Monster UI Body Parts + Weak points
-1. vx.7.x - Large Monster UI Ailments
-1. vx.8.x - Stats UI
-1. vx.9.x - Player Buffs UI (Buffs, Debuffs, Song Timers)
+## Roadmap
+1. `vx.0.x` - Large Monster Static UI
+2. `vx.1.x` - Large Monster Dynamic UI, Large Monster Stamina, Large Monster Rage, Small Monster UI (Dynamic)
+3. `vx.2.x` - Large Monster Highlighted UI, Font Management + Unicode Support
+4. `vx.3.x` - Damage Meter UI
+1. `vx.4.x` - Image Support, Monster Icons, Weapon Icons, Crown Icons
+1. `vx.5.x` - Endemic Life UI
+1. `vx.6.x` - Large Monster UI Body Parts + Weak points
+1. `vx.7.x` - Large Monster UI Ailments
+1. `vx.8.x` - Stats UI
+1. `vx.9.x` - Player Buffs UI (Buffs, Debuffs, Song Timers)
 
 ***
-# Support
+## Support
 
 You can support me by donating! I would appreciate it! But anyway, thank you for using this mod!
 
