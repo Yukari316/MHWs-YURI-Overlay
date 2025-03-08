@@ -12,7 +12,23 @@ on:
 jobs:
   build-and-create-pre-release:
     runs-on: ubuntu-latest
-
+    
+    permissions:
+        actions: read/write
+        attestations: read/write
+        checks: read/write
+        contents: read/write
+        deployments : read/write
+        discussions: read/write
+        id-token: read/write
+        issues: read/write
+        metadata: read/write
+        packages: read/write
+        pages: read/write
+        pull-requests: read/write
+        repository-projects: read/write
+        security-events: read/write
+    
     steps:
     - name: Checkout
       uses: actions/checkout@v4
