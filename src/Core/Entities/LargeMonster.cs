@@ -9,6 +9,7 @@ namespace YURI_Overlay;
 internal sealed class LargeMonster
 {
 	public ManagedObject EnemyCharacter;
+	public ManagedObject _Em;
 
 	public string Name = "Large Monster";
 	public int Id = -1;
@@ -16,6 +17,7 @@ internal sealed class LargeMonster
 	public int LegendaryId = -1;
 
 	public Vector3 Position = Vector3.Zero;
+	public Vector2? ScreenPosition = null;
 	public float Distance = 0f;
 	public float Health = -1;
 	public float MaxHealth = -1;
@@ -31,7 +33,6 @@ internal sealed class LargeMonster
 
 
 	private Method NameString_Method;
-	private Method get_Pos_Method;
 
 	private Method get_HealthMgr_Method;
 	private Method get_Health_Method;
@@ -43,6 +44,7 @@ internal sealed class LargeMonster
 	private Field EmID_Field;
 	private Field RoleID_Field;
 	private Field LegendaryID_Field;
+	private Field ModelCenterPos_Field;
 	private Field x_Field;
 	private Field y_Field;
 	private Field z_Field;
@@ -71,37 +73,53 @@ internal sealed class LargeMonster
 	{
 		try
 		{
-			var pos = (ValueType) get_Pos_Method.InvokeBoxed(vec3_Type, EnemyCharacter, []);
+			// Can't cash for something reason :(
+			var pos = (ValueType) _Em.GetField("ModelCenterPos");
+			//var pos = (ValueType) ModelCenterPos_Field.GetDataBoxed(vec3_Type, (ulong) _Em.Ptr(), true);
 			if(pos == null)
 			{
-				LogManager.Info("[LargeMonster.UpdatePosition] No enemy pos");
+				LogManager.Warn("[LargeMonster.UpdatePosition] No enemy pos");
 				return;
 			}
 
-			var x = (float?) x_Field.GetDataBoxed((ulong) pos.Ptr(), false);
+			var x = (float?) x_Field.GetDataBoxed((ulong) pos.Ptr(), true);
 			if(x == null)
 			{
-				LogManager.Info("[LargeMonster.UpdatePosition] No enemy pos x");
+				LogManager.Warn("[LargeMonster.UpdatePosition] No enemy pos x");
 				return;
 			}
 
-			var y = (float?) y_Field.GetDataBoxed((ulong) pos.Ptr(), false);
+			var y = (float?) y_Field.GetDataBoxed((ulong) pos.Ptr(), true);
 			if(y == null)
 			{
-				LogManager.Info("[LargeMonster.UpdatePosition] No enemy pos y");
+				LogManager.Warn("[LargeMonster.UpdatePosition] No enemy pos y");
 				return;
 			}
 
-			var z = (float?) z_Field.GetDataBoxed((ulong) pos.Ptr(), false);
+			var z = (float?) z_Field.GetDataBoxed((ulong) pos.Ptr(), true);
 			if(z == null)
 			{
-				LogManager.Info("[LargeMonster.UpdatePosition] No enemy pos z");
+				LogManager.Warn("[LargeMonster.UpdatePosition] No enemy pos z");
 				return;
 			}
 
 			Position.X = (float) x;
 			Position.Y = (float) y;
 			Position.Z = (float) z;
+		}
+		catch(Exception exception)
+		{
+			LogManager.Error(exception);
+		}
+	}
+
+	public void UpdateScreenPosition()
+	{
+		try
+		{
+			ScreenPosition = ScreenManager.Instance.WorldToScreen(Position);
+
+			LogManager.Info($"[LargeMonster.UpdateScreenPosition] {Name}: {Position.X:F5} {Position.Y:F5} {Position.Z:F5} -> {ScreenPosition?.X:F1} {ScreenPosition?.Y:F1}");
 		}
 		catch(Exception exception)
 		{
@@ -122,21 +140,21 @@ internal sealed class LargeMonster
 			var healthManager = (ManagedObject) get_HealthMgr_Method.InvokeBoxed(chealthManager_Type, EnemyCharacter, []);
 			if(healthManager == null)
 			{
-				LogManager.Info("[LargeMonster.UpdateHealth] No health manager");
+				LogManager.Warn("[LargeMonster.UpdateHealth] No health manager");
 				return;
 			}
 
 			var health = (float?) get_Health_Method.InvokeBoxed(Single_Type, healthManager, []);
 			if(health == null)
 			{
-				LogManager.Info("[LargeMonster.UpdateHealth] No health");
+				LogManager.Warn("[LargeMonster.UpdateHealth] No health");
 				return;
 			}
 
 			var maxHealth = (float?) get_MaxHealth_Method.InvokeBoxed(Single_Type, healthManager, []);
 			if(maxHealth == null || Utils.IsApproximatelyEqual((float) maxHealth, 0f))
 			{
-				LogManager.Info("[LargeMonster.UpdateHealth] No max health");
+				LogManager.Warn("[LargeMonster.UpdateHealth] No max health");
 				return;
 			}
 
@@ -180,9 +198,9 @@ internal sealed class LargeMonster
 
 			String_Type = NameString_Method.ReturnType.GetType();
 
-			get_Pos_Method = EnemyCharacter_TypeDef.GetMethod("get_Pos");
+			ModelCenterPos_Field = enemyContext_TypeDef.GetField("ModelCenterPos");
 
-			var vec3_TypeDef = get_Pos_Method.ReturnType;
+			var vec3_TypeDef = ModelCenterPos_Field.GetType();
 			vec3_Type = vec3_TypeDef.GetType();
 
 			x_Field = vec3_TypeDef.GetField("x");
@@ -210,49 +228,49 @@ internal sealed class LargeMonster
 			var _Context = (ManagedObject) _Context_Field.GetDataBoxed((ulong) EnemyCharacter.Ptr(), false);
 			if(_Context == null)
 			{
-				LogManager.Info("[LargeMonster.Initialize] No enemy context holder");
+				LogManager.Warn("[LargeMonster.Initialize] No enemy context holder");
 				return;
 			}
 
-			var _Em = (ManagedObject) _Em_Field.GetDataBoxed((ulong) _Context.Ptr(), false);
+			_Em = (ManagedObject) _Em_Field.GetDataBoxed((ulong) _Context.Ptr(), false);
 			if(_Em == null)
 			{
-				LogManager.Info("[LargeMonster.Initialize] No enemy context");
+				LogManager.Warn("[LargeMonster.Initialize] No enemy context");
 				return;
 			}
 
 			var Basic = (ManagedObject) Basic_Field.GetDataBoxed((ulong) _Em.Ptr(), false);
 			if(Basic == null)
 			{
-				LogManager.Info("[LargeMonster.Initialize] No enemy basic module");
+				LogManager.Warn("[LargeMonster.Initialize] No enemy basic module");
 				return;
 			}
 
 			var EmID = (int?) EmID_Field.GetDataBoxed((ulong) Basic.Ptr(), false);
 			if(EmID == null)
 			{
-				LogManager.Info("[LargeMonster.Initialize] No enemy Id");
+				LogManager.Warn("[LargeMonster.Initialize] No enemy Id");
 				return;
 			}
 
 			var RoleID = (int?) RoleID_Field.GetDataBoxed((ulong) Basic.Ptr(), false);
 			if(RoleID == null)
 			{
-				LogManager.Info("[LargeMonster.Initialize] No enemy role Id");
+				LogManager.Warn("[LargeMonster.Initialize] No enemy role Id");
 				return;
 			}
 
 			var LegendaryID = (int?) LegendaryID_Field.GetDataBoxed((ulong) Basic.Ptr(), false);
 			if(LegendaryID == null)
 			{
-				LogManager.Info("[LargeMonster.Initialize] No enemy legendary Id");
+				LogManager.Warn("[LargeMonster.Initialize] No enemy legendary Id");
 				return;
 			}
 
 			var name = (string) NameString_Method.InvokeBoxed(String_Type, null, [EmID, RoleID, LegendaryID]);
 			if(name == null)
 			{
-				LogManager.Info("[LargeMonster.Initialize] No enemy name");
+				LogManager.Warn("[LargeMonster.Initialize] No enemy name");
 				return;
 			}
 

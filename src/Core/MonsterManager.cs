@@ -1,6 +1,4 @@
-﻿using System.Xml.Linq;
-
-using REFrameworkNET;
+﻿using REFrameworkNET;
 
 namespace YURI_Overlay;
 
@@ -113,21 +111,21 @@ internal sealed class MonsterManager : IDisposable
 			var _Context = (ManagedObject) _Context_Field.GetDataBoxed(enemyCharacterPtr, false);
 			if(_Context == null)
 			{
-				LogManager.Info("[MonsterManager.OnPreDoUpdateEnd] No enemy context holder");
+				LogManager.Warn("[MonsterManager.OnPreDoUpdateEnd] No enemy context holder");
 				return PreHookResult.Continue;
 			}
 
 			var _Em = (ManagedObject) _Em_Field.GetDataBoxed((ulong) _Context.Ptr(), false);
 			if(_Em == null)
 			{
-				LogManager.Info("[MonsterManager.OnPreDoUpdateEnd] No enemy context");
+				LogManager.Warn("[MonsterManager.OnPreDoUpdateEnd] No enemy context");
 				return PreHookResult.Continue;
 			}
 
 			var isBoss = (bool?) get_IsBoss_Method.InvokeBoxed(Boolean_Type, _Em, []);
 			if(isBoss == null)
 			{
-				LogManager.Info("[MonsterManager.OnPreDoUpdateEnd] No enemy boss type");
+				LogManager.Warn("[MonsterManager.OnPreDoUpdateEnd] No enemy boss type");
 				return PreHookResult.Continue;
 			}
 

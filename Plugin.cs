@@ -1,11 +1,13 @@
-﻿using ImGuiNET;
+﻿using System.Diagnostics.CodeAnalysis;
+
+using ImGuiNET;
 
 using REFrameworkNET;
 using REFrameworkNET.Attributes;
 
 namespace YURI_Overlay;
 
-[System.Diagnostics.CodeAnalysis.SuppressMessage("Roslynator", "RCS1102:Make class Static", Justification = "<Pending>")]
+[SuppressMessage("Roslynator", "RCS1102:Make class Static", Justification = "<Pending>")]
 public class Plugin
 {
 	public static bool IsInitialized { get; private set; }
@@ -52,6 +54,7 @@ public class Plugin
 			var imGuiManager = ImGuiManager.Instance;
 			var overlayManager = OverlayManager.Instance;
 
+			var cameraManager = ScreenManager.Instance;
 			var monsterManager = MonsterManager.Instance;
 
 			configManager.Initialize();
@@ -61,6 +64,7 @@ public class Plugin
 			imGuiManager.Initialize();
 			overlayManager.Initialize();
 
+			cameraManager.Initialize();
 			monsterManager.Initialize();
 
 			IsInitialized = true;
@@ -69,6 +73,7 @@ public class Plugin
 			LogManager.Info("Callbacks: Initializing...");
 
 			REFrameworkNET.Callbacks.ImGuiRender.Post += OnImGuiRender;
+			REFrameworkNET.Callbacks.Initialize.Post += () => LogManager.Info("INIT POST");
 
 			LogManager.Info("Callbacks: Initialized!");
 		}
@@ -77,6 +82,7 @@ public class Plugin
 			LogManager.Error(exception);
 		}
 	}
+
 
 	private static void OnImGuiRender()
 	{
@@ -93,6 +99,8 @@ public class Plugin
 			{
 				imGuiManager.IsOpened = !imGuiManager.IsOpened;
 			}
+
+			ScreenManager.Instance.FrameUpdate();
 
 			OverlayManager.Instance.Draw();
 

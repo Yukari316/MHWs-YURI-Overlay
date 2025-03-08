@@ -1,4 +1,6 @@
-﻿using ImGuiNET;
+﻿using System.Numerics;
+
+using ImGuiNET;
 
 namespace YURI_Overlay;
 
@@ -128,25 +130,27 @@ internal sealed class LargeMonsterUiManager : IDisposable
 	{
 		var customization = ConfigManager.Instance.ActiveConfig.Data.LargeMonsterUI.Dynamic;
 
-		if(!customization.Enabled)
-		{
-			return;
-		}
+		if(!customization.Enabled) return;
 
-		//foreach(var largeMonsterPair in LargeMonsterManager.Instance.LargeMonsters)
-		//{
-		//	largeMonsterPair.Value.DrawDynamic(backgroundDrawList);
-		//}
+		var bar = new BarElement();
+
+		for(var locationIndex = 0; locationIndex < _staticLargeMonsters.Count; locationIndex++)
+		{
+			var largeMonster = _staticLargeMonsters[locationIndex];
+
+			largeMonster.UpdateScreenPosition();
+
+			if(largeMonster.ScreenPosition == null) continue;
+
+			bar.Draw(backgroundDrawList, (Vector2) largeMonster.ScreenPosition, largeMonster.HealthPercentage);
+		}
 	}
 
 	private void DrawStaticUi(ImDrawListPtr backgroundDrawList)
 	{
 		var customization = ConfigManager.Instance.ActiveConfig.Data.LargeMonsterUI.Static;
 
-		if(!customization.Enabled)
-		{
-			return;
-		}
+		if(!customization.Enabled) return;
 
 		for(var locationIndex = 0; locationIndex < _staticLargeMonsters.Count; locationIndex++)
 		{

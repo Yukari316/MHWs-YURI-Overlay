@@ -1,7 +1,5 @@
 ﻿using System.Text.Json.Serialization;
 
-using ImGuiNET;
-
 namespace YURI_Overlay;
 
 internal class ColorCustomization : Customization
