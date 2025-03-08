@@ -30,10 +30,13 @@ internal sealed class LargeMonsterDynamicUi
 		var worldOffset = customization.WorldOffset;
 
 		var targetWorldPosition = new Vector3(
-			monsterPosition.X + worldOffset.X + _largeMonster.MissionBeaconOffset.X,
-			monsterPosition.Y + worldOffset.Y + _largeMonster.MissionBeaconOffset.Y,
-			monsterPosition.Z + worldOffset.Z + _largeMonster.MissionBeaconOffset.Z
+			monsterPosition.X + worldOffset.X,
+			monsterPosition.Y + worldOffset.Y,
+			monsterPosition.Z + worldOffset.Z
 		);
+
+		if(settings.AddMissionBeaconOffsetToWorldOffset) targetWorldPosition += _largeMonster.MissionBeaconOffset;
+		if(settings.AddModelRadiusToWorldOffsetY) targetWorldPosition.Y += _largeMonster.ModelRadius;
 
 		var (maybeScreenPosition, _) = ScreenManager.Instance.ConvertWorldPositionToScreenPosition(targetWorldPosition);
 
@@ -49,6 +52,8 @@ internal sealed class LargeMonsterDynamicUi
 
 		screenPosition.X += customization.Offset.X;
 		screenPosition.Y += customization.Offset.Y;
+
+
 
 		_healthComponent.Draw(backgroundDrawList, screenPosition, opacityScale);
 		_nameLabelElement.Draw(backgroundDrawList, screenPosition, opacityScale, _largeMonster.Name);

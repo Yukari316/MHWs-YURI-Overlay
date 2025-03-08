@@ -358,7 +358,8 @@ internal sealed class LargeMonster
 	{
 		try
 		{
-			var _ModelRadius = (float?) ModelRadius_Field.GetDataBoxed(Single_Type, (ulong) _Em.Ptr(), true);
+			// isValueType = false is intentional, otherwise, value is wrong
+			var _ModelRadius = (float?) ModelRadius_Field.GetDataBoxed(Single_Type, (ulong) _Em.Ptr(), false);
 			if(_ModelRadius == null)
 			{
 				LogManager.Warn("[LargeMonster.UpdateModelRadius] No enemy model radius");
@@ -366,8 +367,6 @@ internal sealed class LargeMonster
 			}
 
 			ModelRadius = (float) _ModelRadius;
-
-			LogManager.Info($"[LargeMonster.UpdateModelRadius] {ModelRadius}");
 		}
 		catch(Exception exception)
 		{
