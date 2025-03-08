@@ -98,26 +98,10 @@ internal sealed class ScreenManager
 			var screenX = (normalizedDeviceCoordinatesX + 1.0f) / 2.0f * DisplaySize.X;
 			var screenY = (1.0f - normalizedDeviceCoordinatesY) / 2.0f * DisplaySize.Y;
 
-
-			if(screenX < -_overheadX)
-			{
-				return (null, distance);
-			}
-
-			if(screenX > DisplaySize.X + _overheadX)
-			{
-				return (null, distance);
-			}
-
-			if(screenY < -_overheadY)
-			{
-				return (null, distance);
-			}
-
-			if(screenY > DisplaySize.Y + _overheadY)
-			{
-				return (null, distance);
-			}
+			if(screenX < -_overheadX) return (null, distance);
+			if(screenX > DisplaySize.X + _overheadX) return (null, distance);
+			if(screenY < -_overheadY) return (null, distance);
+			if(screenY > DisplaySize.Y + _overheadY) return (null, distance);
 
 			return (new Vector2(screenX, screenY), distance);
 		}
