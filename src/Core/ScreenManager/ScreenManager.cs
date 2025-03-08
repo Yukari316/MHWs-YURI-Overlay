@@ -55,31 +55,34 @@ internal class ScreenManager
 
 	public void Initialize()
 	{
-		LogManager.Info("[CameraHelper] Initializing...");
+		LogManager.Info("[ScreenManager] Initializing...");
 
 		InitializeTdb();
 
 		Timers.SetInterval(Update, 1000);
 
-		LogManager.Info("[CameraHelper] Initialized!");
+		LogManager.Info("[ScreenManager] Initialized!");
 	}
 
 	// worldPos2ScreenPos returns gibberish for some reason :(
-	public Vector2? WorldToScreen(Vector3 worldPosition)
+	public (Vector2?, float) ConvertWorldPositionToScreenPosition(Vector3 worldPosition)
 	{
 		try
 		{
+			// Calculate distance
+			var distance = Vector3.Distance(_cameraPosition, worldPosition);
+
 			// Calculate vector from camera to world position
 			var cameraToWorld = worldPosition - _cameraPosition;
 
 			// Check if world position is behind the camera
-			if(Vector3.Dot(_cameraForward, cameraToWorld) < 0) return null;
+			if(Vector3.Dot(_cameraForward, cameraToWorld) < 0) return (null, distance);
 
 			var worldPosition4 = new Vector4(worldPosition, 1.0f);
 
 			var clipSpacePosition = Vector4.Transform(worldPosition4, _viewProjectionMatrix);
 
-			if(Math.Abs(clipSpacePosition.W) < Constants.Epsilon) return null;
+			if(Math.Abs(clipSpacePosition.W) < Constants.Epsilon) return (null, distance);
 
 			// Perform perspective division to get NDC
 			var normalizedDeviceCoordinatesX = clipSpacePosition.X / clipSpacePosition.W;
@@ -90,18 +93,23 @@ internal class ScreenManager
 			var screenY = (1.0f - normalizedDeviceCoordinatesY) / 2.0f * DisplaySize.Y;
 
 
-			if(screenX < -_overheadX) return null;
-			if(screenX > DisplaySize.X + _overheadX) return null;
-			if(screenY < -_overheadY) return null;
-			if(screenY > DisplaySize.Y + _overheadY) return null;
+			if(screenX < -_overheadX) return (null, distance);
+			if(screenX > DisplaySize.X + _overheadX) return (null, distance);
+			if(screenY < -_overheadY) return (null, distance);
+			if(screenY > DisplaySize.Y + _overheadY) return (null, distance);
 
-			return new Vector2(screenX, screenY);
+			return (new Vector2(screenX, screenY), distance);
 		}
 		catch(Exception exception)
 		{
 			LogManager.Error(exception);
-			return null;
+			return (null, 0f);
 		}
+	}
+
+	public float GetWorldPositionToCameraDistance(Vector3 worldPosition)
+	{
+		return Vector3.Distance(_cameraPosition, worldPosition);
 	}
 
 	public unsafe void FrameUpdate()
@@ -115,7 +123,7 @@ internal class ScreenManager
 
 			if(PrimaryCamera == null)
 			{
-				LogManager.Warn("[CameraHelper.FrameUpdate] No primary camera");
+				//LogManager.Warn("[CameraHelper.FrameUpdate] No primary camera");
 				return;
 			}
 

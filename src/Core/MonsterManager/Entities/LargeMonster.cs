@@ -117,9 +117,7 @@ internal sealed class LargeMonster
 	{
 		try
 		{
-			ScreenPosition = ScreenManager.Instance.WorldToScreen(Position);
-
-			LogManager.Info($"[LargeMonster.UpdateScreenPosition] {Name}: {Position.X:F5} {Position.Y:F5} {Position.Z:F5} -> {ScreenPosition?.X:F1} {ScreenPosition?.Y:F1}");
+			(ScreenPosition, Distance) = ScreenManager.Instance.ConvertWorldPositionToScreenPosition(Position);
 		}
 		catch(Exception exception)
 		{
