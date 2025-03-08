@@ -1,3 +1,4 @@
+#
 <p align="center">
 	<h1 align="center"><b>YURI Overlay</b></h1>
 	<h5 align="center"><b>(Your Useless Rewilding Interface)</b></h2>
@@ -129,7 +130,7 @@
 
 <p align="center">
 	<a>
-		<img align="center" src="https://github.com/user-attachments/assets/59da30a1-8e9b-492d-a85c-ae40a42280e8" />
+		<img align="center" alt="Preview" src="https://github.com/user-attachments/assets/59da30a1-8e9b-492d-a85c-ae40a42280e8" />
 	</a>
 </p>
 
