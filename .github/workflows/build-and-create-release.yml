@@ -14,20 +14,20 @@ jobs:
     runs-on: ubuntu-latest
     
     permissions:
-        actions: read/write
-        attestations: read/write
-        checks: read/write
-        contents: read/write
-        deployments : read/write
-        discussions: read/write
-        id-token: read/write
-        issues: read/write
-        metadata: read/write
-        packages: read/write
-        pages: read/write
-        pull-requests: read/write
-        repository-projects: read/write
-        security-events: read/write
+        actions: write
+        attestations: read
+        checks: write
+        contents: write
+        deployments : write
+        discussions: read
+        id-token: read
+        issues: read
+        metadata: write
+        packages: write
+        pages: write
+        pull-requests: write
+        repository-projects: write
+        security-events: read
     
     steps:
     - name: Checkout
