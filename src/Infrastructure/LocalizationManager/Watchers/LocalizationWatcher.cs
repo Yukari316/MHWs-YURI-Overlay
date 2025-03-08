@@ -11,7 +11,7 @@ internal partial class LocalizationWatcher : IDisposable
 	{
 		try
 		{
-			LogManager.Info("LocalizationWatcher: Initializing...");
+			LogManager.Info("[LocalizationWatcher] Initializing...");
 
 			_watcher = new FileSystemWatcher(Constants.LocalizationsPath);
 
@@ -22,16 +22,16 @@ internal partial class LocalizationWatcher : IDisposable
 								 | NotifyFilters.Security
 								 | NotifyFilters.Size;
 
-			_watcher.Changed += OnConfigFileChanged;
-			_watcher.Created += OnConfigFileCreated;
-			_watcher.Renamed += OnConfigFileRenamed;
-			_watcher.Deleted += OnConfigFileDeleted;
-			_watcher.Error += OnConfigFileError;
+			_watcher.Changed += OnLocalizationFileChanged;
+			_watcher.Created += OnLocalizationFileCreated;
+			_watcher.Renamed += OnLocalizationFileRenamed;
+			_watcher.Deleted += OnLocalizationFileDeleted;
+			_watcher.Error += OnLocalizationFileError;
 
 			_watcher.Filter = "*.json";
 			_watcher.EnableRaisingEvents = true;
 
-			LogManager.Info("LocalizationWatcher: Initialized!");
+			LogManager.Info("[LocalizationWatcher] Initialized!");
 		}
 		catch(Exception exception)
 		{
@@ -61,19 +61,18 @@ internal partial class LocalizationWatcher : IDisposable
 
 	public void Dispose()
 	{
-		LogManager.Info("LocalizationWatcher: Disposing...");
+		LogManager.Info("[LocalizationWatcher] Disposing...");
+
 		_watcher.Dispose();
-		LogManager.Info("LocalizationWatcher: Disposed!");
+
+		LogManager.Info("[LocalizationWatcher] Disposed!");
 	}
 
-	private void OnConfigFileChanged(object sender, FileSystemEventArgs e)
+	private void OnLocalizationFileChanged(object sender, FileSystemEventArgs e)
 	{
 		try
 		{
-			if(_disabled)
-			{
-				return;
-			}
+			if(_disabled) return;
 
 			var name = Path.GetFileNameWithoutExtension(e.Name);
 			if(name == null)
@@ -87,7 +86,7 @@ internal partial class LocalizationWatcher : IDisposable
 				_lastEventTimes[name] = DateTime.MinValue;
 			}
 
-			if(_lastEventTimes[name].Ticks - eventTime.Ticks < Constants.DuplicateEventThresholdTicks)
+			if(eventTime.Ticks - _lastEventTimes[name].Ticks < Constants.DuplicateEventThresholdTicks)
 			{
 				return;
 			}
@@ -107,14 +106,11 @@ internal partial class LocalizationWatcher : IDisposable
 		}
 	}
 
-	private void OnConfigFileCreated(object sender, FileSystemEventArgs e)
+	private void OnLocalizationFileCreated(object sender, FileSystemEventArgs e)
 	{
 		try
 		{
-			if(_disabled)
-			{
-				return;
-			}
+			if(_disabled) return;
 
 			var name = Path.GetFileNameWithoutExtension(e.Name);
 
@@ -128,14 +124,11 @@ internal partial class LocalizationWatcher : IDisposable
 		}
 	}
 
-	private void OnConfigFileDeleted(object sender, FileSystemEventArgs e)
+	private void OnLocalizationFileDeleted(object sender, FileSystemEventArgs e)
 	{
 		try
 		{
-			if(_disabled)
-			{
-				return;
-			}
+			if(_disabled) return;
 
 			var name = Path.GetFileNameWithoutExtension(e.Name);
 
@@ -147,14 +140,11 @@ internal partial class LocalizationWatcher : IDisposable
 		}
 	}
 
-	private void OnConfigFileRenamed(object sender, RenamedEventArgs e)
+	private void OnLocalizationFileRenamed(object sender, RenamedEventArgs e)
 	{
 		try
 		{
-			if(_disabled)
-			{
-				return;
-			}
+			if(_disabled) return;
 
 			var oldName = Path.GetFileNameWithoutExtension(e.OldName);
 			var name = Path.GetFileNameWithoutExtension(e.Name);
@@ -167,13 +157,10 @@ internal partial class LocalizationWatcher : IDisposable
 		}
 	}
 
-	private void OnConfigFileError(object sender, ErrorEventArgs e)
+	private void OnLocalizationFileError(object sender, ErrorEventArgs e)
 	{
-		if(_disabled)
-		{
-			return;
-		}
+		if(_disabled) return;
 
-		LogManager.Info("LocalizationWatcher: Unknown error.");
+		LogManager.Info("[LocalizationWatcher] Unknown error.");
 	}
 }

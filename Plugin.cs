@@ -1,7 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 
-using ImGuiNET;
-
 using REFrameworkNET;
 using REFrameworkNET.Attributes;
 
@@ -31,26 +29,30 @@ public class Plugin
 	[PluginExitPoint]
 	public static void Unload()
 	{
-		LogManager.Info("[Managers]  Disposing...");
+		LogManager.Info("Disposing...");
 
 		ConfigManager.Instance.Dispose();
 		LocalizationManager.Instance.Dispose();
+		ReframeworkManager.Instance.Dispose();
 		MonsterManager.Instance.Dispose();
 
 		API.LocalFrameGC();
 
-		LogManager.Info("[Managers]  Disposed!");
+		LogManager.Info($"Disposed!");
+
+		LogManager.Info("I permitted it to pass over me and through me. When it had gone past I turned the inner eye to see its path. Where the fear had gone, there was nothing. Only I remained...");
 	}
 
 	private static void Init()
 	{
 		try
 		{
-			LogManager.Info("[Managers]  Initializing...");
+			LogManager.Info("Managers: Initializing...");
 
 			var configManager = ConfigManager.Instance;
 			var localizationManager = LocalizationManager.Instance;
 			var localizationHelper = LocalizationHelper.Instance;
+			var reframeworkManager = ReframeworkManager.Instance;
 
 			var imGuiManager = ImGuiManager.Instance;
 			var overlayManager = OverlayManager.Instance;
@@ -61,6 +63,7 @@ public class Plugin
 			configManager.Initialize();
 			localizationManager.Initialize();
 			localizationHelper.Initialize();
+			reframeworkManager.Initialize();
 
 			imGuiManager.Initialize();
 			overlayManager.Initialize();
@@ -68,11 +71,10 @@ public class Plugin
 			cameraManager.Initialize();
 			monsterManager.Initialize();
 
-			LogManager.Info("[Managers]  Initialized!");
+			LogManager.Info("Managers: Initialized!");
 			LogManager.Info("Callbacks: Initializing...");
 
 			REFrameworkNET.Callbacks.ImGuiRender.Post += OnImGuiRender;
-			REFrameworkNET.Callbacks.Initialize.Post += () => LogManager.Info("INIT POST");
 
 			IsInitialized = true;
 
@@ -109,10 +111,10 @@ public class Plugin
 
 		try
 		{
-			var imGuiManager = ImGuiManager.Instance;
-
-			if(ImGui.IsKeyPressed(ImGuiKey.Home)) imGuiManager.IsOpened = !imGuiManager.IsOpened;
-			if(imGuiManager.IsOpened) ImGuiManager.Instance.Draw();
+			if(ReframeworkManager.Instance.IsReframeworkMenuOpen)
+			{
+				ImGuiManager.Instance.Draw();
+			}
 		}
 		catch(Exception exception)
 		{

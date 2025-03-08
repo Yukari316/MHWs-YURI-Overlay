@@ -12,7 +12,7 @@ internal partial class JsonWatcher<T> : IDisposable where T : class, new()
 	{
 		try
 		{
-			LogManager.Info($"JsonWatcher \"{jsonDatabase.Name}\": Initializing...");
+			LogManager.Info($"[JsonWatcher] \"{jsonDatabase.Name}\": Initializing...");
 
 			JsonDatabaseInstance = jsonDatabase;
 			Watcher = new FileSystemWatcher(jsonDatabase.FilePath);
@@ -32,7 +32,7 @@ internal partial class JsonWatcher<T> : IDisposable where T : class, new()
 			Watcher.Filter = $"{jsonDatabase.Name}.json";
 			Watcher.EnableRaisingEvents = true;
 
-			LogManager.Info($"JsonWatcher \"{jsonDatabase.Name}\": Initialized!");
+			LogManager.Info($"[JsonWatcher] \"{jsonDatabase.Name}\": Initialized!");
 		}
 		catch(Exception exception)
 		{
@@ -61,19 +61,18 @@ internal partial class JsonWatcher<T> : IDisposable where T : class, new()
 	}
 	public void Dispose()
 	{
-		LogManager.Info($"JsonWatcher \"{JsonDatabaseInstance.Name}\": Disposing...");
+		LogManager.Info($"[JsonWatcher] \"{JsonDatabaseInstance.Name}\": Disposing...");
+
 		Watcher.Dispose();
-		LogManager.Info($"JsonWatcher \"{JsonDatabaseInstance.Name}\": Disposed!");
+
+		LogManager.Info($"[JsonWatcher] \"{JsonDatabaseInstance.Name}\": Disposed!");
 	}
 
 	private void OnJsonFileChanged(object sender, FileSystemEventArgs e)
 	{
 		try
 		{
-			if(_disabled)
-			{
-				return;
-			}
+			if(_disabled) return;
 
 			var eventTime = File.GetLastWriteTime(e.FullPath);
 
@@ -117,12 +116,9 @@ internal partial class JsonWatcher<T> : IDisposable where T : class, new()
 	{
 		try
 		{
-			if(_disabled)
-			{
-				return;
-			}
+			if(_disabled) return;
 
-			LogManager.Info($"File \"{e.OldName}\": Renamed to \"{e.Name}\".");
+			LogManager.Info($"[JsonWatcher] File \"{e.OldName}\": Renamed to \"{e.Name}\".");
 
 			if(e.Name != Watcher.Filter)
 			{
@@ -143,12 +139,9 @@ internal partial class JsonWatcher<T> : IDisposable where T : class, new()
 	{
 		try
 		{
-			if(_disabled)
-			{
-				return;
-			}
+			if(_disabled) return;
 
-			LogManager.Info($"File \"{JsonDatabaseInstance.Name}\": Deleted.");
+			LogManager.Info($"[JsonWatcher] File \"{JsonDatabaseInstance.Name}\": Deleted.");
 
 			JsonDatabaseInstance.EmitDeleted();
 		}
@@ -162,12 +155,9 @@ internal partial class JsonWatcher<T> : IDisposable where T : class, new()
 	{
 		try
 		{
-			if(_disabled)
-			{
-				return;
-			}
+			if(_disabled) return;
 
-			LogManager.Info($"File \"{JsonDatabaseInstance.Name}\": Unknown error.");
+			LogManager.Info($"[JsonWatcher] File \"{JsonDatabaseInstance.Name}\": Unknown error.");
 
 			JsonDatabaseInstance.Load();
 		}

@@ -11,7 +11,7 @@ internal partial class ConfigWatcher : IDisposable
 	{
 		try
 		{
-			LogManager.Info("ConfigWatcher: Initializing...");
+			LogManager.Info("[ConfigWatcher] Initializing...");
 
 			_watcher = new FileSystemWatcher(Constants.ConfigsPath);
 
@@ -31,7 +31,7 @@ internal partial class ConfigWatcher : IDisposable
 			_watcher.Filter = "*.json";
 			_watcher.EnableRaisingEvents = true;
 
-			LogManager.Info("ConfigWatcher: Initialized!");
+			LogManager.Info("[ConfigWatcher] Initialized!");
 		}
 		catch(Exception exception)
 		{
@@ -41,7 +41,11 @@ internal partial class ConfigWatcher : IDisposable
 
 	~ConfigWatcher()
 	{
+		LogManager.Info("[ConfigWatcher] Disposing...");
+
 		Dispose();
+
+		LogManager.Info("[ConfigWatcher] Disposed!");
 	}
 
 	public void Enable()
@@ -61,9 +65,9 @@ internal partial class ConfigWatcher : IDisposable
 
 	public void Dispose()
 	{
-		LogManager.Info("ConfigWatcher: Disposing...");
+		LogManager.Info("[ConfigWatcher] Disposing...");
 		_watcher.Dispose();
-		LogManager.Info("ConfigWatcher: Disposed!");
+		LogManager.Info("[ConfigWatcher] Disposed!");
 	}
 
 	private void OnConfigFileChanged(object sender, FileSystemEventArgs e)
@@ -72,10 +76,7 @@ internal partial class ConfigWatcher : IDisposable
 
 		try
 		{
-			if(_disabled)
-			{
-				return;
-			}
+			if(_disabled) return;
 
 			var name = Path.GetFileNameWithoutExtension(e.Name);
 
@@ -113,10 +114,7 @@ internal partial class ConfigWatcher : IDisposable
 	{
 		try
 		{
-			if(_disabled)
-			{
-				return;
-			}
+			if(_disabled) return;
 
 			var name = Path.GetFileNameWithoutExtension(e.Name);
 
@@ -134,10 +132,7 @@ internal partial class ConfigWatcher : IDisposable
 	{
 		try
 		{
-			if(_disabled)
-			{
-				return;
-			}
+			if(_disabled) return;
 
 			var name = Path.GetFileNameWithoutExtension(e.Name);
 
@@ -153,10 +148,7 @@ internal partial class ConfigWatcher : IDisposable
 	{
 		try
 		{
-			if(_disabled)
-			{
-				return;
-			}
+			if(_disabled) return;
 
 			var oldName = Path.GetFileNameWithoutExtension(e.OldName);
 			var name = Path.GetFileNameWithoutExtension(e.Name);
@@ -171,11 +163,8 @@ internal partial class ConfigWatcher : IDisposable
 
 	private void OnConfigFileError(object sender, ErrorEventArgs e)
 	{
-		if(_disabled)
-		{
-			return;
-		}
+		if(_disabled) return;
 
-		LogManager.Info("ConfigWatcher: Unknown error.");
+		LogManager.Info("[ConfigWatcher] Unknown error.");
 	}
 }

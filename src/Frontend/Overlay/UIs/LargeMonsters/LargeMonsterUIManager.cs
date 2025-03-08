@@ -72,8 +72,15 @@ internal sealed class LargeMonsterUiManager : IDisposable
 		{
 			var largeMonster = largeMonsterPair.Value;
 
-			if(!settings.RenderDeadOrCaptured && !largeMonster.IsAlive) continue;
-			if(settings.MaxDistance > 0f && largeMonster.Distance > settings.MaxDistance) continue;
+			if(!settings.RenderDeadOrCaptured && !largeMonster.IsAlive)
+			{
+				continue;
+			}
+
+			if(settings.MaxDistance > 0f && largeMonster.Distance > settings.MaxDistance)
+			{
+				continue;
+			}
 
 			newLargeMonsters.Add(largeMonster);
 		}
@@ -97,7 +104,10 @@ internal sealed class LargeMonsterUiManager : IDisposable
 		{
 			var largeMonster = largeMonsterPair.Value;
 
-			if(!config.Settings.RenderDeadOrCaptured && !largeMonster.IsAlive) continue;
+			if(!config.Settings.RenderDeadOrCaptured && !largeMonster.IsAlive)
+			{
+				continue;
+			}
 
 			newLargeMonsters.Add(largeMonster);
 		}
@@ -162,7 +172,10 @@ internal sealed class LargeMonsterUiManager : IDisposable
 	{
 		var customization = ConfigManager.Instance.ActiveConfig.Data.LargeMonsterUI.Dynamic;
 
-		if(!customization.Enabled) return;
+		if(!customization.Enabled)
+		{
+			return;
+		}
 
 		for(var locationIndex = 0; locationIndex < _dynamicLargeMonsters.Count; locationIndex++)
 		{
@@ -176,7 +189,10 @@ internal sealed class LargeMonsterUiManager : IDisposable
 	{
 		var customization = ConfigManager.Instance.ActiveConfig.Data.LargeMonsterUI.Static;
 
-		if(!customization.Enabled) return;
+		if(!customization.Enabled)
+		{
+			return;
+		}
 
 		for(var locationIndex = 0; locationIndex < _staticLargeMonsters.Count; locationIndex++)
 		{

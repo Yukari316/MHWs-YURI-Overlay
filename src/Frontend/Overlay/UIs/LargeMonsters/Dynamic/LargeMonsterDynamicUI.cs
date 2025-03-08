@@ -35,13 +35,23 @@ internal sealed class LargeMonsterDynamicUi
 			monsterPosition.Z + worldOffset.Z
 		);
 
-		if(settings.AddMissionBeaconOffsetToWorldOffset) targetWorldPosition += _largeMonster.MissionBeaconOffset;
-		if(settings.AddModelRadiusToWorldOffsetY) targetWorldPosition.Y += _largeMonster.ModelRadius;
+		if(settings.AddMissionBeaconOffsetToWorldOffset)
+		{
+			targetWorldPosition += _largeMonster.MissionBeaconOffset;
+		}
+
+		if(settings.AddModelRadiusToWorldOffsetY)
+		{
+			targetWorldPosition.Y += _largeMonster.ModelRadius;
+		}
 
 		var (maybeScreenPosition, _) = ScreenManager.Instance.ConvertWorldPositionToScreenPosition(targetWorldPosition);
 
 		// Not on screen
-		if(maybeScreenPosition == null) return;
+		if(maybeScreenPosition == null)
+		{
+			return;
+		}
 
 		var opacityScale =
 			settings.OpacityFalloff && settings.MaxDistance > 0f

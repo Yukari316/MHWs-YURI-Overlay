@@ -8,7 +8,7 @@ using ValueType = REFrameworkNET.ValueType;
 
 namespace YURI_Overlay;
 
-internal class ScreenManager
+internal sealed class ScreenManager
 {
 	private static readonly Lazy<ScreenManager> Lazy = new(() => new ScreenManager());
 	public static ScreenManager Instance => Lazy.Value;
@@ -76,13 +76,19 @@ internal class ScreenManager
 			var cameraToWorld = worldPosition - _cameraPosition;
 
 			// Check if world position is behind the camera
-			if(Vector3.Dot(_cameraForward, cameraToWorld) < 0) return (null, distance);
+			if(Vector3.Dot(_cameraForward, cameraToWorld) < 0)
+			{
+				return (null, distance);
+			}
 
 			var worldPosition4 = new Vector4(worldPosition, 1.0f);
 
 			var clipSpacePosition = Vector4.Transform(worldPosition4, _viewProjectionMatrix);
 
-			if(Math.Abs(clipSpacePosition.W) < Constants.Epsilon) return (null, distance);
+			if(Math.Abs(clipSpacePosition.W) < Constants.Epsilon)
+			{
+				return (null, distance);
+			}
 
 			// Perform perspective division to get NDC
 			var normalizedDeviceCoordinatesX = clipSpacePosition.X / clipSpacePosition.W;
@@ -93,10 +99,25 @@ internal class ScreenManager
 			var screenY = (1.0f - normalizedDeviceCoordinatesY) / 2.0f * DisplaySize.Y;
 
 
-			if(screenX < -_overheadX) return (null, distance);
-			if(screenX > DisplaySize.X + _overheadX) return (null, distance);
-			if(screenY < -_overheadY) return (null, distance);
-			if(screenY > DisplaySize.Y + _overheadY) return (null, distance);
+			if(screenX < -_overheadX)
+			{
+				return (null, distance);
+			}
+
+			if(screenX > DisplaySize.X + _overheadX)
+			{
+				return (null, distance);
+			}
+
+			if(screenY < -_overheadY)
+			{
+				return (null, distance);
+			}
+
+			if(screenY > DisplaySize.Y + _overheadY)
+			{
+				return (null, distance);
+			}
 
 			return (new Vector2(screenX, screenY), distance);
 		}
@@ -393,7 +414,7 @@ internal class ScreenManager
 			PrimaryCamera = (ManagedObject) get_PrimaryCamera_Method.InvokeBoxed(Camera_Type, MainView, []);
 			if(PrimaryCamera == null)
 			{
-				LogManager.Warn("[CameraHelper.Update] No primary camera");
+				//LogManager.Warn("[CameraHelper.Update] No primary camera");
 				return;
 			}
 		}

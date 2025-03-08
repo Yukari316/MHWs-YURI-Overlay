@@ -16,6 +16,7 @@ internal static class Constants
 	public const string PluginDataPath = $@"{DataPath}{ModNameNoWhitespaces}\";
 	public const string FontsPath = @"reframework\fonts\";
 	public const string LocalizationsPath = $@"{PluginDataPath}localizations\";
+	public const string ReframeworkConfigWithExtension = "re2_fw_config.txt";
 
 	public const string ConfigsPath = $@"{PluginDataPath}configs\";
 

@@ -19,7 +19,10 @@ internal class LabelElementSettingsCustomization : Customization
 		{
 			isChanged |= ImGui.InputInt($"{localization.RightAlignmentShift}##{customizationName}", ref RightAlignmentShift);
 
-			if(isChanged && RightAlignmentShift < 0) RightAlignmentShift = 0;
+			if(isChanged && RightAlignmentShift < 0)
+			{
+				RightAlignmentShift = 0;
+			}
 
 			ImGui.TreePop();
 		}
