@@ -1,7 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
 using ImGuiNET;
-
 namespace YURI_Overlay;
 
 internal sealed class BarElementOutlineCustomization : Customization

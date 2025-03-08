@@ -3,7 +3,6 @@
 using ImGuiNET;
 
 namespace YURI_Overlay;
-
 internal sealed class AnchoredPositionCustomization : Customization
 {
 	public float x = 0f;

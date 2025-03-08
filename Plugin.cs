@@ -5,6 +5,7 @@ using ImGuiNET;
 using REFrameworkNET;
 using REFrameworkNET.Attributes;
 
+
 namespace YURI_Overlay;
 
 [SuppressMessage("Roslynator", "RCS1102:Make class Static", Justification = "<Pending>")]
