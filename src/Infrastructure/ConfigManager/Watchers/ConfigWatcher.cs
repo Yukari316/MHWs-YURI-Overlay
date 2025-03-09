@@ -1,3 +1,5 @@
+using Timer = System.Timers.Timer;
+
 namespace YURI_Overlay;
 
 internal partial class ConfigWatcher : IDisposable
@@ -6,6 +8,7 @@ internal partial class ConfigWatcher : IDisposable
 	private readonly Dictionary<string, DateTime> _lastEventTimes = [];
 
 	private bool _disabled = false;
+	private Timer _delayedEnableTimer;
 
 	public ConfigWatcher()
 	{
@@ -51,29 +54,39 @@ internal partial class ConfigWatcher : IDisposable
 	public void Enable()
 	{
 		_disabled = false;
+		_delayedEnableTimer?.Dispose();
+		_delayedEnableTimer = null;
+
+		LogManager.Info("[LocalizationWatcher] Enabled!");
 	}
 
 	public void DelayedEnable()
 	{
-		Timers.SetTimeout(Enable, Constants.ReenableWatcherDelayMilliseconds);
+		_delayedEnableTimer?.Dispose();
+		_delayedEnableTimer = Timers.SetTimeout(Enable, Constants.ReenableWatcherDelayMilliseconds);
+
+		LogManager.Info("[LocalizationWatcher] Will enable after a delay...");
 	}
 
 	public void Disable()
 	{
 		_disabled = true;
+		_delayedEnableTimer?.Dispose();
+
+		LogManager.Info("[LocalizationWatcher] Temporarily disabled!");
 	}
 
 	public void Dispose()
 	{
 		LogManager.Info("[ConfigWatcher] Disposing...");
+
 		_watcher.Dispose();
+
 		LogManager.Info("[ConfigWatcher] Disposed!");
 	}
 
 	private void OnConfigFileChanged(object sender, FileSystemEventArgs e)
 	{
-		LogManager.Info($"Config \"{e.Name}\": Changed.");
-
 		try
 		{
 			if(_disabled) return;

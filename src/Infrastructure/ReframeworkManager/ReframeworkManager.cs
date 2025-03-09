@@ -39,8 +39,6 @@ internal sealed partial class ReframeworkManager : IDisposable
 
 			if(IsReframeworkMenuOpen) ImGuiManager.Instance.IsOpened = true;
 
-			LogManager.Info($"IsReframeworkMenuOpen = {IsReframeworkMenuOpen}");
-
 			LogManager.Info("[ReframeworkManager] REFramework config reading is done!");
 		}
 		catch(Exception exception)
@@ -53,7 +51,7 @@ internal sealed partial class ReframeworkManager : IDisposable
 	{
 		LogManager.Info("[ReframeworkManager] Disposing...");
 
-		_reframeworkConfigWatcherInstance?.Dispose();
+		_reframeworkConfigWatcherInstance.Dispose();
 
 		LogManager.Info("[ReframeworkManager] Disposed!");
 	}

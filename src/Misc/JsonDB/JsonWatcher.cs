@@ -1,4 +1,7 @@
+using Timer = System.Timers.Timer;
+
 namespace YURI_Overlay;
+
 
 internal partial class JsonWatcher<T> : IDisposable where T : class, new()
 {
@@ -7,6 +10,7 @@ internal partial class JsonWatcher<T> : IDisposable where T : class, new()
 
 	private bool _disabled = false;
 	private DateTime _lastEventTime = DateTime.MinValue;
+	private Timer _delayedEnableTimer;
 
 	public JsonWatcher(JsonDatabase<T> jsonDatabase)
 	{
@@ -48,24 +52,34 @@ internal partial class JsonWatcher<T> : IDisposable where T : class, new()
 	public void Enable()
 	{
 		_disabled = false;
+		_delayedEnableTimer?.Dispose();
+		_delayedEnableTimer = null;
+
+		LogManager.Info($"[JsonWatcher] File \"{JsonDatabaseInstance.Name}\": Enabled!");
 	}
 
 	public void DelayedEnable()
 	{
-		Timers.SetTimeout(Enable, Constants.ReenableWatcherDelayMilliseconds);
+		_delayedEnableTimer?.Dispose();
+		_delayedEnableTimer = Timers.SetTimeout(Enable, Constants.ReenableWatcherDelayMilliseconds);
+
+		LogManager.Info($"[JsonWatcher] File \"{JsonDatabaseInstance.Name}\": Will enable after a delay...");
 	}
 
 	public void Disable()
 	{
 		_disabled = true;
+		_delayedEnableTimer?.Dispose();
+
+		LogManager.Info($"[JsonWatcher] File \"{JsonDatabaseInstance.Name}\": Temporarily disabled!");
 	}
 	public void Dispose()
 	{
-		LogManager.Info($"[JsonWatcher] \"{JsonDatabaseInstance.Name}\": Disposing...");
+		LogManager.Info($"[JsonWatcher] File \"{JsonDatabaseInstance.Name}\": Disposing...");
 
 		Watcher.Dispose();
 
-		LogManager.Info($"[JsonWatcher] \"{JsonDatabaseInstance.Name}\": Disposed!");
+		LogManager.Info($"[JsonWatcher] File \"{JsonDatabaseInstance.Name}\": Disposed!");
 	}
 
 	private void OnJsonFileChanged(object sender, FileSystemEventArgs e)
@@ -81,7 +95,7 @@ internal partial class JsonWatcher<T> : IDisposable where T : class, new()
 				return;
 			}
 
-			LogManager.Info($"File \"{JsonDatabaseInstance.Name}\": Changed.");
+			LogManager.Info($"[JsonWatcher] File \"{JsonDatabaseInstance.Name}.json\": Changed.");
 
 			JsonDatabaseInstance.Load();
 			JsonDatabaseInstance.EmitChanged();

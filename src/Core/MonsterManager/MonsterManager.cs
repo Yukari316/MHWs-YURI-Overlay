@@ -164,7 +164,7 @@ internal sealed class MonsterManager : IDisposable
 			var isFound = LargeMonsters.TryGetValue(enemyCharacter, out var largeMonster);
 			if(isFound)
 			{
-				LogManager.Info($"[LargeMonster] Destroyed {largeMonster?.Name}");
+				LogManager.Info($"[LargeMonster] Destroyed {largeMonster!.Name}");
 				LargeMonsters.Remove(enemyCharacter);
 			}
 

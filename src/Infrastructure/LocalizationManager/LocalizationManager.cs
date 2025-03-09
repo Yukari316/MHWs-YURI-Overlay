@@ -94,11 +94,11 @@ internal sealed partial class LocalizationManager : IDisposable
 	{
 		LogManager.Info("[LocalizationManager] Disposing...");
 
-		_localizationWatcherInstance?.Dispose();
+		_localizationWatcherInstance.Dispose();
 
 		foreach(var localization in Localizations)
 		{
-			localization.Value?.Dispose();
+			localization.Value.Dispose();
 		}
 
 		LogManager.Info("[LocalizationManager] Disposed!");

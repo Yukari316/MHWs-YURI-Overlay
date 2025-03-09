@@ -46,16 +46,16 @@ internal partial class JsonDatabase<T> : IDisposable where T : class, new()
 	{
 		try
 		{
-			JsonWatcherInstance?.Disable();
-			LogManager.Info($"File \"{Name}.json\": Loading... ${data}");
+			JsonWatcherInstance.Disable();
+			LogManager.Info($"[JsonDatabase] File \"{Name}.json\": Loading... ${data}");
 
 			var json = data == null ? FileSyncInstance.Read() : JsonSerializer.Serialize(data, Constants.JsonSerializerOptionsInstance);
 
 			Data = JsonSerializer.Deserialize<T>(json, Constants.JsonSerializerOptionsInstance);
 			FileSyncInstance.Write(json);
 
-			LogManager.Info($"File \"{Name}.json\": Loaded!");
-			JsonWatcherInstance?.DelayedEnable();
+			LogManager.Info($"[JsonDatabase] File \"{Name}.json\": Loaded!");
+			JsonWatcherInstance.DelayedEnable();
 			return Data;
 		}
 		catch(Exception exception)
@@ -71,8 +71,8 @@ internal partial class JsonDatabase<T> : IDisposable where T : class, new()
 	{
 		try
 		{
-			LogManager.Info($"File \"{Name}.json\": Saving...");
-			JsonWatcherInstance?.Disable();
+			LogManager.Info($"[JsonDatabase] File \"{Name}.json\": Saving...");
+			JsonWatcherInstance.Disable();
 
 			var json = JsonSerializer.Serialize(Data, Constants.JsonSerializerOptionsInstance);
 
@@ -80,14 +80,14 @@ internal partial class JsonDatabase<T> : IDisposable where T : class, new()
 
 			if(isSuccess)
 			{
-				LogManager.Info($"File \"{Name}.json\": Saved!");
+				LogManager.Info($"[JsonDatabase] File \"{Name}.json\": Saved!");
 			}
 			else
 			{
-				LogManager.Info($"File \"{Name}.json\": Saving failed!");
+				LogManager.Info($"[JsonDatabase] File \"{Name}.json\": Saving failed!");
 			}
 
-			JsonWatcherInstance?.DelayedEnable();
+			JsonWatcherInstance.DelayedEnable();
 			return isSuccess;
 		}
 		catch(Exception exception)
@@ -99,10 +99,10 @@ internal partial class JsonDatabase<T> : IDisposable where T : class, new()
 
 	public void Delete()
 	{
-		LogManager.Info($"File \"{Name}.json\": Deleting...");
+		LogManager.Info($"[JsonDatabase] File \"{Name}.json\": Deleting...");
 		Dispose();
 		FileSyncInstance.Delete();
-		LogManager.Info($"File \"{Name}.json\": Deleted!");
+		LogManager.Info($"[JsonDatabase] File \"{Name}.json\": Deleted!");
 	}
 
 	public void EmitChanged()
@@ -128,8 +128,10 @@ internal partial class JsonDatabase<T> : IDisposable where T : class, new()
 	}
 	public void Dispose()
 	{
-		LogManager.Info($"File \"{Name}.json\": Disposing...");
+		LogManager.Info($"[JsonDatabase] File \"{Name}.json\": Disposing...");
+
 		JsonWatcherInstance.Dispose();
-		LogManager.Info($"File \"{Name}.json\": Disposed!");
+
+		LogManager.Info($"[JsonDatabase] File \"{Name}.json\": Disposed!");
 	}
 }

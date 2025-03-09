@@ -124,6 +124,7 @@ internal sealed class ImGuiManager
 
 			if(changed)
 			{
+				LogManager.Info("[ImGuiManager] Changes detected. Saving...");
 				configManager.ActiveConfig.Save();
 			}
 		}

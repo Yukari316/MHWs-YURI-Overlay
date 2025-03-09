@@ -49,7 +49,7 @@ internal static class Constants
 
 	public const string EmojiFont = "NotoEmoji-Bold.ttf";
 
-	public const int ReenableWatcherDelayMilliseconds = 50;
+	public const int ReenableWatcherDelayMilliseconds = 100;
 	public const long DuplicateEventThresholdTicks = 10000;
 
 	public const float Epsilon = 0.000001f;

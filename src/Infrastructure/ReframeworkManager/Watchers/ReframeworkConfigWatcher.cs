@@ -1,10 +1,15 @@
+using Timer = System.Timers.Timer;
+
 namespace YURI_Overlay;
+
 internal partial class ReframeworkConfigWatcher : IDisposable
 {
 	private readonly FileSystemWatcher _watcher;
 	private DateTime _lastEventTime = DateTime.MinValue;
 
 	private bool _disabled = false;
+
+	private Timer _delayedEnableTimer;
 
 	public ReframeworkConfigWatcher()
 	{
@@ -48,16 +53,26 @@ internal partial class ReframeworkConfigWatcher : IDisposable
 	public void Enable()
 	{
 		_disabled = false;
+		_delayedEnableTimer?.Dispose();
+		_delayedEnableTimer = null;
+
+		LogManager.Info("[ReframeworkConfigWatcher] Enabled!");
 	}
 
 	public void DelayedEnable()
 	{
-		Timers.SetTimeout(Enable, Constants.ReenableWatcherDelayMilliseconds);
+		_delayedEnableTimer?.Dispose();
+		_delayedEnableTimer = Timers.SetTimeout(Enable, Constants.ReenableWatcherDelayMilliseconds);
+
+		LogManager.Info("[ReframeworkConfigWatcher] Will enable after a delay...");
 	}
 
 	public void Disable()
 	{
 		_disabled = true;
+		_delayedEnableTimer?.Dispose();
+
+		LogManager.Info("[ReframeworkConfigWatcher] Temporarily isabled!");
 	}
 
 	public void Dispose()
@@ -88,7 +103,7 @@ internal partial class ReframeworkConfigWatcher : IDisposable
 				return;
 			}
 
-			ReframeworkManager.Instance.ReadReframeworkConfig();
+			Timers.SetTimeout(ReframeworkManager.Instance.ReadReframeworkConfig, 50);
 			_lastEventTime = eventTime;
 
 			LogManager.Info($"[ReframeworkConfigWatcher] \"{name}\": Changed.");

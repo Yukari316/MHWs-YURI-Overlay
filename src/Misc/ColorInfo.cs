@@ -1,4 +1,4 @@
-﻿using System.Numerics;
+using System.Numerics;
 
 namespace YURI_Overlay;
 
@@ -77,7 +77,7 @@ internal class ColorInfo
 		var blue = (byte) (newVector.Z * 255f);
 		var alpha = (byte) (newVector.W * 255f);
 
-		_rgba = ((uint) red << 24) | green | ((uint) blue << 8) | alpha;
+		_rgba = ((uint) red << 24) | ((uint) green << 16) | ((uint) blue << 8) | alpha;
 		_abgr = ((uint) alpha << 24) | ((uint) blue << 16) | ((uint) green << 8) | red;
 		_rgbaHex = $"#{_rgba:X8}";
 		_abgrHex = $"#{_abgr:X8}";
@@ -111,10 +111,7 @@ internal class ColorInfo
 
 	private void UpdateFromRgbaHex(string rgbaHex)
 	{
-		if(rgbaHex.Length != 9)
-		{
-			return;
-		}
+		if(rgbaHex.Length != 9) return;
 
 		_rgba = uint.Parse(rgbaHex[1..], System.Globalization.NumberStyles.HexNumber);
 
@@ -130,10 +127,7 @@ internal class ColorInfo
 
 	private void UpdateFromAbgrHex(string abgrHex)
 	{
-		if(abgrHex.Length != 9)
-		{
-			return;
-		}
+		if(abgrHex.Length != 9) return;
 
 		_abgr = uint.Parse(abgrHex[1..], System.Globalization.NumberStyles.HexNumber);
 
