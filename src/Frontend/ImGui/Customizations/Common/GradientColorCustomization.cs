@@ -1,5 +1,7 @@
 ﻿using System.Text.Json.Serialization;
 
+using ImGuiNET;
+
 namespace YURI_Overlay;
 
 internal class GradientColorCustomization : Customization
@@ -30,37 +32,37 @@ internal class GradientColorCustomization : Customization
 		var isChanged = false;
 		var customizationName = $"{parentName}-gradient-color";
 
-		//if(ImGui.TreeNode($"{name}##${customizationName}"))
-		//{
-		//	if(ImGui.TreeNode($"{localization.start}##${customizationName}"))
-		//	{
-		//		var isStartChanged = ImGui.ColorPicker4($"##${customizationName}-start", ref StartInfo.vector);
-		//		isChanged |= isStartChanged;
+		if(ImGui.TreeNode($"{name}##${customizationName}"))
+		{
+			if(ImGui.TreeNode($"{localization.Start}##${customizationName}"))
+			{
+				var isStartChanged = ImGui.ColorPicker4($"##${customizationName}-start", ref StartInfo.vector);
+				isChanged |= isStartChanged;
 
-		//		if(isStartChanged)
-		//		{
-		//			StartInfo.Vector = StartInfo.vector;
-		//		}
+				if(isStartChanged)
+				{
+					StartInfo.Vector = StartInfo.vector;
+				}
 
-		//		ImGui.TreePop();
-		//	}
+				ImGui.TreePop();
+			}
 
 
-		//	if(ImGui.TreeNode($"{localization.end}##${parentName}"))
-		//	{
-		//		var isEndChanged = ImGui.ColorPicker4($"##${customizationName}-end", ref EndInfo.vector);
-		//		isChanged |= isEndChanged;
+			if(ImGui.TreeNode($"{localization.End}##${parentName}"))
+			{
+				var isEndChanged = ImGui.ColorPicker4($"##${customizationName}-end", ref EndInfo.vector);
+				isChanged |= isEndChanged;
 
-		//		if(isEndChanged)
-		//		{
-		//			EndInfo.Vector = EndInfo.vector;
-		//		}
+				if(isEndChanged)
+				{
+					EndInfo.Vector = EndInfo.vector;
+				}
 
-		//		ImGui.TreePop();
-		//	}
+				ImGui.TreePop();
+			}
 
-		//	ImGui.TreePop();
-		//}
+			ImGui.TreePop();
+		}
 
 		return isChanged;
 	}
