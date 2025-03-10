@@ -7,19 +7,35 @@ namespace YURI_Overlay;
 internal class GradientColorCustomization : Customization
 {
 	[JsonIgnore]
-	public ColorInfo StartInfo { get; set; } = new();
-	public string Start
+	public ColorInfo StartInfo1 { get; set; } = new();
+	public string Start1
 	{
-		get => StartInfo.RgbaHex;
-		set => StartInfo.RgbaHex = value;
+		get => StartInfo1.RgbaHex;
+		set => StartInfo1.RgbaHex = value;
 	}
 
 	[JsonIgnore]
-	public ColorInfo EndInfo { get; set; } = new();
-	public string End
+	public ColorInfo StartInfo2 { get; set; } = new();
+	public string Start2
 	{
-		get => EndInfo.RgbaHex;
-		set => EndInfo.RgbaHex = value;
+		get => StartInfo2.RgbaHex;
+		set => StartInfo2.RgbaHex = value;
+	}
+
+	[JsonIgnore]
+	public ColorInfo EndInfo1 { get; set; } = new();
+	public string End1
+	{
+		get => EndInfo1.RgbaHex;
+		set => EndInfo1.RgbaHex = value;
+	}
+
+	[JsonIgnore]
+	public ColorInfo EndInfo2 { get; set; } = new();
+	public string End2
+	{
+		get => EndInfo2.RgbaHex;
+		set => EndInfo2.RgbaHex = value;
 	}
 
 	public GradientColorCustomization() { }
@@ -34,28 +50,54 @@ internal class GradientColorCustomization : Customization
 
 		if(ImGui.TreeNode($"{name}##${customizationName}"))
 		{
-			if(ImGui.TreeNode($"{localization.Start}##${customizationName}"))
+			if(ImGui.TreeNode($"{localization.Start1}##${customizationName}"))
 			{
-				var isStartChanged = ImGui.ColorPicker4($"##${customizationName}-start", ref StartInfo.vector);
-				isChanged |= isStartChanged;
+				var isStart1Changed = ImGui.ColorPicker4($"##${customizationName}-start1", ref StartInfo1.vector);
+				isChanged |= isStart1Changed;
 
-				if(isStartChanged)
+				if(isStart1Changed)
 				{
-					StartInfo.Vector = StartInfo.vector;
+					StartInfo1.Vector = StartInfo1.vector;
+				}
+
+				ImGui.TreePop();
+			}
+
+			if(ImGui.TreeNode($"{localization.Start2}##${customizationName}"))
+			{
+				var isStart2Changed = ImGui.ColorPicker4($"##${customizationName}-start2", ref StartInfo2.vector);
+				isChanged |= isStart2Changed;
+
+				if(isStart2Changed)
+				{
+					StartInfo2.Vector = StartInfo2.vector;
 				}
 
 				ImGui.TreePop();
 			}
 
 
-			if(ImGui.TreeNode($"{localization.End}##${parentName}"))
+			if(ImGui.TreeNode($"{localization.End1}##${parentName}"))
 			{
-				var isEndChanged = ImGui.ColorPicker4($"##${customizationName}-end", ref EndInfo.vector);
-				isChanged |= isEndChanged;
+				var isEnd1Changed = ImGui.ColorPicker4($"##${customizationName}-end1", ref EndInfo1.vector);
+				isChanged |= isEnd1Changed;
 
-				if(isEndChanged)
+				if(isEnd1Changed)
 				{
-					EndInfo.Vector = EndInfo.vector;
+					EndInfo1.Vector = EndInfo1.vector;
+				}
+
+				ImGui.TreePop();
+			}
+
+			if(ImGui.TreeNode($"{localization.End2}##${parentName}"))
+			{
+				var isEnd2Changed = ImGui.ColorPicker4($"##${customizationName}-end2", ref EndInfo2.vector);
+				isChanged |= isEnd2Changed;
+
+				if(isEnd2Changed)
+				{
+					EndInfo2.Vector = EndInfo2.vector;
 				}
 
 				ImGui.TreePop();

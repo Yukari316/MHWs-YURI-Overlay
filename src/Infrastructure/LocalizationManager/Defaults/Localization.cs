@@ -68,8 +68,11 @@ internal class ImGuiLocalization
 	public string Background = "Background";
 	public string Foreground = "Foreground";
 	public string Color = "Color";
-	public string Start = "Start";
-	public string End = "End";
+	public string Start1 = "Start 1";
+	public string Start2 = "Start 2";
+	public string End1 = "End 1";
+	public string End2 = "End 2";
+
 
 	// Label
 

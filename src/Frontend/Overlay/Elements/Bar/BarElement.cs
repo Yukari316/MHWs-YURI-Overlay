@@ -35,11 +35,15 @@ internal sealed class BarElement
 	private float _backgroundShiftX = 0f;
 	private float _backgroundShiftY = 0f;
 
-	private uint _backgroundColorStart = 0;
-	private uint _backgroundColorEnd = 0;
+	private uint _backgroundColorTopLeft = 0;
+	private uint _backgroundColorTopRight = 0;
+	private uint _backgroundColorBottomRight = 0;
+	private uint _backgroundColorBottomLeft = 0;
 
-	private uint _foregroundColorStart = 0;
-	private uint _foregroundColorEnd = 0;
+	private uint _foregroundColorTopLeft = 0;
+	private uint _foregroundColorTopRight = 0;
+	private uint _foregroundColorBottomRight = 0;
+	private uint _foregroundColorBottomLeft = 0;
 
 	private uint _outlineColor = 0;
 
@@ -86,20 +90,20 @@ internal sealed class BarElement
 		backgroundDrawList.AddRectFilledMultiColor(
 			_backgroundTopLeft,
 			_backgroundBottomRight,
-			_backgroundColorStart,
-			_backgroundColorEnd,
-			_backgroundColorEnd,
-			_backgroundColorStart);
+			_backgroundColorTopLeft,
+			_backgroundColorTopRight,
+			_backgroundColorBottomRight,
+			_backgroundColorBottomLeft);
 
 		// Foreground
 
 		backgroundDrawList.AddRectFilledMultiColor(
 			_foregroundTopLeft,
 			_foregroundBottomRight,
-			_foregroundColorStart,
-			_foregroundColorEnd,
-			_foregroundColorEnd,
-			_foregroundColorStart);
+			_foregroundColorTopLeft,
+			_foregroundColorTopRight,
+			_foregroundColorBottomRight,
+			_foregroundColorBottomLeft);
 
 		// Outline
 
@@ -256,11 +260,62 @@ internal sealed class BarElement
 		var backgroundColor = colors.Background;
 		var foregroundColor = colors.Foreground;
 
-		_backgroundColorStart = backgroundColor.StartInfo.Abgr;
-		_backgroundColorEnd = backgroundColor.EndInfo.Abgr;
+		switch(customization.Settings.FillDirection)
+		{
+			case FillDirections.RightToLeft:
+				_backgroundColorTopRight = backgroundColor.StartInfo1.Abgr;
+				_backgroundColorBottomRight = backgroundColor.StartInfo2.Abgr;
 
-		_foregroundColorStart = foregroundColor.StartInfo.Abgr;
-		_foregroundColorEnd = foregroundColor.EndInfo.Abgr;
+				_backgroundColorTopLeft = backgroundColor.EndInfo1.Abgr;
+				_backgroundColorBottomLeft = backgroundColor.EndInfo2.Abgr;
+
+				_foregroundColorTopRight = foregroundColor.StartInfo1.Abgr;
+				_foregroundColorBottomRight = foregroundColor.StartInfo2.Abgr;
+
+				_foregroundColorTopLeft = foregroundColor.EndInfo1.Abgr;
+				_foregroundColorBottomLeft = foregroundColor.EndInfo2.Abgr;
+				break;
+			case FillDirections.TopToBottom:
+				_backgroundColorTopLeft = backgroundColor.StartInfo1.Abgr;
+				_backgroundColorTopRight = backgroundColor.StartInfo2.Abgr;
+
+				_backgroundColorBottomLeft = backgroundColor.EndInfo1.Abgr;
+				_backgroundColorBottomRight = backgroundColor.EndInfo2.Abgr;
+
+				_foregroundColorTopLeft = foregroundColor.StartInfo1.Abgr;
+				_foregroundColorTopRight = foregroundColor.StartInfo2.Abgr;
+
+				_foregroundColorBottomLeft = foregroundColor.EndInfo1.Abgr;
+				_foregroundColorBottomRight = foregroundColor.EndInfo2.Abgr;
+				break;
+			case FillDirections.BottomToTop:
+				_backgroundColorBottomLeft = backgroundColor.StartInfo1.Abgr;
+				_backgroundColorBottomRight = backgroundColor.StartInfo2.Abgr;
+
+				_backgroundColorTopLeft = backgroundColor.EndInfo1.Abgr;
+				_backgroundColorTopRight = backgroundColor.EndInfo2.Abgr;
+
+				_foregroundColorBottomLeft = foregroundColor.StartInfo1.Abgr;
+				_foregroundColorBottomRight = foregroundColor.StartInfo2.Abgr;
+
+				_foregroundColorTopLeft = foregroundColor.EndInfo1.Abgr;
+				_foregroundColorTopRight = foregroundColor.EndInfo2.Abgr;
+				break;
+			case FillDirections.LeftToRight:
+			default:
+				_foregroundColorTopLeft = backgroundColor.StartInfo1.Abgr;
+				_foregroundColorBottomLeft = backgroundColor.StartInfo2.Abgr;
+
+				_foregroundColorTopRight = backgroundColor.EndInfo1.Abgr;
+				_foregroundColorBottomRight = backgroundColor.EndInfo2.Abgr;
+
+				_foregroundColorTopLeft = foregroundColor.StartInfo1.Abgr;
+				_foregroundColorBottomLeft = foregroundColor.StartInfo2.Abgr;
+
+				_foregroundColorTopRight = foregroundColor.EndInfo1.Abgr;
+				_foregroundColorBottomRight = foregroundColor.EndInfo2.Abgr;
+				break;
+		}
 
 		_outlineColor = customization.Outline.Color.colorInfo.Abgr;
 
@@ -269,11 +324,17 @@ internal sealed class BarElement
 			return;
 		}
 
-		_backgroundColorStart = Utils.ScaleColorOpacityAbgr(_backgroundColorStart, opacityScale);
-		_backgroundColorEnd = Utils.ScaleColorOpacityAbgr(_backgroundColorEnd, opacityScale);
+		_backgroundColorTopLeft = Utils.ScaleColorOpacityAbgr(_backgroundColorTopLeft, opacityScale);
+		_backgroundColorTopRight = Utils.ScaleColorOpacityAbgr(_backgroundColorTopRight, opacityScale);
 
-		_foregroundColorStart = Utils.ScaleColorOpacityAbgr(_foregroundColorStart, opacityScale);
-		_foregroundColorEnd = Utils.ScaleColorOpacityAbgr(_foregroundColorEnd, opacityScale);
+		_backgroundColorBottomRight = Utils.ScaleColorOpacityAbgr(_backgroundColorBottomRight, opacityScale);
+		_backgroundColorBottomLeft = Utils.ScaleColorOpacityAbgr(_backgroundColorBottomLeft, opacityScale);
+
+		_foregroundColorTopLeft = Utils.ScaleColorOpacityAbgr(_foregroundColorTopLeft, opacityScale);
+		_foregroundColorTopRight = Utils.ScaleColorOpacityAbgr(_foregroundColorTopRight, opacityScale);
+
+		_foregroundColorBottomRight = Utils.ScaleColorOpacityAbgr(_foregroundColorBottomRight, opacityScale);
+		_foregroundColorBottomLeft = Utils.ScaleColorOpacityAbgr(_foregroundColorBottomLeft, opacityScale);
 
 		_outlineColor = Utils.ScaleColorOpacityAbgr(_outlineColor, opacityScale);
 	}

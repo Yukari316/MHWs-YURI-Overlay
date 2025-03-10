@@ -27,6 +27,7 @@ internal partial class JsonDatabase<T> : IDisposable where T : class, new()
 
 			var filePathName = Path.Combine(path, $"{name}.json");
 			FileSyncInstance = new FileSync(filePathName);
+
 			Load(data);
 
 			JsonWatcherInstance = new JsonWatcher<T>(this);
@@ -46,7 +47,7 @@ internal partial class JsonDatabase<T> : IDisposable where T : class, new()
 	{
 		try
 		{
-			JsonWatcherInstance.Disable();
+			JsonWatcherInstance?.Disable();
 			LogManager.Info($"[JsonDatabase] File \"{Name}.json\": Loading... ${data}");
 
 			var json = data == null ? FileSyncInstance.Read() : JsonSerializer.Serialize(data, Constants.JsonSerializerOptionsInstance);
@@ -55,7 +56,7 @@ internal partial class JsonDatabase<T> : IDisposable where T : class, new()
 			FileSyncInstance.Write(json);
 
 			LogManager.Info($"[JsonDatabase] File \"{Name}.json\": Loaded!");
-			JsonWatcherInstance.DelayedEnable();
+			JsonWatcherInstance?.DelayedEnable();
 			return Data;
 		}
 		catch(Exception exception)
@@ -72,7 +73,7 @@ internal partial class JsonDatabase<T> : IDisposable where T : class, new()
 		try
 		{
 			LogManager.Info($"[JsonDatabase] File \"{Name}.json\": Saving...");
-			JsonWatcherInstance.Disable();
+			JsonWatcherInstance?.Disable();
 
 			var json = JsonSerializer.Serialize(Data, Constants.JsonSerializerOptionsInstance);
 
@@ -87,7 +88,7 @@ internal partial class JsonDatabase<T> : IDisposable where T : class, new()
 				LogManager.Info($"[JsonDatabase] File \"{Name}.json\": Saving failed!");
 			}
 
-			JsonWatcherInstance.DelayedEnable();
+			JsonWatcherInstance?.DelayedEnable();
 			return isSuccess;
 		}
 		catch(Exception exception)

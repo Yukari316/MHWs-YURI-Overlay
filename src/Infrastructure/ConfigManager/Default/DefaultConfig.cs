@@ -40,7 +40,7 @@ internal static class DefaultConfig
 		config.LargeMonsterUI.Dynamic.Health.Offset.X = 0f;
 		config.LargeMonsterUI.Dynamic.Health.Offset.Y = 15f;
 
-		config.LargeMonsterUI.Dynamic.Health.ValueLabel.Visible = true;
+		config.LargeMonsterUI.Dynamic.Health.ValueLabel.Visible = false;
 		config.LargeMonsterUI.Dynamic.Health.ValueLabel.Format = "{0:F1}/{1:F0}";
 		config.LargeMonsterUI.Dynamic.Health.ValueLabel.Settings.RightAlignmentShift = 0;
 		config.LargeMonsterUI.Dynamic.Health.ValueLabel.Offset.X = 7f;
@@ -52,7 +52,7 @@ internal static class DefaultConfig
 		config.LargeMonsterUI.Dynamic.Health.ValueLabel.Shadow.Offset.Y = 2f;
 		config.LargeMonsterUI.Dynamic.Health.ValueLabel.Shadow.Color.colorInfo.Rgba = 0x000000FF;
 
-		config.LargeMonsterUI.Dynamic.Health.PercentageLabel.Visible = true;
+		config.LargeMonsterUI.Dynamic.Health.PercentageLabel.Visible = false;
 		config.LargeMonsterUI.Dynamic.Health.PercentageLabel.Format = "{0:P1}";
 		config.LargeMonsterUI.Dynamic.Health.PercentageLabel.Settings.RightAlignmentShift = 6;
 		config.LargeMonsterUI.Dynamic.Health.PercentageLabel.Offset.X = 245f;
@@ -71,10 +71,15 @@ internal static class DefaultConfig
 		config.LargeMonsterUI.Dynamic.Health.Bar.Size.Width = 297f;
 		config.LargeMonsterUI.Dynamic.Health.Bar.Size.Height = 12f;
 
-		config.LargeMonsterUI.Dynamic.Health.Bar.Colors.Foreground.StartInfo.Rgba = 0x004016CC;
-		config.LargeMonsterUI.Dynamic.Health.Bar.Colors.Foreground.EndInfo.Rgba = 0x34FF4ECC;
-		config.LargeMonsterUI.Dynamic.Health.Bar.Colors.Background.StartInfo.Rgba = 0x0000004A;
-		config.LargeMonsterUI.Dynamic.Health.Bar.Colors.Background.EndInfo.Rgba = 0x0000004A;
+		config.LargeMonsterUI.Dynamic.Health.Bar.Colors.Foreground.StartInfo1.Rgba = 0x004016CC;
+		config.LargeMonsterUI.Dynamic.Health.Bar.Colors.Foreground.StartInfo2.Rgba = 0x004016CC;
+		config.LargeMonsterUI.Dynamic.Health.Bar.Colors.Foreground.EndInfo1.Rgba = 0x34FF4ECC;
+		config.LargeMonsterUI.Dynamic.Health.Bar.Colors.Foreground.EndInfo2.Rgba = 0x34FF4ECC;
+
+		config.LargeMonsterUI.Dynamic.Health.Bar.Colors.Background.StartInfo1.Rgba = 0x0000004A;
+		config.LargeMonsterUI.Dynamic.Health.Bar.Colors.Background.StartInfo2.Rgba = 0x0000004A;
+		config.LargeMonsterUI.Dynamic.Health.Bar.Colors.Background.EndInfo1.Rgba = 0x0000004A;
+		config.LargeMonsterUI.Dynamic.Health.Bar.Colors.Background.EndInfo2.Rgba = 0x0000004A;
 
 
 		config.LargeMonsterUI.Dynamic.Health.Bar.Outline.Visible = true;
@@ -145,10 +150,15 @@ internal static class DefaultConfig
 		config.LargeMonsterUI.Static.Health.Bar.Size.Width = 297f;
 		config.LargeMonsterUI.Static.Health.Bar.Size.Height = 12f;
 
-		config.LargeMonsterUI.Static.Health.Bar.Colors.Foreground.StartInfo.Rgba = 0x004016CC;
-		config.LargeMonsterUI.Static.Health.Bar.Colors.Foreground.EndInfo.Rgba = 0x34FF4ECC;
-		config.LargeMonsterUI.Static.Health.Bar.Colors.Background.StartInfo.Rgba = 0x0000004A;
-		config.LargeMonsterUI.Static.Health.Bar.Colors.Background.EndInfo.Rgba = 0x0000004A;
+		config.LargeMonsterUI.Static.Health.Bar.Colors.Foreground.StartInfo1.Rgba = 0x004016CC;
+		config.LargeMonsterUI.Static.Health.Bar.Colors.Foreground.StartInfo2.Rgba = 0x004016CC;
+		config.LargeMonsterUI.Static.Health.Bar.Colors.Foreground.EndInfo1.Rgba = 0x34FF4ECC;
+		config.LargeMonsterUI.Static.Health.Bar.Colors.Foreground.EndInfo2.Rgba = 0x34FF4ECC;
+
+		config.LargeMonsterUI.Static.Health.Bar.Colors.Background.StartInfo1.Rgba = 0x0000004A;
+		config.LargeMonsterUI.Static.Health.Bar.Colors.Background.StartInfo2.Rgba = 0x0000004A;
+		config.LargeMonsterUI.Static.Health.Bar.Colors.Background.EndInfo1.Rgba = 0x0000004A;
+		config.LargeMonsterUI.Static.Health.Bar.Colors.Background.EndInfo2.Rgba = 0x0000004A;
 
 
 		config.LargeMonsterUI.Static.Health.Bar.Outline.Visible = true;

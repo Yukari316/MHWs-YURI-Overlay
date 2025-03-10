@@ -1,4 +1,6 @@
-﻿namespace YURI_Overlay;
+﻿using ImGuiNET;
+
+namespace YURI_Overlay;
 
 internal class BarElementColorsCustomization : Customization
 {
@@ -12,13 +14,13 @@ internal class BarElementColorsCustomization : Customization
 		var isChanged = false;
 		var customizationName = $"{parentName}-colors";
 
-		//if(ImGui.TreeNode($"{localization.colors}##{customizationName}"))
-		//{
-		//	isChanged |= Foreground.RenderImGui(customizationName, localization.foreground);
-		//	isChanged |= Background.RenderImGui(customizationName, localization.background);
+		if(ImGui.TreeNode($"{localization.Colors}##{customizationName}"))
+		{
+			isChanged |= Foreground.RenderImGui(customizationName, localization.Foreground);
+			isChanged |= Background.RenderImGui(customizationName, localization.Background);
 
-		//	ImGui.TreePop();
-		//}
+			ImGui.TreePop();
+		}
 
 		return isChanged;
 	}
