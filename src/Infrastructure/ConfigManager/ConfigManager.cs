@@ -72,7 +72,7 @@ internal sealed partial class ConfigManager : IDisposable
 
 				LogManager.Info("[ConfigManager] Default config is created!");
 
-				ActivateConfig(defaultConfig);
+				ActivateConfig(newDefaultConfig);
 				return;
 			}
 
