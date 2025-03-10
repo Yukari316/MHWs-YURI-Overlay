@@ -23,17 +23,13 @@ internal sealed partial class ReframeworkManager : IDisposable
 		LogManager.Info("[ReframeworkManager] Initialized!");
 	}
 
-	public async void ReadReframeworkConfig()
+	public void ReadReframeworkConfig()
 	{
 		try
 		{
 			LogManager.Info("[ReframeworkManager] Reading REFramework config...");
 
-			var reframeworkConfig = await File.ReadAllTextAsync(Constants.ReframeworkConfigWithExtension);
-			if(reframeworkConfig == null)
-			{
-				return;
-			}
+			var reframeworkConfig = File.ReadAllText(Constants.ReframeworkConfigWithExtension);
 
 			IsReframeworkMenuOpen = reframeworkConfig.Contains("REFrameworkConfig_MenuOpen=true");
 

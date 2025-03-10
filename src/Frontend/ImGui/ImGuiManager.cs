@@ -19,6 +19,8 @@ internal sealed class ImGuiManager
 	{
 		LogManager.Info("ImGuiManager: Initializing...");
 
+		IsOpened = ReframeworkManager.Instance.IsReframeworkMenuOpen;
+
 		LogManager.Info("ImGuiManager: Initialized!");
 
 		return this;
