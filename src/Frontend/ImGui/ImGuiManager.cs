@@ -118,7 +118,6 @@ internal sealed class ImGuiManager
 			ImGui.Separator();
 
 			changed |= configManager.Customization.RenderImGui("config-settings");
-			changed |= localizationManager.Customization.RenderImGui("localization");
 			changed |= configManager.ActiveConfig.Data.GlobalSettings.RenderImGui("global-settings");
 			changed |= configManager.ActiveConfig.Data.LargeMonsterUI.RenderImGui("large-monster-ui");
 

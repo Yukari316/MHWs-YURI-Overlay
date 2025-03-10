@@ -8,7 +8,7 @@ internal sealed class BarElement
 {
 	private readonly Func<BarElementCustomization> _customizationAccessor;
 
-	private (OutlineStyles, float, float, float, float, float, float, float, float) _cashingKeyByPosition1 = (OutlineStyles.Inside, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f);
+	private (OutlineStyles, float, float, float, float, float, float, float, float, float) _cashingKeyByPosition1 = (OutlineStyles.Inside, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f);
 	private (FillDirections, float, float, float) _cashingKeyByProgress2 = (FillDirections.LeftToRight, 0f, 0f, 0f);
 
 	private float _outlinePositionX = 0f;
@@ -131,7 +131,18 @@ internal sealed class BarElement
 		var outlineOffset = outline.Offset;
 		var outlineStyle = outline.Style;
 
-		var cachingKey = (outlineStyle, position.X, position.Y, offset.X, offset.Y, size.Width, size.Height, outlineThickness, outlineOffset);
+		var sizeScaleModifier = ConfigManager.Instance.ActiveConfig.Data.GlobalSettings.GlobalScale.SizeScaleModifier;
+
+		var cachingKey = (outlineStyle, position.X, position.Y, offset.X, offset.Y, size.Width, size.Height, outlineThickness, outlineOffset, sizeScaleModifier);
+
+		var offsetX = offset.X * sizeScaleModifier;
+		var offsetY = offset.Y * sizeScaleModifier;
+
+		var width = size.Width * sizeScaleModifier;
+		var height = size.Height * sizeScaleModifier;
+
+		outlineThickness = outline.Thickness * sizeScaleModifier;
+		outlineOffset = outline.Offset * sizeScaleModifier;
 
 		if(!disableCaching && cachingKey == _cashingKeyByPosition1)
 		{
@@ -146,11 +157,11 @@ internal sealed class BarElement
 		switch(outlineStyle)
 		{
 			case OutlineStyles.Outside:
-				_positionX = position.X + offset.X;
-				_positionY = position.Y + offset.Y;
+				_positionX = position.X + offsetX;
+				_positionY = position.Y + offsetY;
 
-				_width = size.Width;
-				_height = size.Height;
+				_width = width;
+				_height = height;
 
 				_outlinePositionX = _positionX - halfOutlineThickness - outlineOffset;
 				_outlinePositionY = _positionY - halfOutlineThickness - outlineOffset;
@@ -160,11 +171,11 @@ internal sealed class BarElement
 
 				break;
 			case OutlineStyles.Center:
-				_outlinePositionX = position.X + offset.X - halfOutlineOffset;
-				_outlinePositionY = position.Y + offset.Y - halfOutlineOffset;
+				_outlinePositionX = position.X + offsetX - halfOutlineOffset;
+				_outlinePositionY = position.Y + offsetY - halfOutlineOffset;
 
-				_outlineWidth = size.Width + outlineOffset;
-				_outlineHeight = size.Height + outlineOffset;
+				_outlineWidth = width + outlineOffset;
+				_outlineHeight = height + outlineOffset;
 
 				_positionX = _outlinePositionX + halfOutlineThickness + outlineOffset;
 				_positionY = _outlinePositionY + halfOutlineThickness + outlineOffset;
@@ -176,11 +187,11 @@ internal sealed class BarElement
 
 			case OutlineStyles.Inside:
 			default:
-				_outlinePositionX = position.X + offset.X + halfOutlineThickness;
-				_outlinePositionY = position.Y + offset.Y + halfOutlineThickness;
+				_outlinePositionX = position.X + offsetX + halfOutlineThickness;
+				_outlinePositionY = position.Y + offsetY + halfOutlineThickness;
 
-				_outlineWidth = size.Width - outlineThickness;
-				_outlineHeight = size.Height - outlineThickness;
+				_outlineWidth = width - outlineThickness;
+				_outlineHeight = height - outlineThickness;
 
 				_positionX = _outlinePositionX + halfOutlineThickness + outlineOffset;
 				_positionY = _outlinePositionY + halfOutlineThickness + outlineOffset;

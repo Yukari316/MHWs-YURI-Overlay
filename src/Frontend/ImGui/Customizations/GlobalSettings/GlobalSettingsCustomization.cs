@@ -4,9 +4,10 @@ namespace YURI_Overlay;
 
 internal sealed class GlobalSettingsCustomization : Customization
 {
-	public float updateDelay = 0.1f;
+	public string Localization = Constants.DefaultLocalization;
 
-	public bool calculationCaching = true;
+	public GlobalScaleCustomization GlobalScale = new();
+	public PerformanceCustomization Performance = new();
 
 	public GlobalSettingsCustomization() { }
 
@@ -19,9 +20,9 @@ internal sealed class GlobalSettingsCustomization : Customization
 
 		if(ImGui.TreeNode($"{localization.GlobalSettings}##${customizationName}"))
 		{
-			isChanged |= ImGui.DragFloat($"{localization.UpdateDelaySeconds}##{customizationName}", ref updateDelay, 0.001f, 0.001f, 10f, "%.3f");
-
-			isChanged |= ImGui.Checkbox($"{localization.CalculationCaching}##{customizationName}", ref calculationCaching);
+			isChanged |= LocalizationManager.Instance.Customization.RenderImGui(customizationName);
+			isChanged |= GlobalScale.RenderImGui(customizationName);
+			isChanged |= Performance.RenderImGui(customizationName);
 
 			ImGui.TreePop();
 		}

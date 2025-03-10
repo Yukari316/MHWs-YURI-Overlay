@@ -60,10 +60,10 @@ internal sealed class LargeMonsterDynamicUi
 
 		var screenPosition = (Vector2) maybeScreenPosition;
 
-		screenPosition.X += customization.Offset.X;
-		screenPosition.Y += customization.Offset.Y;
+		var positionScaleModifier = ConfigManager.Instance.ActiveConfig.Data.GlobalSettings.GlobalScale.PositionScaleModifier;
 
-
+		screenPosition.X += customization.Offset.X * positionScaleModifier;
+		screenPosition.Y += customization.Offset.Y * positionScaleModifier;
 
 		_healthComponent.Draw(backgroundDrawList, screenPosition, opacityScale);
 		_nameLabelElement.Draw(backgroundDrawList, screenPosition, opacityScale, _largeMonster.Name);

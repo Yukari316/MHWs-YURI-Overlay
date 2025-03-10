@@ -41,14 +41,22 @@ internal sealed class LabelElement
 			text = text.PadLeft(rightAlignmentShift);
 		}
 
+		var sizeScaleModifier = ConfigManager.Instance.ActiveConfig.Data.GlobalSettings.GlobalScale.SizeScaleModifier;
+
 		var offset = customization.Offset;
 		var shadowOffset = customization.Shadow.Offset;
 
-		var textPositionX = position.X + offset.X;
-		var textPositionY = position.Y + offset.Y;
+		var offsetX = offset.X * sizeScaleModifier;
+		var offsetY = offset.Y * sizeScaleModifier;
 
-		var shadowPositionX = textPositionX + shadowOffset.X;
-		var shadowPositionY = textPositionY + shadowOffset.Y;
+		var shadowOffsetX = shadowOffset.X * sizeScaleModifier;
+		var shadowOffsetY = shadowOffset.Y * sizeScaleModifier;
+
+		var textPositionX = position.X + offsetX;
+		var textPositionY = position.Y + offsetY;
+
+		var shadowPositionX = textPositionX + shadowOffsetX;
+		var shadowPositionY = textPositionY + shadowOffsetY;
 
 		Vector2 textPosition = new(textPositionX, textPositionY);
 		Vector2 shadowPosition = new(shadowPositionX, shadowPositionY);

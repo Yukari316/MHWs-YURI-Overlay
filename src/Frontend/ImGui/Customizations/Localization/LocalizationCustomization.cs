@@ -30,18 +30,13 @@ internal sealed class LocalizationCustomization : Customization
 
 		var isChanged = false;
 
-		if(ImGui.TreeNode($"{localization.Language}##{parentName}"))
+		var isActiveConfigChanged = ImGui.Combo(localization.Language, ref _activeLocalizationIndex, _localizationNames, _localizationNames.Length);
+		if(isActiveConfigChanged)
 		{
-			var isActiveConfigChanged = ImGui.Combo(localization.Language, ref _activeLocalizationIndex, _localizationNames, _localizationNames.Length);
-			if(isActiveConfigChanged)
-			{
-				isChanged |= isActiveConfigChanged;
+			isChanged |= isActiveConfigChanged;
 
-				configManager.ActiveConfig.Data.localization = _localizationIsoCodes[_activeLocalizationIndex];
-				localizationManager.ActivateLocalization(_localizationIsoCodes[_activeLocalizationIndex]);
-			}
-
-			ImGui.TreePop();
+			configManager.ActiveConfig.Data.GlobalSettings.Localization = _localizationIsoCodes[_activeLocalizationIndex];
+			localizationManager.ActivateLocalization(_localizationIsoCodes[_activeLocalizationIndex]);
 		}
 
 		return isChanged;

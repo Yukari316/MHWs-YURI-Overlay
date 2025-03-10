@@ -30,7 +30,7 @@ internal sealed partial class LocalizationManager : IDisposable
 		var configManager = ConfigManager.Instance;
 
 		LoadAllLocalizations();
-		ActivateLocalization(configManager.ActiveConfig.Data.localization);
+		ActivateLocalization(configManager.ActiveConfig.Data.GlobalSettings.Localization);
 
 		configManager.AnyConfigChanged += OnAnyConfigChanged;
 
@@ -153,12 +153,12 @@ internal sealed partial class LocalizationManager : IDisposable
 	{
 		var configManager = ConfigManager.Instance;
 
-		if(ActiveLocalization.Name == configManager.ActiveConfig.Data.localization)
+		if(ActiveLocalization.Name == configManager.ActiveConfig.Data.GlobalSettings.Localization)
 		{
 			return;
 		}
 
-		ActivateLocalization(configManager.ActiveConfig.Data.localization);
+		ActivateLocalization(configManager.ActiveConfig.Data.GlobalSettings.Localization);
 	}
 
 	private void OnLocalizationFileChanged(object sender, EventArgs eventArgs)

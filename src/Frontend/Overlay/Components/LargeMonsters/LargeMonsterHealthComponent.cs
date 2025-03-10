@@ -27,7 +27,7 @@ internal class LargeMonsterHealthComponent
 
 	public void Draw(ImDrawListPtr backgroundDrawList, Vector2 position, float opacityScale = 1f)
 	{
-		var offset = this.customizationAccessor().Offset;
+		var offset = customizationAccessor().Offset;
 		var offsetPosition = new Vector2(position.X + offset.X, position.Y + offset.Y);
 
 		_healthBarElement.Draw(backgroundDrawList, offsetPosition, _largeMonster.HealthPercentage, opacityScale);

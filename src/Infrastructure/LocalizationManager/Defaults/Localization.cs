@@ -131,6 +131,11 @@ internal class ImGuiLocalization
 	public string NameLabel = "Name Label";
 
 	public string GlobalSettings = "Global Settings";
+
+	public string GlobalScale = "Global Scale";
+	public string PositionScaleModifier = "Position Scale Modifier";
+	public string SizeScaleModifier = "Size Scale Modifier";
+
 	public string Performance = "Performance";
 	public string UpdateDelaySeconds = "Update Delay (seconds)";
 	public string CalculationCaching = "Calculation Caching";

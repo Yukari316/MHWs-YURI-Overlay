@@ -26,11 +26,14 @@ internal sealed class LargeMonsterStaticUi
 		var spacing = customization.Spacing;
 
 		var anchoredPosition = customization.Position;
-		// TODO: Can be cached
-		var position = AnchorPositionCalculator.Convert(anchoredPosition);
 
-		position.X += spacing.X * locationIndex;
-		position.Y += spacing.Y * locationIndex;
+		var positionScaleModifier = ConfigManager.Instance.ActiveConfig.Data.GlobalSettings.GlobalScale.PositionScaleModifier;
+
+		// TODO: Can be cached
+		var position = AnchorPositionCalculator.Convert(anchoredPosition, positionScaleModifier);
+
+		position.X += spacing.X * positionScaleModifier * locationIndex;
+		position.Y += spacing.Y * positionScaleModifier * locationIndex;
 
 		_healthComponent.Draw(backgroundDrawList, position);
 		_nameLabelElement.Draw(backgroundDrawList, position, 1f, _largeMonster.Name);

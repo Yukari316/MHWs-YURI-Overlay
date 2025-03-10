@@ -6,7 +6,13 @@ internal static class DefaultConfig
 	{
 		var config = configDatabase.Data;
 
-		config.localization = Constants.DefaultLocalization;
+		config.GlobalSettings.Localization = Constants.DefaultLocalization;
+
+		config.GlobalSettings.GlobalScale.PositionScaleModifier = 1f;
+		config.GlobalSettings.GlobalScale.SizeScaleModifier = 1f;
+
+		config.GlobalSettings.Performance.UpdateDelay = 0.1f;
+		config.GlobalSettings.Performance.CalculationCaching = true;
 
 		config.LargeMonsterUI.Dynamic.Settings.RenderDeadOrCaptured = false;
 		config.LargeMonsterUI.Dynamic.Settings.RenderHighlightedMonster = true;
