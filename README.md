@@ -157,15 +157,16 @@
 
 ## Roadmap
 1. `vx.0.x` - Large Monster Static UI
-2. `vx.1.x` - Large Monster Dynamic UI, Large Monster Stamina, Large Monster Rage, Small Monster UI (Dynamic)
-3. `vx.2.x` - Large Monster Highlighted UI, Font Management + Unicode Support
-4. `vx.3.x` - Damage Meter UI
-1. `vx.4.x` - Image Support, Monster Icons, Weapon Icons, Crown Icons
-1. `vx.5.x` - Endemic Life UI
-1. `vx.6.x` - Large Monster UI Body Parts + Weak points
-1. `vx.7.x` - Large Monster UI Ailments
-1. `vx.8.x` - Stats UI
-1. `vx.9.x` - Player Buffs UI (Buffs, Debuffs, Song Timers)
+2. `vx.1.x` - Large Monster Dynamic UI
+3. `vx.2.x` - Large Monster Stamina, Large Monster Rage, Small Monster UI (Dynamic)
+4. `vx.3.x` - Large Monster Highlighted UI, Font Management + Unicode Support
+5. `vx.4.x` - Damage Meter UI
+1. `vx.5.x` - Image Support, Monster Icons, Weapon Icons, Crown Icons
+1. `vx.6.x` - Endemic Life UI
+1. `vx.7.x` - Large Monster UI Body Parts + Weak points
+1. `vx.8.x` - Large Monster UI Ailments
+1. `vx.9.x` - Stats UI
+1. `vx.10.x` - Player Buffs UI (Buffs, Debuffs, Song Timers)
 
 ***
 ## Support
