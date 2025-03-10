@@ -8,6 +8,12 @@ internal class LocalizationInfo
 	public string Translators = "GreenComfyTea";
 }
 
+internal class FontInfo
+{
+	public string Name { get; set; } = "NotoSans-Bold.ttf";
+	public string[] GlyphRanges { get; set; } = ["0x0020", "0xFFFF"];
+}
+
 internal class ImGuiLocalization
 {
 	// Mod Info
@@ -140,7 +146,11 @@ internal class ImGuiLocalization
 	public string UpdateDelaySeconds = "Update Delay (seconds)";
 	public string CalculationCaching = "Calculation Caching";
 
-
+	public string Font { get; set; } = "Font";
+	public string AnyChangesToFontRequireGameRestart { get; set; } = "Any Changes to Font Require Game Restart!";
+	public string FontSize { get; set; } = "Font Size";
+	public string HorizontalOversample { get; set; } = "Horizontal Oversample";
+	public string VerticalOversample { get; set; } = "Vertical Oversample";
 }
 
 internal class Localization
@@ -149,5 +159,6 @@ internal class Localization
 	public string IsoCode = Constants.DefaultLocalization;
 
 	public LocalizationInfo LocalizationInfo = new();
+	public FontInfo FontInfo { get; set; } = new();
 	public ImGuiLocalization ImGui = new();
 }

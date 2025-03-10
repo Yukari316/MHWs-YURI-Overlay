@@ -54,8 +54,12 @@ public class Plugin
 			var localizationHelper = LocalizationHelper.Instance;
 			var reframeworkManager = ReframeworkManager.Instance;
 
+			//var fontManager = FontManager.Instance;
+
 			var imGuiManager = ImGuiManager.Instance;
 			var overlayManager = OverlayManager.Instance;
+
+
 
 			var cameraManager = ScreenManager.Instance;
 			var monsterManager = MonsterManager.Instance;
@@ -64,6 +68,8 @@ public class Plugin
 			localizationManager.Initialize();
 			localizationHelper.Initialize();
 			reframeworkManager.Initialize();
+
+			//fontManager.Initialize();
 
 			imGuiManager.Initialize();
 			overlayManager.Initialize();

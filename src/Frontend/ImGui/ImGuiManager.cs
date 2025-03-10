@@ -37,8 +37,14 @@ internal sealed class ImGuiManager
 			var localizationManager = LocalizationManager.Instance;
 
 			var activeLocalization = localizationManager.ActiveLocalization.Data;
-
 			var changed = false;
+
+			//var (fontName, fontPtr) = FontManager.Instance.ActiveFont;
+
+			//if(fontPtr != null)
+			//{
+			//	ImGui.PushFont((ImFontPtr) fontPtr);
+			//}
 
 			ImGui.SetNextWindowPos(Constants.DefaultWindowPosition, ImGuiCond.FirstUseEver);
 			ImGui.SetNextWindowSize(Constants.DefaultWindowSize, ImGuiCond.FirstUseEver);
@@ -120,6 +126,13 @@ internal sealed class ImGuiManager
 			changed |= configManager.Customization.RenderImGui("config-settings");
 			changed |= configManager.ActiveConfig.Data.GlobalSettings.RenderImGui("global-settings");
 			changed |= configManager.ActiveConfig.Data.LargeMonsterUI.RenderImGui("large-monster-ui");
+
+			//if(fontPtr != null)
+			//{
+			//	ImGui.PushFont((ImFontPtr) fontPtr);
+			//}
+
+			ImGui.End();
 
 			if(changed)
 			{
