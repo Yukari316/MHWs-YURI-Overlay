@@ -301,7 +301,7 @@ internal sealed class LargeMonster
 			}
 
 			Name = name;
-			Name = "Tempered Guardian Fulgur Anjanath";
+			//Name = "Tempered Guardian Fulgur Anjanath";
 		}
 		catch(Exception exception)
 		{
