@@ -2,7 +2,7 @@ using System.Text.Json;
 
 namespace YURI_Overlay;
 
-internal partial class JsonDatabase<T> : IDisposable where T : class, new()
+internal partial class JsonDatabase<T> : IDisposable where T : class
 {
 	public string Name = string.Empty;
 	public string FilePath = Constants.PluginDataPath;
@@ -62,7 +62,7 @@ internal partial class JsonDatabase<T> : IDisposable where T : class, new()
 		catch(Exception exception)
 		{
 			LogManager.Error(exception);
-			Data = new T();
+			Data = Utils.CreateInstance<T>();
 			Save();
 			return Data;
 		}

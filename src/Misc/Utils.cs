@@ -126,7 +126,13 @@ internal static class Utils
 		return stream;
 	}
 
-	public static uint AbgrToRgba(uint argb)
+    public static T CreateInstance<T>()
+    {
+		LogManager.Info($"Activator test for {typeof(T)}");
+        return (T)Activator.CreateInstance(typeof(T), true);
+    }
+
+    public static uint AbgrToRgba(uint argb)
 	{
 		var red = argb & 0x000000FF;
 		var green = (argb & 0x0000FF00) >> 8;

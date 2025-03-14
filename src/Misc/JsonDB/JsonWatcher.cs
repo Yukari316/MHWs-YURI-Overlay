@@ -3,7 +3,7 @@ using Timer = System.Timers.Timer;
 namespace YURI_Overlay;
 
 
-internal partial class JsonWatcher<T> : IDisposable where T : class, new()
+internal partial class JsonWatcher<T> : IDisposable where T : class
 {
 	private readonly JsonDatabase<T> JsonDatabaseInstance;
 	private readonly FileSystemWatcher Watcher;
