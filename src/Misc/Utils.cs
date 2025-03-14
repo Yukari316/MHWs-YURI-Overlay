@@ -129,7 +129,7 @@ internal static class Utils
     public static T CreateInstance<T>()
     {
 		LogManager.Info($"Activator test for {typeof(T)}");
-        return (T)Activator.CreateInstance(typeof(T), true);
+		return (T)Activator.CreateInstance(typeof(T), true);
     }
 
     public static uint AbgrToRgba(uint argb)
