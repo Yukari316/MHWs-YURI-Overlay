@@ -1,4 +1,5 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 
 using REFrameworkNET;
 using REFrameworkNET.Attributes;
@@ -48,6 +49,14 @@ public class Plugin
 		try
 		{
 			LogManager.Info("Managers: Initializing...");
+
+#if DEBUG
+			LogManager.Info("Waiting for debugger...");
+			if (!Debugger.IsAttached)
+			{
+				Debugger.Launch();
+			}
+#endif
 
 			var configManager = ConfigManager.Instance;
 			var localizationManager = LocalizationManager.Instance;

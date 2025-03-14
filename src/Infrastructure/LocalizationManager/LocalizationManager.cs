@@ -8,9 +8,9 @@ internal sealed partial class LocalizationManager : IDisposable
 
 	public LocalizationCustomization Customization;
 
-	public JsonDatabase<Localization> ActiveLocalization;
-	public JsonDatabase<Localization> DefaultLocalization;
-	public Dictionary<string, JsonDatabase<Localization>> Localizations = [];
+	public JsonDatabase<ILocalization> ActiveLocalization;
+	public JsonDatabase<ILocalization> DefaultLocalization;
+	public Dictionary<string, JsonDatabase<ILocalization>> Localizations = [];
 	public EventHandler ActiveLocalizationChanged = delegate { };
 	public EventHandler AnyLocalizationChanged = delegate { };
 
@@ -40,7 +40,7 @@ internal sealed partial class LocalizationManager : IDisposable
 		LogManager.Info("[LocalizationManager] Initialized!");
 	}
 
-	public void ActivateLocalization(JsonDatabase<Localization> localization)
+	public void ActivateLocalization(JsonDatabase<ILocalization> localization)
 	{
 		LogManager.Info($"[LocalizationManager] Activating localization \"{localization.Name}\"...");
 
@@ -75,7 +75,7 @@ internal sealed partial class LocalizationManager : IDisposable
 	{
 		LogManager.Info($"[LocalizationManager] Initializing localization \"{name}\"...");
 
-		JsonDatabase<Localization> newLocalization = new(Constants.LocalizationsPath, name);
+		JsonDatabase<ILocalization> newLocalization = new(Constants.LocalizationsPath, name);
 		newLocalization.Data.IsoCode = name;
 		newLocalization.Save();
 
@@ -108,8 +108,8 @@ internal sealed partial class LocalizationManager : IDisposable
 	{
 		LogManager.Info("[LocalizationManager] Initializing default localization...");
 
-		JsonDatabase<Localization> defaultLocalization = new(Constants.LocalizationsPath, Constants.DefaultLocalization);
-		defaultLocalization.Data = new Localization();
+		JsonDatabase<ILocalization> defaultLocalization = new(Constants.LocalizationsPath, Constants.DefaultLocalization);
+		defaultLocalization.Data = new EnglishLocalization();
 		defaultLocalization.Save();
 		Localizations[Constants.DefaultLocalization] = defaultLocalization;
 		this.DefaultLocalization = defaultLocalization;

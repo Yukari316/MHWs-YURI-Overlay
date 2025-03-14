@@ -57,7 +57,7 @@ internal sealed partial class FontManager
 		return this;
 	}
 
-	public unsafe FontObject LoadFont(JsonDatabase<Localization> localization)
+	public unsafe FontObject LoadFont(JsonDatabase<ILocalization> localization)
 	{
 		var fontConfig = ConfigManager.Instance.ActiveConfig.Data.Fonts;
 
@@ -107,7 +107,7 @@ internal sealed partial class FontManager
 		return (fontName, newFont);
 	}
 
-	public void SetCurrentFont(JsonDatabase<Localization> localization)
+	public void SetCurrentFont(JsonDatabase<ILocalization> localization)
 	{
 		Fonts.TryGetValue(localization.Name, out ActiveFont);
 
@@ -130,7 +130,7 @@ internal sealed partial class FontManager
 		return this;
 	}
 
-	private static ushort[] GetGlyphRanges(JsonDatabase<Localization> localization)
+	private static ushort[] GetGlyphRanges(JsonDatabase<ILocalization> localization)
 	{
 		var glyphRangeStringArray = localization.Data.FontInfo.GlyphRanges;
 
